@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">GestionInterim</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="skip">Passer</string>
+
+    <!-- FIRST SLIDE -->
+
+    <string name="bienvenue">Bienvenue sur</string>
+    <string name="interimConnect">InterimConnect</string>
+    <string name="slogan">Connectez le talent avec l\'opportunité</string>
+    <string name="rechercheEmploi">Vous êtes à la recherche d’un emploi ?</string>
+    <string name="textFirstSlide">Notre application d\'intérim est le moyen le plus rapide et le plus facile de trouver un emploi temporaire. Nous avons rassemblé des centaines d\'offres d\'emploi provenant d\'entreprises de tous secteurs, et nous les avons rendues accessibles en quelques clics.
+        Une fois que vous avez postulé à une offre, nous vous tenons informé de l\'avancement de votre candidature.
+        Inscrivez-vous dès maintenant et trouvez les offres parfaites en un rien de temps !</string>
+    
+    <!-- SECOND SLIDE -->
+    <string name="rechercheVolontaire">Vous êtes un employeur à la recherche de volontaire ?</string>
+
+
+
+
 </resources>
