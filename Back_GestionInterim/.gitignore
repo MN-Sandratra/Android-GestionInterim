@@ -1,0 +1,16 @@
+# Dossiers
+node_modules/
+dist/
+coverage/
+logs/
+tmp/
+temp/
+public/uploads/
+
+# Fichiers
+.env
+*.log
+*.pid
+*.sqlite
+.DS_Store
+.vscode/
