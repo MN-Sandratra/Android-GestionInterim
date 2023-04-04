@@ -1,6 +1,8 @@
 # Android-GestionInterim
 
-# A proposCette application de gestion d'intérim est destinée à aider les entreprises à simplifier la gestion de la main d'œuvre temporaire, ainsi qu'à aider les travailleurs à trouver plus facilement des missions. 
+# A propos
+
+Cette application de gestion d'intérim est destinée à aider les entreprises à simplifier la gestion de la main d'œuvre temporaire, ainsi qu'à aider les travailleurs à trouver plus facilement des missions. 
 Elle permet de créer, modifier et supprimer des missions, et de suivre les heures travaillées par les intérimaires
 
 ## Fonctionnalités
