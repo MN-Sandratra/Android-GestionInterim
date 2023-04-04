@@ -21,6 +21,7 @@ Elle permet de créer, modifier et supprimer des missions, et de suivre les heur
 
 ## Installation et utilisation
 
-1. Clonez ce dépôt sur votre machine locale
-2. Lancer le serveur grace a la commnade npm install
-3. Run le projet dans Android Studio
+ 1. Clonez ce dépôt sur votre machine locale
+ 2. Installez les dépendances nécessaires au backend en utilisant la commande npm install
+ 3. Lancez le serveur en utilisant la commande npm start
+ 4. Ouvrez le projet dans Android Studio et lancez-le
