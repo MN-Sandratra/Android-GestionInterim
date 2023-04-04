@@ -4,45 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".FirstSlides">
+    tools:context=".slides.FragmentSlideParent">
 
-    <TextView
-        android:id="@+id/title"
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/title_subtitle_slogan"
+        android:name="com.example.gestioninterim.FragmentTitleSubTitleSlogan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        android:layout_marginTop="48dp"
-        android:text="@string/bienvenue"
-        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/subtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/interimConnect"
-        android:textStyle="bold"
-        android:textSize="28dp"
-        android:textColor="@color/orange"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
-
-    <TextView
-        android:id="@+id/subsubtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/slogan"
-        android:textStyle="bold"
-        android:textSize="16dp"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+        tools:ignore="MissingConstraints"
+        tools:layout="@layout/fragment_title_subtitle_slogan" />
 
     <TextView
         android:id="@+id/skip"
@@ -57,31 +29,16 @@
         app:layout_constraintEnd_toStartOf="@+id/imageButton" />
 
 
-    <TextView
-        android:id="@+id/rechercheEmploi"
-        android:layout_width="wrap_content"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewpagerSlides"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="12dp"
-        android:text="@string/rechercheEmploi"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.542"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subsubtitle" />
+        android:layout_marginTop="64dp"
+        app:layout_constraintTop_toBottomOf="@+id/title_subtitle_slogan"
+        tools:context=".MainActivity"
+        tools:layout_editor_absoluteX="0dp">
 
-    <TextView
-        android:id="@+id/textFirstSlide"
-        android:layout_width="347dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
-        android:text="@string/textFirstSlide"
-        android:textColor="@color/white"
-        android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rechercheEmploi" />
+    </androidx.viewpager2.widget.ViewPager2>
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -92,9 +49,10 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textFirstSlide">
+        app:layout_constraintTop_toBottomOf="@+id/viewpagerSlides">
 
         <ImageView
+            android:id="@+id/round1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="0dp"
@@ -104,6 +62,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textFirstSlide" />
 
         <ImageView
+            android:id="@+id/round2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/round"
@@ -111,6 +70,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textFirstSlide" />
 
         <ImageView
+            android:id="@+id/round3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"

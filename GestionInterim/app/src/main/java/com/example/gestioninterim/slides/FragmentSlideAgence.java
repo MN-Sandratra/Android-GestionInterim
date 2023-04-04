@@ -1,22 +1,22 @@
-package com.example.gestioninterim;
+package com.example.gestioninterim.slides;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
 
-public class FirstSlides extends Fragment {
+import com.example.gestioninterim.R;
+
+
+public class FragmentSlideAgence extends Fragment {
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        return inflater.inflate(R.layout.fragment_first_slides, container, false);
+        return inflater.inflate(R.layout.fragment_slide_child_agence, container, false);
     }
 }
