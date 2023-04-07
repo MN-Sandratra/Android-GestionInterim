@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">GestionInterim</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="skip">Passer</string>
 
@@ -49,6 +48,9 @@
     <string name="yesAccount">Vous avez déjà un compte ?</string>
     <string name="connectezvousbis">Connectez-vous !</string>
     <string name="inscriptionLater">S\'inscrire plus tard</string>
+
+    <!-- INSCRIPTION INTERIMAIRE -->
+    <string name="inscriptionInterimaire">Vous êtes à la recherche d’un job</string>
 
 
 </resources>

@@ -8,26 +8,49 @@
     tools:context=".LoginActivity"
     android:orientation="vertical">
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/title_subtitle_slogan"
-        android:name="com.example.gestioninterim.FragmentTitleSubTitleSlogan"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/bienvenue"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="MissingConstraints"
-        tools:layout="@layout/fragment_title_subtitle_slogan" />
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/SubtitleTextStyle"/>
+
 
     <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/interimConnect"
+        style="@style/TitleTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/subsubtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/slogan"
+        style="@style/SubtitleTextStyle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+
+    <TextView
+        android:id="@+id/connectText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/connectezvous"
-        android:textColor="@color/white"
-        android:textSize="16dp"
+        style="@style/DefaultTextStyle"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_subtitle_slogan" />
+        app:layout_constraintTop_toBottomOf="@+id/subsubtitle" />
+
 
     <LinearLayout
         android:id="@+id/linearLayout3"
@@ -37,23 +60,26 @@
         android:padding="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/title_subtitle_slogan">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.502">
 
 
         <TextView
+            style="@style/DefaultTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
-            android:text="@string/nomUtilisateurAdresseMail"
-            android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:text="@string/nomUtilisateurAdresseMail" />
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/grey_clair"
-            android:hint="E-mail">
+            android:hint="E-mail"
+            android:textColorHint="@color/grey_clair">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -62,24 +88,21 @@
                 android:inputType="textEmailAddress" />
 
         </com.google.android.material.textfield.TextInputLayout>
-
         <TextView
+            style="@style/DefaultTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/password"
-            android:layout_marginBottom="5dp"
             android:layout_marginTop="10dp"
-            android:textColor="@color/white"
-            android:textSize="16dp" />
-
+            android:layout_marginBottom="5dp"
+            android:text="@string/password" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Mot de passe"
             android:textColorHint="@color/grey_clair"
-            app:passwordToggleTint="@color/grey_clair"
-            app:passwordToggleEnabled="true">
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="@color/grey_clair">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -90,7 +113,6 @@
         </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
-
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -104,8 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/noAccount"
-            android:textColor="@color/white"
-            android:textSize="16dp"
+            style="@style/DefaultTextStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.26"
             app:layout_constraintStart_toStartOf="parent"
@@ -152,8 +173,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/loginLater"
-            android:textColor="@color/white"
-            android:textSize="16dp"
+            style="@style/DefaultTextStyle"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialButton" />
