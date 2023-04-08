@@ -1,4 +1,4 @@
-package com.example.gestioninterim
+package com.example.gestioninterim.inscription
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -22,7 +22,7 @@ class FragmentChooseInscription : Fragment() {
         val checkBoxAgence = view.findViewById<CheckBox>(R.id.checkAgence)
         val buttonValidation = view.findViewById<MaterialButton>(R.id.materialButtonValidation)
 
-        checkBoxInterim.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxInterim.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 checkBoxEmployeur.isChecked = false
                 checkBoxAgence.isChecked = false
@@ -31,14 +31,14 @@ class FragmentChooseInscription : Fragment() {
             }
         }
 
-        checkBoxEmployeur.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxEmployeur.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 checkBoxInterim.isChecked = false
                 checkBoxAgence.isChecked = false
             }
         }
 
-        checkBoxAgence.setOnCheckedChangeListener { buttonView, isChecked ->
+        checkBoxAgence.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 checkBoxInterim.isChecked = false
                 checkBoxEmployeur.isChecked = false
@@ -51,9 +51,9 @@ class FragmentChooseInscription : Fragment() {
             fragment = if (checkBoxInterim.isChecked) {
                 FragmentInterimaireInscription()
             } else if (checkBoxEmployeur.isChecked) {
-                FragmentInterimaireInscription()
+                FragmentEmployeurInscription()
             } else if (checkBoxAgence.isChecked) {
-                FragmentInterimaireInscription()
+                FragmentAgenceInscription()
             } else {
                 Toast.makeText(requireContext(), "Veuillez cocher une case", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener

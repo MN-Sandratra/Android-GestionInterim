@@ -1,4 +1,4 @@
-package com.example.gestioninterim
+package com.example.gestioninterim.slides
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,14 +9,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentManager
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
-import com.example.gestioninterim.slides.FragmentSlideAgence
-import com.example.gestioninterim.slides.FragmentSlideEmployeur
-import com.example.gestioninterim.slides.FragmentSlideInterim
+import com.example.gestioninterim.R
+import com.example.gestioninterim.login.LoginActivity
 
-class MainActivity : AppCompatActivity() {
+class FirstSlidesActivity : AppCompatActivity() {
 
     private var viewPager2: ViewPager2? = null
     private var pagerAdapter: FragmentStateAdapter? = null
@@ -44,14 +42,14 @@ class MainActivity : AppCompatActivity() {
                         round1!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round_white,
+                                    R.drawable.round_white,
                                         null
                                 )
                         )
                         round2!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round,
+                                    R.drawable.round,
                                         null
                                 )
                         )
@@ -60,21 +58,21 @@ class MainActivity : AppCompatActivity() {
                         round1!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round,
+                                    R.drawable.round,
                                         null
                                 )
                         )
                         round2!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round_white,
+                                    R.drawable.round_white,
                                         null
                                 )
                         )
                         round3!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round,
+                                    R.drawable.round,
                                         null
                                 )
                         )
@@ -83,14 +81,14 @@ class MainActivity : AppCompatActivity() {
                         round2!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round,
+                                    R.drawable.round,
                                         null
                                 )
                         )
                         round3!!.setImageDrawable(
                                 ResourcesCompat.getDrawable(
                                         res,
-                                        R.drawable.round_white,
+                                    R.drawable.round_white,
                                         null
                                 )
                         )

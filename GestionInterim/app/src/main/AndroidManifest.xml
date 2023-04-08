@@ -12,7 +12,7 @@
         android:theme="@style/Theme.GestionInterim"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name=".slides.FirstSlidesActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="true">
             <intent-filter>
@@ -23,13 +23,14 @@
         </activity>
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".login.LoginActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".slides.FirstSlidesActivity"/>
         <activity
-            android:name=".InscriptionActivity"
+            android:name=".inscription.InscriptionActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".slides.FirstSlidesActivity"/>
     </application>
 
 </manifest>

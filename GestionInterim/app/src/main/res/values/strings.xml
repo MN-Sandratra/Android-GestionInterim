@@ -50,7 +50,36 @@
     <string name="inscriptionLater">S\'inscrire plus tard</string>
 
     <!-- INSCRIPTION INTERIMAIRE -->
+
     <string name="inscriptionInterimaire">Vous êtes à la recherche d’un job</string>
+    <string name="inscriptionInterimaireNom">Nom : (obligatoire)</string>
+    <string name="inscriptionInterimairePrenom">Prénom : (obligatoire)</string>
+    <string name="inscriptionInterimaireNationalite">Nationalité : (optionnel)</string>
+    <string name="inscriptionInterimaireMail">Mail : (optionnel)</string>
+    <string name="inscriptionInterimaireTelephone">Téléphone : (optionnel)</string>
+    <string name="inscriptionInterimaireDateNaissance">Date de naissance : (optionnel)</string>
+    <string name="inscriptionInterimaireVille">Ville : (optionnel)</string>
+    <string name="inscriptionInterimaireCv">CV : (optionnel)</string>
+    <string name="inscriptionInterimaireCommentaires">Commentaires : (optionnel)</string>
+
+    <!-- INSCRIPTION EMPLOYEUR -->
+
+    <string name="inscriptionEmployeur">Vous êtes un employeur</string>
+    <string name="inscriptionEmployeurNom">Nom de l\'entreprise : (obligatoire)</string>
+    <string name="inscriptionEmployeurService">Nom de votre service : (optionnel)</string>
+    <string name="inscriptionEmployeurSousService">Nom de votre sous service : (optionnel)</string>
+    <string name="inscriptionEmployeurNumeroNational">Numéro national de l’entité dépositaire (obligatoire)</string>
+    <string name="inscriptionEmployeurContact1">Nom personne - contact 1 (optionnel)</string>
+    <string name="inscriptionEmployeurContact2">Nom personne - contact 2 (optionnel)</string>
+    <string name="inscriptionEmployeurMail1">Mail - contact 1 (obligatoire)</string>
+    <string name="inscriptionEmployeurMail2">Mail - contact 2 (optionnel)</string>
+    <string name="inscriptionEmployeurTelephone1">Téléphone - contact 1 (optionnel)</string>
+    <string name="inscriptionEmployeurTelephone2">Téléphone - contact 2 (optionnel)</string>
+    <string name="inscriptionEmployeurAdresse">Adresse (obligatoire)</string>
+
+    <!-- INSCRIPTION AGENCE -->
+
+    <string name="inscriptionAgence">Vous êtes une agence</string>
 
 
 </resources>

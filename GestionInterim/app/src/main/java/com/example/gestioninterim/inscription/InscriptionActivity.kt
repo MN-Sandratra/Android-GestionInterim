@@ -1,9 +1,9 @@
-package com.example.gestioninterim
+package com.example.gestioninterim.inscription
 
 import android.os.Bundle
-import android.widget.CheckBox
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentManager
+import com.example.gestioninterim.R
 
 class InscriptionActivity : AppCompatActivity() {
 
