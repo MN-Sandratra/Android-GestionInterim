@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".login.LoginActivity"
     android:background="@drawable/fond"
     android:orientation="vertical">
 
@@ -30,7 +29,7 @@
         style="@style/TitleTextStyle"/>
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerChooseInscription"
+        android:id="@+id/containerInscription"
         android:layout_width="match_parent"
         android:layout_height="500dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -39,45 +38,13 @@
         app:layout_constraintTop_toBottomOf="@+id/subtitle"
         tools:layout="@layout/fragment_choose_inscription" />
 
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerInscriptionInterimaire"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_inscription_interimaire" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerInscriptionEmployeur"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_inscription_employeur" />
-
-    <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerInscriptionAgence"
-        android:layout_width="match_parent"
-        android:layout_height="450dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout="@layout/fragment_inscription_agence" />
-
-
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="horizontal"
-        android:layout_margin="5dp"
+        android:layout_margin="10dp"
         android:gravity="center"
         >
 

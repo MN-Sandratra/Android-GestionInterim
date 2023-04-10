@@ -98,5 +98,14 @@
         <item>Australie</item>
     </string-array>
 
+    <!-- UTILISATEUR ANONYME -->
+
+    <string name="bottom_home_item">Accueil</string>
+    <string name="bottom_search_item">Trouver un job</string>
+    <string name="bottom_profil_item">Se connecter</string>
+    <string name="accueil_create_login_account">Créer un compte ou se connecter</string>
+    <string name="sub_title_accueil">Mon accueil</string>
+    <string name="sub_title_search">Recherchez des offres parmis des centaines !</string>
+    <string name="top_menu_pour_vous">Pour vous</string>
 
 </resources>

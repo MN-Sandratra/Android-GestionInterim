@@ -33,6 +33,12 @@
             android:windowSoftInputMode="adjustPan"
             android:exported="false"
             android:parentActivityName=".slides.FirstSlidesActivity"/>
+        <activity
+            android:name=".utilisateurAnonyme.MainAnonymeActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"
+            />
+
     </application>
 
 </manifest>

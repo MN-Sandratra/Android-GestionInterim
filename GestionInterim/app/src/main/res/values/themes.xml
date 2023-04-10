@@ -37,4 +37,15 @@
         <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/lato</item>
     </style>
+
+    <!-- Style pour le menu bottom -->
+    <style name="bottomNavigationMenu">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/lato</item>
+
+    </style>
+
+    <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
+        <item name="android:background">@color/grey_clair</item>
+    </style>
 </resources>

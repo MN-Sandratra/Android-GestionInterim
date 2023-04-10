@@ -60,7 +60,7 @@ class FragmentChooseInscription : Fragment() {
             }
 
             val fragmentManager = requireActivity().supportFragmentManager
-            fragmentManager.beginTransaction().replace(R.id.containerChooseInscription, fragment).commit()
+            fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
         }
 
         return view

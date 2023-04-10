@@ -1,9 +1,17 @@
 package com.example.gestioninterim.inscription
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageButton
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentManager
 import com.example.gestioninterim.R
+import com.example.gestioninterim.login.LoginActivity
+import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
+import com.google.android.material.button.MaterialButton
 
 class InscriptionActivity : AppCompatActivity() {
 
@@ -13,11 +21,18 @@ class InscriptionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inscription)
 
+        var skipButton = findViewById<ImageButton>(R.id.imageButton)
+
         fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         val fragment = FragmentChooseInscription()
-        fragmentTransaction.add(R.id.containerChooseInscription, fragment)
+        fragmentTransaction.add(R.id.containerInscription, fragment)
         fragmentTransaction.commit()
+
+        skipButton.setOnClickListener{
+            val intent = Intent(this@InscriptionActivity, MainAnonymeActivity::class.java)
+            startActivity(intent)
+        }
 
     }
 }
