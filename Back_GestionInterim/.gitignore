@@ -8,7 +8,7 @@ temp/
 public/uploads/
 
 # Fichiers
-.env
+# .env
 *.log
 *.pid
 *.sqlite
