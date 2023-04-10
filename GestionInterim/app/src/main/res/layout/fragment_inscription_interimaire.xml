@@ -30,7 +30,7 @@
 
     <ScrollView
         android:id="@+id/scrollViewInterimInscription"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -42,202 +42,233 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:padding="25dp">
 
 
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireNom" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Doe"
+                android:hint="@string/inscriptionInterimaireNom"
+                app:startIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_user"
+                android:textColorHint="@color/grey_clair"
+                >
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
+                    android:inputType="textEmailAddress"
+                    />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inscriptionInterimairePrenom"
+                app:startIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_user"
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/darkblue"
+                    android:layout_marginTop="10dp"
+                    android:textColor="@color/grey_clair"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inscriptionMDP"
+                android:layout_marginTop="10dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/grey_clair"
+                app:startIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_mdp"
+                android:textColorHint="@color/grey_clair">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inscriptionConfirmationMDP"
+                android:layout_marginTop="10dp"
+                app:endIconMode="password_toggle"
+                app:endIconTint="@color/grey_clair"
+                app:startIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_mdp"
+                android:textColorHint="@color/grey_clair">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inscriptionInterimaireMail"
+                app:startIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_mail"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/grey_clair">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimairePrenom" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="John"
+                android:hint="@string/inscriptionInterimaireTelephone"
+                android:layout_marginTop="10dp"
+                app:startIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_phone"
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/darkblue"
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireMail" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="john.doe@gmail.com"
-                android:textColorHint="@color/grey_clair">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireTelephone" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="06XXXXXXXX"
-                android:textColorHint="@color/grey_clair">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
                     android:inputType="phone" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireDateNaissance" />
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="dd/MM/yyyy"
+                android:hint="@string/inscriptionInterimaireDateNaissance"
+                app:startIconDrawable="@drawable/ic_birthday"
+                app:startIconTint="@color/grey_clair"
+                android:layout_marginTop="10dp"
+
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
+                    android:inputType="date" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/inscriptionInterimaireVille"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_location"
+                app:startIconTint="@color/grey_clair"
+                android:textColorHint="@color/grey_clair">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireVille" />
 
             <com.google.android.material.textfield.TextInputLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Montpellier"
+                android:layout_height="match_parent"
+                android:hint="@string/inscriptionInterimaireNationalite"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_flag"
+                app:startIconTint="@color/grey_clair"
                 android:textColorHint="@color/grey_clair">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
+                    android:id="@+id/nationality_dropdown"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
-                    android:inputType="textEmailAddress" />
+                    android:layout_height="match_parent"
+                    android:completionThreshold="1"
+                    android:inputType="text"
+                    android:textSize="16dp"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:textColor="@android:color/black"
+                    android:textColorHint="@color/grey"
+                    android:background="@color/darkblue" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireNationalite" />
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inscriptionInterimaireCv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Français"
+                android:hint="@string/inscriptionInterimaireCv"
+                android:layout_marginTop="10dp"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_import"
+                app:endIconTint="@color/grey_clair"
+                app:startIconDrawable="@drawable/ic_document"
+                app:startIconTint="@color/grey_clair"
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/darkblue"
-                    android:inputType="textEmailAddress" />
+                    android:textColor="@color/grey_clair"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireCv" />
-
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="cv.pdf"
+                app:startIconDrawable="@drawable/ic_document"
+                app:startIconTint="@color/grey_clair"
+                android:hint="@string/inscriptionInterimaireCommentaires"
+                android:layout_marginTop="10dp"
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/darkblue"
-                    android:inputType="textEmailAddress" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <TextView
-                style="@style/DefaultTextStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="5dp"
-                android:text="@string/inscriptionInterimaireCommentaires" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Je suis intéressé par la manutention"
-                android:textColorHint="@color/grey_clair">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
+                    android:textColor="@color/grey_clair"
                     android:inputType="textLongMessage" />
 
             </com.google.android.material.textfield.TextInputLayout>

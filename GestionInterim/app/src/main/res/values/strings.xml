@@ -48,6 +48,8 @@
     <string name="yesAccount">Vous avez déjà un compte ?</string>
     <string name="connectezvousbis">Connectez-vous !</string>
     <string name="inscriptionLater">S\'inscrire plus tard</string>
+    <string name="inscriptionMDP">Mot de passe : (obligatoire)</string>
+    <string name="inscriptionConfirmationMDP">Confirmez votre mot de passe : (obligatoire)</string>
 
     <!-- INSCRIPTION INTERIMAIRE -->
 
@@ -68,7 +70,7 @@
     <string name="inscriptionEmployeurNom">Nom de l\'entreprise : (obligatoire)</string>
     <string name="inscriptionEmployeurService">Nom de votre service : (optionnel)</string>
     <string name="inscriptionEmployeurSousService">Nom de votre sous service : (optionnel)</string>
-    <string name="inscriptionEmployeurNumeroNational">Numéro national de l’entité dépositaire (obligatoire)</string>
+    <string name="inscriptionEmployeurNumeroNational">Numéro de l’entité dépositaire (obligatoire)</string>
     <string name="inscriptionEmployeurContact1">Nom personne - contact 1 (optionnel)</string>
     <string name="inscriptionEmployeurContact2">Nom personne - contact 2 (optionnel)</string>
     <string name="inscriptionEmployeurMail1">Mail - contact 1 (obligatoire)</string>
@@ -80,6 +82,21 @@
     <!-- INSCRIPTION AGENCE -->
 
     <string name="inscriptionAgence">Vous êtes une agence</string>
+
+    <!-- NATIONALITE -->
+
+    <string-array name="nationalities">
+        <item>France</item>
+        <item>Allemagne</item>
+        <item>États-Unis</item>
+        <item>Japon</item>
+        <item>Canada</item>
+        <item>Chine</item>
+        <item>Royaume-Uni</item>
+        <item>Italie</item>
+        <item>Espagne</item>
+        <item>Australie</item>
+    </string-array>
 
 
 </resources>
