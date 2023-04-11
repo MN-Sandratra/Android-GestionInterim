@@ -1,11 +1,50 @@
 const express = require('express');
 const router = express.Router();
 const JobSeeker = require('../models/jobSeeker');
+const multer=require('multer');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'application/pdf') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 
 // Route pour créer un nouveau chercheur d'emploi
-router.post('/', async (req, res) => {
+router.post('/', upload.single('cv'), async (req, res) => {
     try {
-        const jobSeeker = new JobSeeker(req.body);
+        const jobSeeker = new JobSeeker({
+            firstName: req.body.firstName,
+            lastName: req.body.lastName,
+            nationality: req.body.nationality,
+            dateOfBirth: req.body.dateOfBirth,
+            phoneNumber: req.body.phoneNumber,
+            email: req.body.email,
+            city: req.body.city,
+            comments: req.body.comments
+        });
+        if (req.file) {
+            jobSeeker.cv = req.file.path;
+        }
+
         await jobSeeker.save();
         res.status(201).json(jobSeeker);
     } catch (err) {
@@ -29,7 +68,8 @@ router.get('/:id', getJobSeeker, (req, res) => {
 });
 
 // Route pour mettre à jour un chercheur d'emploi spécifique
-router.put('/:id', getJobSeeker, async (req, res) => {
+router.put('/:id', getJobSeeker,upload.single('cv'), async (req, res) => {
+    console.log(req.body);
     if (req.body.firstName != null) {
         res.jobSeeker.firstName = req.body.firstName;
     }
@@ -51,9 +91,10 @@ router.put('/:id', getJobSeeker, async (req, res) => {
     if (req.body.city != null) {
         res.jobSeeker.city = req.body.city;
     }
-    if (req.body.cv != null) {
-        res.jobSeeker.cv = req.body.cv;
+    if (req.file) {
+        res.jobSeeker.cv = req.file.path;
     }
+
     if (req.body.comments != null) {
         res.jobSeeker.comments = req.body.comments;
     }
@@ -66,14 +107,17 @@ router.put('/:id', getJobSeeker, async (req, res) => {
 });
 
 // Route pour supprimer un chercheur d'emploi spécifique
-router.delete('/:id', getJobSeeker, async (req, res) => {
+router.delete('/:id', async (req, res) => {
     try {
-        await res.jobSeeker.remove();
-        res.json({ message: 'Chercheur d\'emploi supprimé' });
+      const result = await JobSeeker.findByIdAndDelete(req.params.id);
+      if (!result) {
+        return res.status(404).json({ message: 'Chercheur d\'emploi non trouvé' });
+      }
+      res.json({ message: 'Chercheur d\'emploi supprimé' });
     } catch (err) {
-        res.status(400).json({ message: err.message });
+      res.status(400).json({ message: err.message });
     }
-});
+  });
 
 // Middleware pour récupérer un chercheur d'emploi par son identifiant
 async function getJobSeeker(req, res, next) {
