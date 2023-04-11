@@ -2,7 +2,7 @@
     <!-- Base application theme. -->
     <style name="Theme.GestionInterim" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
+        <item name="colorPrimary">@color/purple_700</item>
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
@@ -47,5 +47,13 @@
 
     <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
         <item name="android:background">@color/grey_clair</item>
+        <item name="colorPrimary">@color/orange</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.rounded" parent="">
+        <item name="colorPrimary">@color/white</item>
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">8dp</item>
+        <item name="boxStrokeColor">@color/white</item>
     </style>
 </resources>

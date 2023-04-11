@@ -107,5 +107,9 @@
     <string name="sub_title_accueil">Mon accueil</string>
     <string name="sub_title_search">Recherchez des offres parmis des centaines !</string>
     <string name="top_menu_pour_vous">Pour vous</string>
+    <string name="trouver_job_faites_recherche">Faites votre recherche : </string>
+    <string name="trouver_job_plus_filtres">Plus de filtres : </string>
+    <string name="trouver_job_search">Recherchez un métier</string>
+
 
 </resources>

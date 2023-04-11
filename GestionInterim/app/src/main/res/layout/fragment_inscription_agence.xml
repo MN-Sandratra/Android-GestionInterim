@@ -45,6 +45,10 @@
             android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurNom"
@@ -55,7 +59,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="text" />
 
@@ -63,6 +66,10 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:startIconTint="@color/grey_clair"
@@ -74,7 +81,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="text" />
 
@@ -82,6 +88,10 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurSousService"
@@ -93,13 +103,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionMDP"
@@ -113,13 +126,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionConfirmationMDP"
@@ -133,13 +149,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="textPassword" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurAdresse"
@@ -151,13 +170,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurNumeroNational"
@@ -169,13 +191,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurContact1"
@@ -187,7 +212,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:inputType="text"
                     android:textColor="@color/grey_clair" />
 
@@ -195,6 +219,10 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurTelephone1"
@@ -206,7 +234,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="phone" />
 
@@ -215,6 +242,10 @@
 
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurMail1"
@@ -226,13 +257,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="textEmailAddress" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurContact2"
@@ -244,13 +278,16 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurTelephone2"
@@ -262,7 +299,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="phone" />
 
@@ -270,6 +306,10 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurMail2"
@@ -281,7 +321,6 @@
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/darkblue"
                     android:textColor="@color/grey_clair"
                     android:inputType="textEmailAddress" />
 
