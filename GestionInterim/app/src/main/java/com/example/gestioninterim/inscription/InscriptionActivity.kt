@@ -21,14 +21,17 @@ class InscriptionActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inscription)
 
+        // Définition du bouton pour passer l'inscription
         var skipButton = findViewById<ImageButton>(R.id.imageButton)
 
+        // On ajoute le fragment au container
         fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         val fragment = FragmentChooseInscription()
         fragmentTransaction.add(R.id.containerInscription, fragment)
         fragmentTransaction.commit()
 
+        // Listener sur le bouton de skip
         skipButton.setOnClickListener{
             val intent = Intent(this@InscriptionActivity, MainAnonymeActivity::class.java)
             startActivity(intent)

@@ -30,8 +30,8 @@
 
     <!-- LOGIN -->
 
-    <string name="nomUtilisateurAdresseMail">Nom d’utilisateur ou adresse mail :</string>
-    <string name="password">Mot de passe :</string>
+    <string name="nomUtilisateurAdresseMail">Nom d’utilisateur ou adresse mail</string>
+    <string name="password">Mot de passe</string>
     <string name="connectezvous">Connectez vous pour continuer !</string>
     <string name="noAccount">Vous n’avez pas de compte ?</string>
     <string name="clickHere">Cliquez ici !</string>

@@ -39,7 +39,10 @@ class FragmentInterimaireInscription : Fragment() {
         val nomCv = view.findViewById<TextInputEditText>(R.id.nomCvInterimaire)
         val clickHere = view.findViewById<TextView>(R.id.clickHere)
 
+        // Définition du bouton de validation
         val buttonValidate = view.findViewById<MaterialButton>(R.id.buttonValidationInscription)
+
+        // Définition des inputs obligatoires
         val inputNom = view.findViewById<TextInputEditText>(R.id.inputTextNom)
         val inputPrenom = view.findViewById<TextInputEditText>(R.id.inputTextPrenom)
         val inputMdp = view.findViewById<TextInputEditText>(R.id.inputTextPassword)
@@ -47,8 +50,8 @@ class FragmentInterimaireInscription : Fragment() {
         val inputMail = view.findViewById<TextInputEditText>(R.id.inputTextMail)
         val inputTelephone = view.findViewById<TextInputEditText>(R.id.inputTextTelephone)
 
+        // Définition de l'URI du CV
         var selectedFileUri: Uri? = null
-
 
         // Adapter pour la sélection des pays
         val nationalities = resources.getStringArray(R.array.nationalities)
@@ -131,12 +134,16 @@ class FragmentInterimaireInscription : Fragment() {
 
         }
 
+        // Listener du bouton de validation
         buttonValidate.setOnClickListener{
 
+            // Vérification de correspondance entre les deux mots de passe
             val isMdpMatching = inputMdp.text.toString() == inputConfirmMdp.text.toString()
+
+            // Vérification du remplissage de l'email ou du téléphone
             val isEmailOrTelephoneFilled = inputMail.text?.isNotEmpty() == true || inputTelephone.text?.isNotEmpty() == true
 
-
+            // Vérification que chaque input soit remplis
             val allInputsFilled = listOf(inputNom, inputPrenom, inputMdp, inputConfirmMdp).all {
                 it.text?.isNotEmpty() == true
             } && isMdpMatching && isEmailOrTelephoneFilled
