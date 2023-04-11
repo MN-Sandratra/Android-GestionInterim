@@ -18,13 +18,18 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.provider.OpenableColumns
 import android.widget.TextView
 import android.widget.Toast
+import com.example.gestioninterim.Services.InscriptionService
 import com.example.gestioninterim.login.LoginActivity
+import com.example.gestioninterim.models.Utilisateur
+import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import java.io.File
+import java.io.Serializable
 
 class FragmentInterimaireInscription : Fragment() {
 
@@ -160,6 +165,15 @@ class FragmentInterimaireInscription : Fragment() {
             }
 
         }
+
+
+        // Appel du service pour l'inscription
+        val user = UtilisateurInterimaire("Prenom", "Nom", "mdp",null,"06955485")
+        val intent = Intent(requireContext(), InscriptionService::class.java)
+
+        // J'injecte mon utilisateur dans l'intent
+        intent.putExtra("utilisateur", user as Serializable)
+        requireActivity().startService(intent)
 
         return view
     }
