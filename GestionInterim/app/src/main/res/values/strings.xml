@@ -50,6 +50,9 @@
     <string name="inscriptionLater">S\'inscrire plus tard</string>
     <string name="inscriptionMDP">Mot de passe : (obligatoire)</string>
     <string name="inscriptionConfirmationMDP">Confirmez votre mot de passe : (obligatoire)</string>
+    <string name="inscriptionValidation">Veuillez renseignez le code de validation</string>
+    <string name="inscriptionValidationResendCode">Vous n’avez pas recu le code?</string>
+    <string name="inscriptionValidationResendCodeClickHere">Cliquez ici pour renvoyer le code de validation</string>
 
     <!-- INSCRIPTION INTERIMAIRE -->
 

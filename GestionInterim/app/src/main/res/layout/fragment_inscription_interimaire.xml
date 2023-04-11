@@ -61,10 +61,11 @@
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
-                    android:inputType="textEmailAddress"
+                    android:inputType="textCapCharacters"
                     />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -85,6 +86,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextPrenom"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
@@ -110,6 +112,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -133,6 +136,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -155,6 +159,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextMail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -178,6 +183,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextTelephone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -313,7 +319,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/materialButton"
+        android:id="@+id/buttonValidationInscription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/orange"
@@ -333,7 +339,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/materialButton">
+        app:layout_constraintTop_toBottomOf="@+id/buttonValidationInscription">
 
         <TextView
             android:id="@+id/textView"
@@ -343,7 +349,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.26"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/materialButton"
+            app:layout_constraintTop_toBottomOf="@+id/buttonValidationInscription"
             style="@style/DefaultTextStyle"/>
 
         <TextView
@@ -355,7 +361,7 @@
             android:textColor="@color/orange"
             android:textSize="18dp"
             app:layout_constraintStart_toEndOf="@+id/textView"
-            app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+            app:layout_constraintTop_toBottomOf="@+id/buttonValidationInscription" />
 
     </LinearLayout>
 
