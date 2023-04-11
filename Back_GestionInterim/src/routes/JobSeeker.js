@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const JobSeeker = require('../models/jobSeeker');
 const multer=require('multer');
+const mailService = require('../services/Mail');
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {
@@ -46,6 +47,20 @@ router.post('/', upload.single('cv'), async (req, res) => {
         }
 
         await jobSeeker.save();
+        const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
+
+
+
+        const toEmail = jobSeeker.email;
+
+        mailService.sendConfirmationCodeByEmail(toEmail, confirmationCode)
+        .then(() => {
+            console.log(`Code de confirmation envoyé à ${toEmail}`);
+        })
+        .catch((error) => {
+            console.error(`Erreur lors de l'envoi du code de confirmation : ${error}`);
+        });
+
         res.status(201).json(jobSeeker);
     } catch (err) {
         res.status(400).json({ message: err.message });
