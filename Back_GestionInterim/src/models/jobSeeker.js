@@ -19,7 +19,8 @@ const jobSeekerSchema = new mongoose.Schema({
     type: String
   },
   email: {
-    type: String
+    type: String,
+    unique: true
   },
   city: {
     type: String
@@ -29,6 +30,18 @@ const jobSeekerSchema = new mongoose.Schema({
   },
   comments: {
     type: String
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  validationCode: {
+    type: String,
+  },
+  isValidated: {
+    type: Boolean,
+    required:true,
+    default: false
   }
 });
 

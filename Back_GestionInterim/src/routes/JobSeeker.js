@@ -31,6 +31,7 @@ const upload = multer({
 
 // Route pour créer un nouveau chercheur d'emploi
 router.post('/', upload.single('cv'), async (req, res) => {
+    const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
     try {
         const jobSeeker = new JobSeeker({
             firstName: req.body.firstName,
@@ -40,17 +41,16 @@ router.post('/', upload.single('cv'), async (req, res) => {
             phoneNumber: req.body.phoneNumber,
             email: req.body.email,
             city: req.body.city,
-            comments: req.body.comments
+            comments: req.body.comments,
+            validationCode:confirmationCode,
+            password: req.body.password
         });
         if (req.file) {
             jobSeeker.cv = req.file.path;
         }
 
         await jobSeeker.save();
-        const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
-
-
-
+        
         const toEmail = jobSeeker.email;
 
         mailService.sendConfirmationCodeByEmail(toEmail, confirmationCode)
@@ -74,6 +74,30 @@ router.get('/', async (req, res) => {
         res.json(jobSeekers);
     } catch (err) {
         res.status(500).json({ message: err.message });
+    }
+});
+
+router.post('/validate', async (req, res) => {
+    const email = req.body.email;
+    const validationCode = req.body.validationCode;
+    console.log("my email: "+email);
+
+    try {
+        const jobSeeker = await JobSeeker.findOne({ email: email });
+        if (!jobSeeker) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
+
+        if (jobSeeker.validationCode !== validationCode) {
+            return res.status(400).json({ message: "Code de validation incorrect" });
+        }
+
+        jobSeeker.isValidated = true;
+        await jobSeeker.save();
+
+        return res.status(200).json({ message: "Validation réussie" });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
     }
 });
 
@@ -112,6 +136,9 @@ router.put('/:id', getJobSeeker,upload.single('cv'), async (req, res) => {
 
     if (req.body.comments != null) {
         res.jobSeeker.comments = req.body.comments;
+    }
+    if (req.body.password != null) {
+        res.jobSeeker.password = req.body.password;
     }
     try {
         const updatedJobSeeker = await res.jobSeeker.save();
