@@ -101,6 +101,33 @@ router.post('/validate', async (req, res) => {
     }
 });
 
+//Renvoyer le code de validation
+router.post('/code', async (req, res) => {
+    const email = req.body.email;
+    const confirmationCode =  Math.floor(Math.random() * 9000) + 1000;
+
+    try {
+        const jobSeeker = await JobSeeker.findOne({ email: email });
+        if (!jobSeeker) {
+            return res.status(404).json({ message: "Utilisateur non trouvé" });
+        }
+
+        jobSeeker.validationCode = confirmationCode;
+        await jobSeeker.save();
+
+        mailService.sendConfirmationCodeByEmail(email, confirmationCode)
+        .then(() => {
+            console.log(`Code de confirmation envoyé à ${email}`);
+        })
+        .catch((error) => {
+            console.error(`Erreur lors de l'envoi du code de confirmation : ${error}`);
+        });
+        res.status(201).json({ message: "Code de confirmation renvoyé" });
+    } catch (err) {
+        return res.status(500).json({ message: err.message });
+    }
+});
+
 // Route pour récupérer un chercheur d'emploi spécifique
 router.get('/:id', getJobSeeker, (req, res) => {
     res.json(res.jobSeeker);
