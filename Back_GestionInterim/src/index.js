@@ -7,6 +7,7 @@ const dblink=process.env.CONNECTION_DB;
 console.log(dblink);
 const app = express();
 const port = 8000;
+const serverAddress = "192.168.1.23";
 
 const JobSeekerRouter =require("./routes/JobSeeker");
 const EmployerRouter =require("./routes/Employer");
@@ -36,8 +37,8 @@ app.get('/', (req, res) => {
       ""+dblink,
     ).then(()=>console.log("Connected to MongoDb Database"))
     .catch(()=>console.log("Connection Failed"));
-    app.listen(port, () => {
-      console.log(`Server running at http://localhost:${port}`);
+    app.listen(port, serverAddress,() => {
+      console.log(`Server running at http://${serverAddress}:${port}`);
     });
   }
   

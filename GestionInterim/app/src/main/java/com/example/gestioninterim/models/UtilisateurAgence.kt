@@ -1,4 +1,7 @@
 package com.example.gestioninterim.models
 
-class UtilisateurAgence {
-}
+import java.io.Serializable
+
+data class UtilisateurAgence (
+    val nom: String,
+) : Serializable

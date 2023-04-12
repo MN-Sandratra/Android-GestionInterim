@@ -3,18 +3,26 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
+        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestionInterim"
         tools:targetApi="31">
 
-        <service android:name=".Services.InscriptionService"/>
+        <service android:name=".Services.InscriptionInterimaireService"/>
+        <service android:name=".Services.InscriptionEmployeurService"/>
+        <service android:name=".Services.InscriptionAgenceService"/>
+
+        <service android:name=".Services.InscriptionInterimaireValidationService"/>
+
         <activity
             android:name=".slides.FirstSlidesActivity"
             android:windowSoftInputMode="adjustPan"

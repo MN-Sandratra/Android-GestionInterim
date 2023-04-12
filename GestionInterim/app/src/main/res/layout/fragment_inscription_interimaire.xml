@@ -139,8 +139,8 @@
                     android:id="@+id/inputTextConfirmPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grey_clair"
-                    android:inputType="textPassword" />
+                    android:inputType="textPassword"
+                    android:textColor="@color/grey_clair" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,6 +208,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputDateNaissance"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -230,6 +231,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputVille"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -252,7 +254,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <AutoCompleteTextView
-                    android:id="@+id/nationality_dropdown"
+                    android:id="@+id/inputNationnalite"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:completionThreshold="1"
@@ -284,7 +286,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/nomCvInterimaire"
+                    android:id="@+id/inputCv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -306,6 +308,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputCommentaires"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"

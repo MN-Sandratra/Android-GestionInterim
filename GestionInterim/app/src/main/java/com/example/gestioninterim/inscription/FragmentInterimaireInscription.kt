@@ -1,35 +1,39 @@
 package com.example.gestioninterim.inscription
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Bundle
+import android.provider.OpenableColumns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
-import android.widget.CheckBox
+import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
-import com.google.android.material.textfield.TextInputLayout
-import android.Manifest
-import android.annotation.SuppressLint
-import android.app.Activity
-import android.content.Intent
-import android.net.Uri
-import android.os.Build
-import android.provider.OpenableColumns
-import android.widget.TextView
-import android.widget.Toast
-import com.example.gestioninterim.Services.InscriptionService
+import com.example.gestioninterim.Services.InscriptionInterimaireService
 import com.example.gestioninterim.login.LoginActivity
-import com.example.gestioninterim.models.Utilisateur
 import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import java.io.File
+import com.google.android.material.textfield.TextInputLayout
 import java.io.Serializable
+import java.nio.charset.StandardCharsets
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 class FragmentInterimaireInscription : Fragment() {
 
@@ -41,7 +45,7 @@ class FragmentInterimaireInscription : Fragment() {
 
         // Récupération du bouton pour selectionner le cv
         val getCv = view.findViewById<TextInputLayout>(R.id.inscriptionInterimaireCv)
-        val nomCv = view.findViewById<TextInputEditText>(R.id.nomCvInterimaire)
+        val nomCv = view.findViewById<TextInputEditText>(R.id.inputCv)
         val clickHere = view.findViewById<TextView>(R.id.clickHere)
 
         // Définition du bouton de validation
@@ -54,6 +58,9 @@ class FragmentInterimaireInscription : Fragment() {
         val inputConfirmMdp = view.findViewById<TextInputEditText>(R.id.inputTextConfirmPassword)
         val inputMail = view.findViewById<TextInputEditText>(R.id.inputTextMail)
         val inputTelephone = view.findViewById<TextInputEditText>(R.id.inputTextTelephone)
+        val inputDateNaissance = view.findViewById<TextInputEditText>(R.id.inputDateNaissance)
+        val inputVille = view.findViewById<TextInputEditText>(R.id.inputVille)
+        val inputCommentaires = view.findViewById<TextInputEditText>(R.id.inputCommentaires)
 
         // Définition de l'URI du CV
         var selectedFileUri: Uri? = null
@@ -61,7 +68,7 @@ class FragmentInterimaireInscription : Fragment() {
         // Adapter pour la sélection des pays
         val nationalities = resources.getStringArray(R.array.nationalities)
         val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, nationalities)
-        val autoCompleteTextView = view.findViewById<AutoCompleteTextView>(R.id.nationality_dropdown)
+        val autoCompleteTextView = view.findViewById<AutoCompleteTextView>(R.id.inputNationnalite)
         autoCompleteTextView.setAdapter(adapter)
 
         // Explorateur de fichier
@@ -139,6 +146,9 @@ class FragmentInterimaireInscription : Fragment() {
 
         }
 
+        println("La date de naissance est : " + inputDateNaissance.text)
+
+
         // Listener du bouton de validation
         buttonValidate.setOnClickListener{
 
@@ -154,9 +164,49 @@ class FragmentInterimaireInscription : Fragment() {
             } && isMdpMatching && isEmailOrTelephoneFilled
 
             if (allInputsFilled) {
+
+                val inputDate : String? = inputDateNaissance?.text?.toString()
+                val inputMailText: String? = inputMail?.text?.toString()
+                val inputTelephoneText: String? = inputTelephone?.text?.toString()
+                val inputNationalite : String? = autoCompleteTextView?.text?.toString()
+                val inputVilleText: String? = inputVille?.text?.toString()
+                val inputCommentairesText: String? = inputCommentaires?.text?.toString()
+                val inputPasswordEncrypt : String = hashPassword(inputMdp.text.toString())
+
+                val date: String? = if (!inputDate?.isEmpty()!!) {
+                    val originalDateFormat = SimpleDateFormat("dd/MM/yyyy")
+                    val parsedDate = originalDateFormat.parse(inputDate.toString())
+                    val newDateFormat = SimpleDateFormat("yyyy/MM/dd")
+                    newDateFormat.format(parsedDate)
+                } else {
+                    ""
+                }
+
+                val user = UtilisateurInterimaire(
+                    inputPrenom.text.toString(),
+                    inputNom.text.toString(),
+                    inputNationalite,
+                    date,
+                    inputTelephoneText,
+                    inputMailText,
+                    inputVilleText,
+                    "",
+                    inputCommentairesText,
+                    inputPasswordEncrypt
+                )
+
+                launchServiceInscription(user)
+
                 val fragment = FragmentValidationInscription()
+
+                val args = Bundle()
+                args.putString("email", inputMailText)
+
+                fragment.arguments = args
+
                 val fragmentManager = requireActivity().supportFragmentManager
                 fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
+
             } else if (!isMdpMatching) {
                 Toast.makeText(requireContext(), "Les mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show()
             }
@@ -166,15 +216,27 @@ class FragmentInterimaireInscription : Fragment() {
 
         }
 
+        return view
+    }
 
-        // Appel du service pour l'inscription
-        val user = UtilisateurInterimaire("Prenom", "Nom", "mdp",null,"06955485")
-        val intent = Intent(requireContext(), InscriptionService::class.java)
-
-        // J'injecte mon utilisateur dans l'intent
+    fun launchServiceInscription(user : UtilisateurInterimaire){
+        val intent = Intent(requireContext(), InscriptionInterimaireService::class.java)
         intent.putExtra("utilisateur", user as Serializable)
         requireActivity().startService(intent)
+    }
 
-        return view
+    fun hashPassword(password: String): String {
+        try {
+            val messageDigest = MessageDigest.getInstance("SHA-256")
+            val hash = messageDigest.digest(password.toByteArray(StandardCharsets.UTF_8))
+            val hexString = StringBuilder()
+            for (byte in hash) {
+                val hex = String.format("%02X", byte)
+                hexString.append(hex)
+            }
+            return hexString.toString()
+        } catch (e: NoSuchAlgorithmException) {
+            throw RuntimeException("Error hashing password", e)
+        }
     }
 }

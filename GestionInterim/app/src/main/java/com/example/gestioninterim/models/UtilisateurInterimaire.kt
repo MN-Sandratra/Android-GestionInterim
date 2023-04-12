@@ -1,16 +1,17 @@
 package com.example.gestioninterim.models
 
+import java.io.Serializable
 import java.util.Date
 
-class UtilisateurInterimaire(
-    nom: String,
-    prenom: String,
-    password: String,
-    mail : String? = null,
-    telephone : String? = null,
-    dateNaissance : Date? = null,
-    ville : String? = null,
-    nationnalite : String? = null,
-    uriCV : String? = null,
-    commentaires : String? = null
-) : Utilisateur
+data class UtilisateurInterimaire(
+    val firstName: String,
+    val lastName: String,
+    val nationality: String? = null,
+    val dateOfBirth : String? = null,
+    val phoneNumber : String? = null,
+    val email : String? = null,
+    val city : String? = null,
+    val cv : String? = null,
+    val comments : String? = null,
+    val password : String
+) : Serializable

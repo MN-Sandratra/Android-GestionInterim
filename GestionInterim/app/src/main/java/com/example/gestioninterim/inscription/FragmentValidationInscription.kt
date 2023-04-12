@@ -1,31 +1,20 @@
 package com.example.gestioninterim.inscription
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.CheckBox
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
-import com.google.android.material.textfield.TextInputLayout
-import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
-import android.net.Uri
-import android.provider.OpenableColumns
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
 import android.widget.Toast
-import com.example.gestioninterim.login.LoginActivity
+import com.example.gestioninterim.Services.InscriptionInterimaireValidationService
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
-import java.io.File
 
 class FragmentValidationInscription : Fragment() {
 
@@ -36,8 +25,14 @@ class FragmentValidationInscription : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_inscription_validation, container, false)
 
-        // Définition du bouton de validation
+        // Définition des boutons
         val clickHere = view.findViewById<TextView>(R.id.clickHere)
+        val validation = view.findViewById<MaterialButton>(R.id.buttonValidationInscription)
+
+        // Je récupère l'émail
+        val args = arguments
+        val email = args?.getString("email")
+
 
         // Définition des chiffres
         val number1 = view.findViewById<TextInputEditText>(R.id.inputValidationNumber1)
@@ -68,11 +63,33 @@ class FragmentValidationInscription : Fragment() {
             })
         }
 
-        // Listener sur le bouton de validation
+        // Je concatene les chiffres
+
+        // Listener sur le bouton pour valider
+        validation.setOnClickListener {
+            val code = number1.text.toString() + number2.text.toString() + number3.text.toString() + number4.text.toString()
+            if(code.length == 4){
+                launchServiceValidation(email.toString(), code)
+            }
+            else{
+                Toast.makeText(requireContext(), "Veuillez saisir les 4 chiffres !", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+        // Listener sur le bouton si on a pas recu le code
         clickHere.setOnClickListener{
-            Toast.makeText(requireContext(), "Nous venons de vous renvoyer un code", Toast.LENGTH_SHORT).show()
+            launchServiceValidation(email.toString(), null)
         }
 
         return view
+    }
+
+    // Lancement du service de validation
+    fun launchServiceValidation(email: String, codeValidation: String?){
+        val intent = Intent(requireContext(), InscriptionInterimaireValidationService::class.java)
+        intent.putExtra("email", email)
+        intent.putExtra("code", codeValidation)
+        requireActivity().startService(intent)
     }
 }
