@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.gestioninterim.models.UtilisateurInterimaire
+import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
+import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
@@ -32,20 +34,15 @@ class InscriptionInterimaireValidationService : Service() {
         val email = intent?.getStringExtra("email")
         val code = intent?.getStringExtra("code")
 
-
         // Si le code n'est pas null qu'on veut envoyer une requête avec un code
         // Sinon c'est qu'on redemande un code
         if(code != null){
         sendPostRequestValidation(email.toString(), code.toString()) { validate ->
-
             handler.post {
                 if (validate) {
-                    Toast.makeText(
-                        this,
-                        "Validation réussie, Redirection à faire",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                    // Redirection vers l'interface INTERIMAIRE CONNECTE
+                    val intent = Intent(applicationContext, MainInterimaireActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    startActivity(intent)
                 } else {
                     Toast.makeText(this, "Validation échouée", Toast.LENGTH_SHORT).show()
                     }
@@ -69,8 +66,7 @@ class InscriptionInterimaireValidationService : Service() {
             // J'ajoute à la requete les parameters si ils sont pas null ou vide ("")
             var reqParam = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
 
-
-            val mURL = URL("http://192.168.1.23:8000/api/jobseekers/code")
+            val mURL = URL("http://192.168.1.13:8000/api/jobseekers/code")
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET
                 requestMethod = "POST"
@@ -113,7 +109,7 @@ class InscriptionInterimaireValidationService : Service() {
                 "UTF-8"
             ) + "=" + URLEncoder.encode(codeValidation, "UTF-8")
 
-            val mURL = URL("http://192.168.1.23:8000/api/jobseekers/validate")
+            val mURL = URL("http://192.168.1.13:8000/api/jobseekers/validate")
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET
                 requestMethod = "POST"

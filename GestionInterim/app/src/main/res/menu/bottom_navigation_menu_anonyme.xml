@@ -14,7 +14,7 @@
 
     <item
         android:id="@+id/profil_page"
-        android:title="@string/bottom_profil_item"
+        android:title="@string/bottom_connect_item"
         android:icon="@drawable/ic_user"/>
 
 </menu>

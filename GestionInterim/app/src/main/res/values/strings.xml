@@ -105,7 +105,7 @@
 
     <string name="bottom_home_item">Accueil</string>
     <string name="bottom_search_item">Trouver un job</string>
-    <string name="bottom_profil_item">Se connecter</string>
+    <string name="bottom_connect_item">Se connecter</string>
     <string name="accueil_create_login_account">Créer un compte ou se connecter</string>
     <string name="sub_title_accueil">Mon accueil</string>
     <string name="sub_title_search">Recherchez des offres parmis des centaines !</string>
@@ -114,5 +114,11 @@
     <string name="trouver_job_plus_filtres">Plus de filtres : </string>
     <string name="trouver_job_search">Recherchez un métier</string>
 
+
+    <!-- UTILISATEUR INTERIMAIRE -->
+
+    <string name="bottom_missions_item">Missions</string>
+    <string name="bottom_candidatures_item">Candidatures</string>
+    <string name="bottom_profil_item">Profil</string>
 
 </resources>

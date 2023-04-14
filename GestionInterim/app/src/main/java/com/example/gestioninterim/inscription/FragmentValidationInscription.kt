@@ -69,6 +69,7 @@ class FragmentValidationInscription : Fragment() {
         validation.setOnClickListener {
             val code = number1.text.toString() + number2.text.toString() + number3.text.toString() + number4.text.toString()
             if(code.length == 4){
+                println("Je suis là 1" + email.toString() + code)
                 launchServiceValidation(email.toString(), code)
             }
             else{

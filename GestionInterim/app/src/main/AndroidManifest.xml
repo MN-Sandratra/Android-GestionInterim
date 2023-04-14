@@ -48,6 +48,11 @@
             android:windowSoftInputMode="adjustPan"
             android:exported="false"
             />
+        <activity
+            android:name=".utilisateurInterimaire.MainInterimaireActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"
+            />
 
     </application>
 

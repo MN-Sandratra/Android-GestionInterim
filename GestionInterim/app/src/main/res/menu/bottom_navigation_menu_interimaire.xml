@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/home_page"
+        android:title="@string/bottom_home_item"
+        android:icon="@drawable/ic_home"
+        />
+
+    <item
+        android:id="@+id/search_page"
+        android:title="@string/bottom_search_item"
+        android:icon="@drawable/ic_search"/>
+
+    <item
+        android:id="@+id/missions_page"
+        android:title="@string/bottom_missions_item"
+        android:icon="@drawable/ic_missions"/>
+
+    <item
+        android:id="@+id/candidatures_page"
+        android:title="@string/bottom_candidatures_item"
+        android:icon="@drawable/ic_candidatures"/>
+
+    <item
+        android:id="@+id/profil_page"
+        android:title="@string/bottom_profil_item"
+        android:icon="@drawable/ic_user"/>
+
+</menu>

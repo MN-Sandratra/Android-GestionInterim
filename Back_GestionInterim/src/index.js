@@ -7,7 +7,7 @@ const dblink=process.env.CONNECTION_DB;
 console.log(dblink);
 const app = express();
 const port = 8000;
-const serverAddress = "192.168.1.23";
+const serverAddress = "192.168.1.13";
 
 const JobSeekerRouter =require("./routes/JobSeeker");
 const EmployerRouter =require("./routes/Employer");

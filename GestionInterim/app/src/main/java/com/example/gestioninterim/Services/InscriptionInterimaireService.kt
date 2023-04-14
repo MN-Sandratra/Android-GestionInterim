@@ -62,7 +62,7 @@ class InscriptionInterimaireService : Service() {
             // Je supprime le dernier charactère de la chaîne
             val reqParambis = reqParam!!.substring(0, reqParam.length - 1)
 
-            val mURL = URL("http://192.168.1.23:8000/api/jobseekers")
+            val mURL = URL("http://192.168.1.13:8000/api/jobseekers")
 
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET
