@@ -19,12 +19,13 @@
         android:id="@+id/cardViewLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
+        android:layout_marginHorizontal="60dp"
         android:backgroundTint="@color/darkblue"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
+        android:layout_marginTop="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view"
@@ -58,14 +59,16 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewSearch"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/darkblue"
         app:cardCornerRadius="10dp"
+        android:layout_marginTop="30dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardViewLogin"
         app:strokeColor="@color/white"
         app:strokeWidth="1dp">
@@ -81,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:background="@drawable/ic_search_large"
-                android:backgroundTint="@color/orange" />
+                android:backgroundTint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -97,13 +100,15 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewMissions"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
+        android:layout_marginTop="30dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/darkblue"
         app:cardCornerRadius="10dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view"
         app:layout_constraintTop_toBottomOf="@+id/cardViewLogin"
         app:strokeColor="@color/white"
@@ -119,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_search_large"
+                android:background="@drawable/ic_document_scan_large"
                 android:backgroundTint="@color/orange" />
 
             <TextView
@@ -127,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="@string/bottom_search_item"
+                android:text="@string/accueil_voir_missions"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -137,14 +142,16 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewMissionsCheck"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/darkblue"
         app:cardCornerRadius="10dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toStartOf="@+id/view"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardViewSearch"
         app:strokeColor="@color/white"
         app:strokeWidth="1dp">
@@ -159,7 +166,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_search_large"
+                android:background="@drawable/ic_check_mission"
                 android:backgroundTint="@color/orange" />
 
             <TextView
@@ -167,7 +174,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="@string/bottom_search_item"
+                android:text="@string/accueil_voir_missions_a_valider"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -177,15 +184,17 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewCandidatures"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@color/darkblue"
         app:cardCornerRadius="10dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/cardViewSearch"
+        app:layout_constraintTop_toBottomOf="@+id/cardViewMissions"
         app:strokeColor="@color/white"
         app:strokeWidth="1dp">
 
@@ -199,15 +208,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="@drawable/ic_search_large"
-                android:backgroundTint="@color/orange" />
+                android:background="@drawable/ic_candidatures_large"
+                android:backgroundTint="@color/white" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
-                android:text="@string/bottom_search_item"
+                android:text="@string/accueil_voir_candidatures"
                 android:textColor="@color/white" />
 
         </LinearLayout>

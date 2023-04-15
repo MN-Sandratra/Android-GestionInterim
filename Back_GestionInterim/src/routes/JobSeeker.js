@@ -188,6 +188,8 @@ router.delete('/:id', async (req, res) => {
     }
   });
 
+
+
 // Middleware pour récupérer un chercheur d'emploi par son identifiant
 async function getJobSeeker(req, res, next) {
     try {
@@ -201,5 +203,6 @@ async function getJobSeeker(req, res, next) {
         return res.status(500).json({ message: err.message });
     }
 }
+
 
 module.exports = router;

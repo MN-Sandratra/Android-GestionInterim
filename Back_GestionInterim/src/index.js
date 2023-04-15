@@ -7,11 +7,13 @@ const dblink=process.env.CONNECTION_DB;
 console.log(dblink);
 const app = express();
 const port = 8000;
-const serverAddress = "192.168.1.13";
+const serverAddress = "192.168.1.23";
 
 const JobSeekerRouter =require("./routes/JobSeeker");
 const EmployerRouter =require("./routes/Employer");
 const SubscriptionRouter =require("./routes/Subscription");
+const LoginRouter =require("./routes/Login");
+
 
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
@@ -26,6 +28,8 @@ app.use(function (req, res, next) {
 app.use('/api/jobseekers',JobSeekerRouter);
 app.use('/api/employers',EmployerRouter);
 app.use('/api/subscriptions',SubscriptionRouter);
+app.use('/api/login',LoginRouter);
+
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');

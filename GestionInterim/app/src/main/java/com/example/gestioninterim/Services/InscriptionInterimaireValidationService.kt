@@ -36,108 +36,64 @@ class InscriptionInterimaireValidationService : Service() {
 
         // Si le code n'est pas null qu'on veut envoyer une requête avec un code
         // Sinon c'est qu'on redemande un code
-        if(code != null){
-        sendPostRequestValidation(email.toString(), code.toString()) { validate ->
+        val isResendCode = code == null
+        sendPostRequest(email.toString(), code?.toString(), isResendCode) { validate ->
             handler.post {
                 if (validate) {
                     val intent = Intent(applicationContext, MainInterimaireActivity::class.java)
                     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
                     startActivity(intent)
-                } else {
+                }
+                else if (isResendCode) {
+                    Toast.makeText(this, "Un nouveau code vient de vous être envoyé", Toast.LENGTH_SHORT).show()
+                }
+                else {
                     Toast.makeText(this, "Validation échouée", Toast.LENGTH_SHORT).show()
-                    }
                 }
             }
-        }
-        else{
-            sendPostRequestResendCode(email.toString())
-            Toast.makeText(this, "Un nouveau code vient de vous être envoyé", Toast.LENGTH_SHORT).show()
         }
 
         return START_STICKY
     }
 
-    // Requête renvoie d'un code
-    fun sendPostRequestResendCode(email: String) {
 
+    fun sendPostRequest(email: String, code: String?, resendCode: Boolean = false, callback: (Boolean) -> Unit) {
 
-        Executors.newSingleThreadExecutor().execute {
+        // Définition du endpoint
+        val endpoint = if (resendCode) "code" else "validate"
 
-            // J'ajoute à la requete les parameters si ils sont pas null ou vide ("")
-            var reqParam = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
+        // J'ajoute l'email dans le corps de ma requête
+        var reqParam = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
 
-            val mURL = URL("http://192.168.1.13:8000/api/jobseekers/code")
-            with(mURL.openConnection() as HttpURLConnection) {
-                // optional default is GET
-                requestMethod = "POST"
-
-                val wr = OutputStreamWriter(outputStream);
-                wr.write(reqParam);
-                wr.flush();
-
-                println("URL : $url")
-                println("Response Code : $responseCode")
-
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader(InputStreamReader(inputStream)).use {
-                        val response = StringBuffer()
-
-                        var inputLine = it.readLine()
-                        while (inputLine != null) {
-                            response.append(inputLine)
-                            inputLine = it.readLine()
-                        }
-                    }
-                }
-            }
+        // Si je veux tenter la validation, j'ajoute le code
+        if (!resendCode && code != null) {
+            reqParam += "&" + URLEncoder.encode("validationCode", "UTF-8") + "=" + URLEncoder.encode(code, "UTF-8")
         }
-    }
-
-    // Requête envoie d'un code
-    fun sendPostRequestValidation(email: String, codeValidation : String,callback: (Boolean) -> Unit) {
-
+        val mURL = URL("http://192.168.1.23:8000/api/jobseekers/$endpoint")
 
         Executors.newSingleThreadExecutor().execute {
-
-            var validate : Boolean = false
-
-            // J'ajoute à la requete les parameters si ils sont pas null ou vide ("")
-            var reqParam =
-                URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
-            reqParam += "&" + URLEncoder.encode(
-                "validationCode",
-                "UTF-8"
-            ) + "=" + URLEncoder.encode(codeValidation, "UTF-8")
-
-            val mURL = URL("http://192.168.1.13:8000/api/jobseekers/validate")
+            var validate = false
             with(mURL.openConnection() as HttpURLConnection) {
-                // optional default is GET
                 requestMethod = "POST"
-
-                val wr = OutputStreamWriter(outputStream);
-                wr.write(reqParam);
-                wr.flush();
-
-                println("URL : $url")
-                println("Response Code : $responseCode")
-
+                val wr = OutputStreamWriter(outputStream)
+                wr.write(reqParam)
+                wr.flush()
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
-
                         var inputLine = it.readLine()
                         while (inputLine != null) {
                             response.append(inputLine)
                             inputLine = it.readLine()
                         }
-                        validate = true
+                        validate = !resendCode
                     }
                 }
             }
-            println("Validation est : $validate")
             callback(validate)
         }
     }
+
 
     override fun onBind(intent: Intent?): IBinder? {
         return null

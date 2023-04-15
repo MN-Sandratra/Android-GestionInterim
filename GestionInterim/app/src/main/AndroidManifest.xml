@@ -20,6 +20,7 @@
         <service android:name=".Services.InscriptionInterimaireService"/>
         <service android:name=".Services.InscriptionEmployeurService"/>
         <service android:name=".Services.InscriptionAgenceService"/>
+        <service android:name=".Services.LoginService"/>
 
         <service android:name=".Services.InscriptionInterimaireValidationService"/>
 
@@ -50,6 +51,11 @@
             />
         <activity
             android:name=".utilisateurInterimaire.MainInterimaireActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"
+            />
+        <activity
+            android:name=".utilisateurEmployeur.MainEmployeurActivity"
             android:windowSoftInputMode="adjustPan"
             android:exported="false"
             />

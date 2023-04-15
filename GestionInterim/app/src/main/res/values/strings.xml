@@ -117,6 +117,10 @@
 
     <!-- UTILISATEUR INTERIMAIRE -->
 
+    <string name="accueil_voir_profil">Voir mon profil intérimaire</string>
+    <string name="accueil_voir_missions">Voir ses missions</string>
+    <string name="accueil_voir_missions_a_valider">Missions à valider</string>
+    <string name="accueil_voir_candidatures">Voir ses candidatures</string>
     <string name="bottom_missions_item">Missions</string>
     <string name="bottom_candidatures_item">Candidatures</string>
     <string name="bottom_profil_item">Profil</string>
