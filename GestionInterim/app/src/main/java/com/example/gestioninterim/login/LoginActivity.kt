@@ -4,14 +4,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.gestioninterim.inscription.InscriptionActivity
 import com.example.gestioninterim.R
-import com.example.gestioninterim.Services.InscriptionInterimaireValidationService
 import com.example.gestioninterim.Services.LoginService
 import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
 import com.example.gestioninterim.utilisateurEmployeur.MainEmployeurActivity

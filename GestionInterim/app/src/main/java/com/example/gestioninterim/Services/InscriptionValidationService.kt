@@ -1,17 +1,11 @@
 package com.example.gestioninterim.Services
 
 import android.app.Service
-import android.content.Context
 import android.content.Intent
-import android.os.Build
 import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.gestioninterim.models.UtilisateurInterimaire
-import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -19,13 +13,10 @@ import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
-import java.text.DateFormat
-import java.text.SimpleDateFormat
-import java.util.*
 import java.util.concurrent.Executors
 
 
-class InscriptionInterimaireValidationService : Service() {
+class InscriptionValidationService : Service() {
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -37,6 +28,9 @@ class InscriptionInterimaireValidationService : Service() {
         // Si le code n'est pas null qu'on veut envoyer une requête avec un code
         // Sinon c'est qu'on redemande un code
         val isResendCode = code == null
+
+        println("Le code est : $code")
+
         sendPostRequest(email.toString(), code?.toString(), isResendCode) { validate ->
             handler.post {
                 if (validate) {
@@ -69,7 +63,7 @@ class InscriptionInterimaireValidationService : Service() {
         if (!resendCode && code != null) {
             reqParam += "&" + URLEncoder.encode("validationCode", "UTF-8") + "=" + URLEncoder.encode(code, "UTF-8")
         }
-        val mURL = URL("http://192.168.1.23:8000/api/jobseekers/$endpoint")
+        val mURL = URL("http://192.168.1.23:8000/api/validation/$endpoint")
 
         Executors.newSingleThreadExecutor().execute {
             var validate = false

@@ -8,9 +8,11 @@ router.post('/', async (req, res) => {
     const { email, password } = req.body;
   
     try {
-      const jobSeeker = await JobSeeker.findOne({ email });
-      const employer = await Employer.findOne({ email });
-      if (!jobSeeker && !employer) {
+      const jobSeeker = await JobSeeker.findOne({ email : email });
+      const employer1 = await Employer.findOne({ email1 : email }); 
+      const employer2 = await Employer.findOne({ email2 : email }); 
+      
+      if (!jobSeeker && !employer1 && !employer2) {
         return res.status(400).json({ message: 'Email incorrect ou mot de passe incorrect' });
       }
   
@@ -18,7 +20,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'Email incorrect ou mot de passe incorrect' });
       }
   
-      if (employer && employer.password !== password) {
+      if (employer1 && employer1.password !== password || employer2 && employer2.password !== password) {
         return res.status(400).json({ message: 'Email incorrect ou mot de passe incorrect' });
       }
   
@@ -26,14 +28,14 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'Compte non validé' });
       }
   
-      if (employer && !employer.isValidated) {
+      if (employer1 && !employer1.isValidated || employer2 && !employer2.isValidated) {
         return res.status(400).json({ message: 'Compte non validé' });
       }
   
       let userType = "";
       if(jobSeeker) {
         userType = "jobSeeker";
-      } else if (employer) {
+      } else if (employer1 || employer2) {
         userType = "employer";
       }
   

@@ -21,8 +21,7 @@
         <service android:name=".Services.InscriptionEmployeurService"/>
         <service android:name=".Services.InscriptionAgenceService"/>
         <service android:name=".Services.LoginService"/>
-
-        <service android:name=".Services.InscriptionInterimaireValidationService"/>
+        <service android:name=".Services.InscriptionValidationService"/>
 
         <activity
             android:name=".slides.FirstSlidesActivity"

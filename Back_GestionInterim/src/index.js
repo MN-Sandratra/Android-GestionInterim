@@ -13,6 +13,7 @@ const JobSeekerRouter =require("./routes/JobSeeker");
 const EmployerRouter =require("./routes/Employer");
 const SubscriptionRouter =require("./routes/Subscription");
 const LoginRouter =require("./routes/Login");
+const ValidationRouter =require("./routes/Validation");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -29,7 +30,7 @@ app.use('/api/jobseekers',JobSeekerRouter);
 app.use('/api/employers',EmployerRouter);
 app.use('/api/subscriptions',SubscriptionRouter);
 app.use('/api/login',LoginRouter);
-
+app.use('/api/validation', ValidationRouter)
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');

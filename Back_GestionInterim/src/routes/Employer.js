@@ -1,7 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const Employer = require('../models/employer');
-
+const multer=require('multer');
+const mailService = require('../services/Mail');
 
 const getEmployer = async (req, res) => {
     try {
@@ -33,7 +34,10 @@ router.get('/:id', getEmployer, (req, res) => {
 
 // Route pour créer un nouvel employeur
 router.post('/', async (req, res) => {
-    const employer = new Employer({
+    const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
+    try{
+
+        const employer = new Employer({
         companyName: req.body.companyName,
         department: req.body.department,
         subDepartment: req.body.subDepartment,
@@ -41,18 +45,31 @@ router.post('/', async (req, res) => {
         contactPerson1: req.body.contactPerson1,
         contactPerson2: req.body.contactPerson2,
         email1: req.body.email1,
+        password:req.body.password,
         email2: req.body.email2,
         phone1: req.body.phone1,
         phone2: req.body.phone2,
         address: req.body.address,
-        publicLinks: req.body.publicLinks
+        publicLinks: req.body.publicLinks,
+        validationCode:confirmationCode,
     });
 
-    try {
-        const newEmployer = await employer.save();
-        res.status(201).json(newEmployer);
-    } catch (error) {
-        res.status(400).json({ message: error.message });
+    const newEmployer = await employer.save();
+
+    const toEmail = newEmployer.email1;
+
+    mailService.sendConfirmationCodeByEmail(toEmail, confirmationCode)
+    .then(() => {
+        console.log(`Code de confirmation envoyé à ${toEmail}`);
+    })
+    .catch((error) => {
+        console.error(`Erreur lors de l'envoi du code de confirmation : ${error}`);
+    });
+
+    res.status(201).json(newEmployer);
+    }
+    catch (err){
+        res.status(400).json({ message: err.message });
     }
 });
 

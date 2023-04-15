@@ -57,7 +57,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTextNom"
+                    android:id="@+id/inputTextNomEntreprise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -80,6 +80,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -102,6 +103,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomSousService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -182,6 +184,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -214,6 +217,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomContact1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -236,6 +240,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextTelephoneContact1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -281,6 +286,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomContact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -302,6 +308,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextTelephoneContact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"
@@ -324,6 +331,7 @@
                 android:textColorHint="@color/grey_clair">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextMailContact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/grey_clair"

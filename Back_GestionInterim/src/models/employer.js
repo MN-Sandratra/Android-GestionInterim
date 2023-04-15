@@ -25,6 +25,10 @@ const employerSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
+    password: {
+        type: String,
+        required: true
+    },
     email2: { 
         type: String 
     },
@@ -38,10 +42,22 @@ const employerSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
-    publicLinks: {
-      website: { type: String },
-      linkedin: { type: String },
-      facebook: { type: String },
+    validationCode: {
+        type: String,
+    },
+    isValidated: {
+        type: Boolean,
+        required:true,
+        default: false
+    },
+    website: { 
+        type: String 
+    },
+    linkedin: { 
+        type: String 
+    },
+    facebook: { 
+        type: String 
     },
   });
 
