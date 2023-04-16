@@ -5,16 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
-import com.example.gestioninterim.Services.InscriptionEmployeurService
-import com.example.gestioninterim.Services.InscriptionInterimaireService
+import com.example.gestioninterim.services.InscriptionService
 import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.models.UtilisateurEmployeur
-import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import java.io.Serializable
@@ -121,7 +118,7 @@ class FragmentEmployeurInscription : Fragment() {
 
     // Lancement du service d'inscription
     fun launchServiceInscription(user : UtilisateurEmployeur){
-        val intent = Intent(requireContext(), InscriptionEmployeurService::class.java)
+        val intent = Intent(requireContext(), InscriptionService::class.java)
         intent.putExtra("utilisateur", user as Serializable)
         requireActivity().startService(intent)
     }

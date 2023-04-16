@@ -14,4 +14,4 @@ data class UtilisateurInterimaire(
     val cv : String? = null,
     val comments : String? = null,
     val password : String
-) : Serializable
+) : Serializable, Utilisateur

@@ -18,4 +18,4 @@ data class UtilisateurEmployeur (
     val website : String?,
     val linkedin : String?,
     val facebook : String?
-) : Serializable
+) : Serializable, Utilisateur

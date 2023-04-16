@@ -4,4 +4,4 @@ import java.io.Serializable
 
 data class UtilisateurAgence (
     val nom: String,
-) : Serializable
+) : Serializable, Utilisateur

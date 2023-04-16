@@ -19,7 +19,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
-import com.example.gestioninterim.Services.InscriptionInterimaireService
+import com.example.gestioninterim.services.InscriptionService
 import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.google.android.material.button.MaterialButton
@@ -29,10 +29,7 @@ import java.io.Serializable
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.text.DateFormat
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import java.util.*
 
 class FragmentInterimaireInscription : Fragment() {
@@ -220,7 +217,7 @@ class FragmentInterimaireInscription : Fragment() {
     }
 
     fun launchServiceInscription(user : UtilisateurInterimaire){
-        val intent = Intent(requireContext(), InscriptionInterimaireService::class.java)
+        val intent = Intent(requireContext(), InscriptionService::class.java)
         intent.putExtra("utilisateur", user as Serializable)
         requireActivity().startService(intent)
     }

@@ -1,32 +1,32 @@
-package com.example.gestioninterim.Services
+package com.example.gestioninterim.services
 
 import android.app.Service
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
-import android.widget.Toast
 import androidx.annotation.RequiresApi
-import com.example.gestioninterim.models.UtilisateurEmployeur
-import com.example.gestioninterim.models.UtilisateurInterimaire
+import com.example.gestioninterim.models.Utilisateur
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
+import java.util.*
 import java.util.concurrent.Executors
 
-class InscriptionEmployeurService : Service() {
 
-    var utilisateur : UtilisateurEmployeur? = null
+class InscriptionService : Service() {
+
+    var utilisateur : Utilisateur? = null
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         utilisateur = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent?.getSerializableExtra("utilisateur", UtilisateurEmployeur::class.java)
+            intent?.getSerializableExtra("utilisateur", Utilisateur::class.java)
         } else {
-            @Suppress("DEPRECATION") intent?.getSerializableExtra("utilisateur") as UtilisateurEmployeur
+            @Suppress("DEPRECATION") intent?.getSerializableExtra("utilisateur") as Utilisateur
         }
 
         utilisateur?.let { sendPostRequest(it) }
@@ -36,7 +36,7 @@ class InscriptionEmployeurService : Service() {
 
 
 
-    fun sendPostRequest(user: UtilisateurEmployeur) {
+    fun sendPostRequest(user: Utilisateur) {
         Executors.newSingleThreadExecutor().execute {
 
             var reqParam : String? = ""
@@ -58,9 +58,8 @@ class InscriptionEmployeurService : Service() {
 
             // Je supprime le dernier charactère de la chaîne
             val reqParambis = reqParam!!.substring(0, reqParam.length - 1)
-            println("La requete est : $reqParambis")
 
-            val mURL = URL("http://192.168.1.23:8000/api/employers")
+            val mURL = URL("http://192.168.1.23:8000/api/jobseekers")
 
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET

@@ -17,11 +17,9 @@
         android:theme="@style/Theme.GestionInterim"
         tools:targetApi="31">
 
-        <service android:name=".Services.InscriptionInterimaireService"/>
-        <service android:name=".Services.InscriptionEmployeurService"/>
-        <service android:name=".Services.InscriptionAgenceService"/>
-        <service android:name=".Services.LoginService"/>
-        <service android:name=".Services.InscriptionValidationService"/>
+        <service android:name=".services.InscriptionService"/>
+        <service android:name=".services.LoginService"/>
+        <service android:name=".services.InscriptionValidationService"/>
 
         <activity
             android:name=".slides.FirstSlidesActivity"

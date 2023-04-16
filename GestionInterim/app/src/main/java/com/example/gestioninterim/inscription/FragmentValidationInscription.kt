@@ -12,7 +12,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
 import android.widget.Toast
-import com.example.gestioninterim.Services.InscriptionValidationService
+import com.example.gestioninterim.services.InscriptionValidationService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 

@@ -1,4 +1,4 @@
-package com.example.gestioninterim.Services
+package com.example.gestioninterim.services
 
 import android.app.Service
 import android.content.Intent
