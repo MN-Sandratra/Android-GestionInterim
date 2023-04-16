@@ -18,5 +18,4 @@ const employerSubscriptionSchema = new mongoose.Schema({
     },
   });
 
-const EmployerSubscription = mongoose.model('EmployerSubscription', employerSubscriptionSchema);
-module.exports = { EmployerSubscription };
+module.exports = mongoose.model('EmployerSubscription', employerSubscriptionSchema);

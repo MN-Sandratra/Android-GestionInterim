@@ -7,13 +7,15 @@ const dblink=process.env.CONNECTION_DB;
 console.log(dblink);
 const app = express();
 const port = 8000;
-const serverAddress = "192.168.1.23";
+const serverAddress = process.env.ADDRESS;
 
 const JobSeekerRouter =require("./routes/JobSeeker");
 const EmployerRouter =require("./routes/Employer");
 const SubscriptionRouter =require("./routes/Subscription");
 const LoginRouter =require("./routes/Login");
 const ValidationRouter =require("./routes/Validation");
+const PayementRouter =require("./routes/Payement");
+const EmployerSubscriptionRouter =require("./routes/EmployerSubscription");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -30,7 +32,9 @@ app.use('/api/jobseekers',JobSeekerRouter);
 app.use('/api/employers',EmployerRouter);
 app.use('/api/subscriptions',SubscriptionRouter);
 app.use('/api/login',LoginRouter);
-app.use('/api/validation', ValidationRouter)
+app.use('/api/validation', ValidationRouter);
+app.use('/api/payement',PayementRouter);
+app.use('/api/empsubscription', EmployerSubscriptionRouter);
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');
