@@ -22,8 +22,8 @@ class LoginService : Service(){
         val password = intent?.getStringExtra("password")
 
 
-        sendPostRequestLogin(email.toString(), password.toString()) { message, type ->
-            val event = LoginResultEvent(message, type)
+        sendPostRequestLogin(email.toString(), password.toString()) { message, type, nom ->
+            val event = LoginResultEvent(message, type, nom)
             EventBus.getDefault().post(event)
         }
 
@@ -32,7 +32,7 @@ class LoginService : Service(){
 
 
 
-    fun sendPostRequestLogin(email: String, password: String, callback: (message: String?, type: String?) -> Unit) {
+    fun sendPostRequestLogin(email: String, password: String, callback: (message: String?, type: String?, nom : String?) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -65,11 +65,12 @@ class LoginService : Service(){
                         val jsonObject = JSONObject(response.toString())
                         val message = jsonObject.getString("message")
                         val type = jsonObject.getString("type")
-                        callback(message, type)
+                        val nom = jsonObject.getString("nom")
+                        callback(message, type, nom)
                     }
                 }
                 else {
-                    callback(null, null)
+                    callback(null, null, null)
                 }
             }
         }

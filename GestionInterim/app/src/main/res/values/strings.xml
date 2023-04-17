@@ -125,4 +125,15 @@
     <string name="bottom_candidatures_item">Candidatures</string>
     <string name="bottom_profil_item">Profil</string>
 
+
+    <!-- UTILISATEUR EMPLOYEUR -->
+
+    <string name="welcomeEmployeur">Bienvenue <font color="#FF0000">%1$s</font> !</string>
+    <string name="slideTypeAbonnementTitle">Types d\'abonnement</string>
+    <string name="slideTypeAbonnementText">Vous pouvez choisir entre différents types d\'abonnement, allant d\'un abonnement ponctuel à un abonnement indéterminé, avec différents avantages et conditions pour chaque type.</string>
+    <string name="slideGestionCandidaturesTitle">Gestion des candidatures</string>
+    <string name="slideGestionCandidaturesText">Vous pouvez consulter les candidatures aux offres déposées, les chercher selon différents critères, les accepter ou les refuser, les bloquer ou les signaler, et même les associer à des étiquettes pour mieux les organiser.</string>
+    <string name="slideGestionOffresTitle">Gestion des offres</string>
+    <string name="slideGestionOffresText">Vous pouvez déposer une offre d\'emploi en remplissant les informations nécessaires, ou consulter et gérer les offres déjà déposées, y compris en créant des catégories pour mieux les organiser.</string>
+
 </resources>

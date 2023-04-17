@@ -9,13 +9,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
-import com.example.gestioninterim.slides.FirstSlidesActivity
-import com.example.gestioninterim.slides.FragmentSlideAgence
-import com.example.gestioninterim.slides.FragmentSlideEmployeur
-import com.example.gestioninterim.slides.FragmentSlideInterim
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import java.util.ResourceBundle
 
 class FragmentSearchAnonyme : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {

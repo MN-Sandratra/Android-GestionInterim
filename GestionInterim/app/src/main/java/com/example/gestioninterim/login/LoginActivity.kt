@@ -12,6 +12,7 @@ import com.example.gestioninterim.R
 import com.example.gestioninterim.services.LoginService
 import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
 import com.example.gestioninterim.utilisateurEmployeur.MainEmployeurActivity
+import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
@@ -95,12 +96,15 @@ class LoginActivity : AppCompatActivity() {
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onLoginResult(event: LoginResultEvent) {
         if(event.message != null){
+            println("Le type est : ${event.type}")
             if(event.type == "jobSeeker"){
                 val intent = Intent(this, MainInterimaireActivity::class.java)
+                intent.putExtra("nom", event.nom)
                 startActivity(intent)
             }
-            else if (event.type == "employeur"){
-                val intent = Intent(this, MainEmployeurActivity::class.java)
+            else if (event.type == "employer"){
+                val intent = Intent(this, SlidesActivity::class.java)
+                intent.putExtra("nom", event.nom)
                 startActivity(intent)
             }
         }

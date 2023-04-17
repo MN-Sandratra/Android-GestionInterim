@@ -33,13 +33,22 @@ router.post('/', async (req, res) => {
       }
   
       let userType = "";
+      let nom = "";
+      
       if(jobSeeker) {
         userType = "jobSeeker";
+        nom = jobSeeker.lastName
       } else if (employer1 || employer2) {
         userType = "employer";
+        if(employer1){
+          nom = employer1.companyName
+        }
+        else{
+          nom = employer2.companyName
+        }
       }
   
-      return res.status(200).json({ message: 'Connexion réussie', type: userType });
+      return res.status(200).json({ message: 'Connexion réussie', type: userType, nom: nom });
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: 'Erreur du serveur' });

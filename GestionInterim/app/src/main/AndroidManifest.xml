@@ -56,6 +56,11 @@
             android:windowSoftInputMode="adjustPan"
             android:exported="false"
             />
+        <activity
+            android:name=".utilisateurEmployeur.SlidesActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"
+            />
 
     </application>
 

@@ -9,37 +9,34 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="48dp"
-        android:text="@string/bienvenue"
-        style="@style/SubtitleTextStyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-    <TextView
-        android:id="@+id/subtitle"
+        style="@style/TitleTextStyle"
+        android:layout_marginLeft="@dimen/DefaultMargin"
+        android:layout_marginTop="@dimen/DefaultMargin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/interimConnect"
-        style="@style/TitleTextStyle"
-
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/subsubtitle"
+        android:id="@+id/subtitle"
+        style="@style/SubtitleTextStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/slogan"
-        style="@style/SubtitleTextStyle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
 
+
+    <TextView
+        android:id="@+id/welcomeEmployeur"
+        style="@style/SubtitleTextStyle"
+        android:layout_marginTop="40dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/welcomeEmployeur"
+        app:layout_constraintStart_toStartOf="@+id/title"
+        app:layout_constraintTop_toBottomOf="@+id/subtitle" />
 
 
     <androidx.viewpager2.widget.ViewPager2
@@ -47,8 +44,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        app:layout_constraintTop_toBottomOf="@+id/subsubtitle"
-        tools:context=".slides.FirstSlidesActivity"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeEmployeur"
         tools:layout_editor_absoluteX="0dp">
 
     </androidx.viewpager2.widget.ViewPager2>
