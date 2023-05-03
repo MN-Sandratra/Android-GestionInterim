@@ -3,7 +3,8 @@ package com.example.gestioninterim.services
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
-import com.example.gestioninterim.login.LoginResultEvent
+import com.example.gestioninterim.BuildConfig
+import com.example.gestioninterim.resultEvent.LoginResultEvent
 import org.greenrobot.eventbus.EventBus
 import org.json.JSONObject
 import java.io.BufferedReader
@@ -40,7 +41,7 @@ class LoginService : Service(){
             var reqParam = URLEncoder.encode("email", "UTF-8") + "=" + URLEncoder.encode(email, "UTF-8")
             reqParam += "&" + URLEncoder.encode("password", "UTF-8") + "=" + URLEncoder.encode(password, "UTF-8")
 
-            val mURL = URL("http://192.168.1.23:8000/api/login/")
+            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/login/")
             println("La requete est : $reqParam")
 
             with(mURL.openConnection() as HttpURLConnection) {

@@ -9,9 +9,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gestioninterim.inscription.InscriptionActivity
 import com.example.gestioninterim.R
+import com.example.gestioninterim.resultEvent.LoginResultEvent
 import com.example.gestioninterim.services.LoginService
 import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
-import com.example.gestioninterim.utilisateurEmployeur.MainEmployeurActivity
 import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton

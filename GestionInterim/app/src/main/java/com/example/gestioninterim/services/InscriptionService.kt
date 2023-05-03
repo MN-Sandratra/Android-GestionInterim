@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.IBinder
 import androidx.annotation.RequiresApi
+import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Utilisateur
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -59,7 +60,7 @@ class InscriptionService : Service() {
             // Je supprime le dernier charactère de la chaîne
             val reqParambis = reqParam!!.substring(0, reqParam.length - 1)
 
-            val mURL = URL("http://192.168.1.23:8000/api/jobseekers")
+            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/jobseekers")
 
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET

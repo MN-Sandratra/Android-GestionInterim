@@ -16,6 +16,7 @@ const LoginRouter =require("./routes/Login");
 const ValidationRouter =require("./routes/Validation");
 const PayementRouter =require("./routes/Payement");
 const EmployerSubscriptionRouter =require("./routes/EmployerSubscription");
+const OfferRouter =require("./routes/Offers");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -35,6 +36,8 @@ app.use('/api/login',LoginRouter);
 app.use('/api/validation', ValidationRouter);
 app.use('/api/payement',PayementRouter);
 app.use('/api/empsubscription', EmployerSubscriptionRouter);
+app.use('/api/offers', OfferRouter);
+
 
 app.get('/', (req, res) => {
     res.send('Hello, World!');

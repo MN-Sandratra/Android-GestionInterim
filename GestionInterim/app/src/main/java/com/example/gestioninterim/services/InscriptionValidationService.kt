@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
+import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -63,7 +64,9 @@ class InscriptionValidationService : Service() {
         if (!resendCode && code != null) {
             reqParam += "&" + URLEncoder.encode("validationCode", "UTF-8") + "=" + URLEncoder.encode(code, "UTF-8")
         }
-        val mURL = URL("http://192.168.1.23:8000/api/validation/$endpoint")
+        val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/validation/$endpoint")
+
+        println("L'url est $mURL")
 
         Executors.newSingleThreadExecutor().execute {
             var validate = false
