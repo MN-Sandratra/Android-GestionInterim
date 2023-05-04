@@ -27,9 +27,12 @@ import android.widget.Toast
 import com.example.gestioninterim.adapter.FilterDialogCallback
 import com.example.gestioninterim.adapter.FilterPopup
 import com.example.gestioninterim.models.Offer
+import com.example.gestioninterim.models.OfferDAO
+import com.example.gestioninterim.services.InscriptionService
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import java.io.Serializable
 
 class FragmentOffer : Fragment(), FilterDialogCallback {
 
@@ -39,13 +42,23 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var progressBar: ProgressBar
     private lateinit var listOffers: List<Offer>
+    private lateinit var latitude : String
+    private lateinit var longitude : String
+    private lateinit var inputMetier : TextInputEditText
+
+    private var filterVille: String = ""
+    private var filterDateDebut: String = ""
+    private var filterDateFin: String = ""
+    private var filterRayon: Int = 30
+
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_menu_top_search, container, false)
 
         // Initialisation des variables layout
-        val inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
+        inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
         val moreFilter = view.findViewById<ImageButton>(R.id.imageButtonFiltres)
 
@@ -81,25 +94,18 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
         // Listener du bouton d'ajout de filtres
         moreFilter.setOnClickListener{
-            FilterPopup(requireContext(), this).show()
+            FilterPopup(requireContext(), this, filterVille, filterDateDebut, filterDateFin, filterRayon).show()
         }
 
         return view
     }
 
     // Fonction qui permet la sélection uniquement des offres correspondant au métier "job"
-    private fun getOffersByJob(job : String, offerList : List<Offer>){
-
-        val offers = offerList
-        val offersResult : MutableList<Offer> = mutableListOf()
-        for (offer in offers){
-            if(offer.intitule.contains(job)){
-                offersResult.add(offer)
-            }
-        }
-
+    private fun getOffersByJob(job : String, offerList : List<Offer>) {
+        val offersResult = offerList.filter { offer -> offer.intitule.contains(job) }
         offerAdapter.updateOffers(offersResult)
     }
+
 
     // Fonction demandant la permission à l'utilisateur
     private fun requestLocationPermission() {
@@ -121,7 +127,9 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastKnownLocation()
             } else {
-                // Permission refusée, gérez le cas ici
+                // Si la permission n'est pas accordée, je met les coordonnées de Paris
+                latitude = "48.85"
+                longitude = "2.34"
             }
         }
     }
@@ -131,7 +139,10 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
             != PackageManager.PERMISSION_GRANTED
         ) {
             requestLocationPermission()
-            launchServiceOffers("48.85", "2.34")
+            // Si la permission n'est pas accordée, je met les coordonnées de Paris
+            latitude = "48.85"
+            longitude = "2.34"
+            launchServiceOffers(latitude, longitude)
             return
         }
 
@@ -143,8 +154,8 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 //                val longitude = location.longitude.toString()
 
                 // Je met les coordonnées de Montpellier car les coordonnées de l'émulateur sont biaisées
-                val latitude = "43.61"
-                val longitude = "3.87"
+                latitude = "43.61"
+                longitude = "3.87"
 
                 launchServiceOffers(latitude, longitude)
             } else {
@@ -156,10 +167,9 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
     fun launchServiceOffers(latitude: String, longitude: String) {
 
-        val intent = Intent(requireContext(), OffresService::class.java).apply {
-            putExtra("latitude", latitude)
-            putExtra("longitude", longitude)
-        }
+        val offerRequest = OfferDAO(latitude = latitude, longitude = longitude)
+        val intent = Intent(requireContext(), OffresService::class.java)
+        intent.putExtra("offerRequest", offerRequest as Serializable)
         requireContext().startService(intent)
     }
     override fun onStart() {
@@ -174,17 +184,22 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetOffersResult(event: OffersResultEvent) {
+
         offerAdapter.updateOffers(event.offres)
         listOffers = event.offres
     }
 
     override fun onFiltersApplied(ville: String, dateDebut: String, dateFin: String, rayon: Int) {
-        println("Ville : $ville")
-        println("Date : $dateDebut")
-        println("Date : $dateFin")
-        println("Rayon : $rayon")
 
-        // Modifier les offres à afficher
-        // offerAdapter.updateOffers(event.offres)
+        filterVille = ville
+        filterDateDebut = dateDebut
+        filterDateFin = dateFin
+        filterRayon = rayon
+
+
+        val offerRequest = OfferDAO(metier = inputMetier.text.toString(), ville = ville, latitude = latitude, longitude = longitude, rayon = rayon, dateDebut = dateDebut, dateFin = dateFin)
+        val intent = Intent(requireContext(), OffresService::class.java)
+        intent.putExtra("offerRequest", offerRequest as Serializable)
+        requireContext().startService(intent)
     }
 }

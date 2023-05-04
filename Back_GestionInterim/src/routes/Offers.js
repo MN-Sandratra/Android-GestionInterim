@@ -6,43 +6,71 @@ const cityService = require('../services/Cities');
 
 
 router.get('/', async (req, res) => {
-    try {
-      const { latitude, longitude } = req.query;
-  
-      if (!latitude || !longitude) {
-        return res.status(400).json({ message: 'Missing latitude and/or longitude' });
-      }
-  
-      // Récupération du nom de l'employeur (il faut ajouter de l'agence) à partir de l'identifiant 
-      const offers = await Offer.find().populate('employeur', 'companyName -_id');
-      const filteredOffers = [];
-  
-      // Pour chaque offre
-      for (const offer of offers) {
+  try {
+    const { metier, ville, latitude, longitude, rayon, dateDebut, dateFin } = req.query;
 
-        // Comparaison de la distance entre l'utilisateur et les offres
+    if (!latitude || !longitude) {
+      return res.status(400).json({ message: 'Missing latitude and/or longitude' });
+    }
+
+    // Récupération du nom de l'employeur (il faut ajouter de l'agence) à partir de l'identifiant 
+    const offers = await Offer.find().populate('employeur', 'companyName -_id');
+    const filteredOffers = [];
+
+    // Pour chaque offre
+    for (const offer of offers) {
+      // Comparaison de la distance entre l'utilisateur et les offres
+      
+      let distance;
+      let cityLat, cityLng;
+      if (ville) {
+        const { latitude: cityLat, longitude: cityLng } = await cityService.getCoordinatesFromCity(ville);
+        distance = cityService.getDistanceInKm(cityLat, cityLng, offer.latitude, offer.longitude);
+      } else {
         cityLat = offer.latitude;
         cityLng = offer.longitude;
-        const distance = cityService.getDistanceInKm(latitude, longitude, cityLat, cityLng);
+        distance = cityService.getDistanceInKm(latitude, longitude, cityLat, cityLng);
+      }
 
-        // Si moins de 30 km, je propose l'offre à l'utilisateur
-        if (distance <= 30) {
-          filteredOffers.push(offer);
+      // Si distance plus de "rayon", je propose l'offre à l'utilisateur
+
+      if (distance > rayon) {
+        continue;
+      }
+ 
+      if (metier && offer.intitule !== metier) {
+        continue;
+      }
+
+      if (dateDebut) {
+        const [jour, mois, annee] = dateDebut.split("/");
+        if (new Date(annee, mois - 1, jour) > new Date(formatDate(offer.dateDebut))) {
+          continue;
         }
       }
       
-      const modifiedOffers = filteredOffers.map(offer => {
-        const modifiedOffer = offer.toObject();
-        modifiedOffer.employeur = offer.employeur.companyName;
-        return modifiedOffer;
-      });
-  
-      res.json(modifiedOffers);
+      if (dateFin) {
+        const [jourFin, moisFin, anneeFin] = dateFin.split("/");
+        if (new Date(anneeFin, moisFin - 1, jourFin) < new Date(formatDate(offer.dateFin))) {
+          continue;
+        }
+      }
+
+      filteredOffers.push(offer);
     }
-    catch (error) {
+
+    const modifiedOffers = filteredOffers.map(offer => {
+      const modifiedOffer = offer.toObject();
+      modifiedOffer.employeur = offer.employeur.companyName;
+      return modifiedOffer;
+    });
+
+    res.json(modifiedOffers);
+  } catch (error) {
     res.status(500).json({ message: error.message });
-    }
+  }
 });
+
 
 // GET /offers/:id
 router.get('/:id', async (req, res) => {
@@ -139,6 +167,14 @@ router.put('/:id', async (req, res) => {
     }
   });
   
+
+  function formatDate(date) {
+    const d = new Date(date);
+    const day = String(d.getDate()).padStart(2, '0');
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const year = d.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
 
 
 module.exports = router;

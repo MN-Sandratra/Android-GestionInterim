@@ -15,7 +15,14 @@ import com.google.android.material.slider.Slider
 import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
-class FilterPopup(context : Context, private val callback: FilterDialogCallback) : Dialog(context) {
+class FilterPopup(
+    context: Context,
+    private val callback: FilterDialogCallback,
+    private val filterVille: String,
+    private val filterDateDebut: String,
+    private val filterDateFin: String,
+    private val filterRayon: Int
+) : Dialog(context) {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,6 +35,13 @@ class FilterPopup(context : Context, private val callback: FilterDialogCallback)
         val validateButton = findViewById<MaterialButton>(R.id.validateFilter)
         val slider = findViewById<Slider>(R.id.slider)
         val textSlider = findViewById<TextView>(R.id.sliderRayonText)
+
+        inputVille.setText(filterVille)
+        inputDateDebutFilter.setText(filterDateDebut)
+        inputDateFinFilter.setText(filterDateFin)
+        slider.value = filterRayon.toFloat()
+        textSlider.text = "Dans un rayon autour de : ${filterRayon} km"
+
 
 
         slider.addOnChangeListener { slider, value, fromUser ->

@@ -2,9 +2,12 @@ package com.example.gestioninterim.services
 
 import android.app.Service
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Offer
+import com.example.gestioninterim.models.OfferDAO
+import com.example.gestioninterim.models.Utilisateur
 import com.example.gestioninterim.resultEvent.OffersResultEvent
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -18,12 +21,17 @@ import java.util.concurrent.Executors
 
 class OffresService : Service() {
 
+    lateinit var offersRequest : OfferDAO
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        val latitude = intent?.getStringExtra("latitude")
-        val longitude = intent?.getStringExtra("longitude")
+        offersRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent!!.getSerializableExtra("offerRequest", OfferDAO::class.java) as OfferDAO
+        } else {
+            @Suppress("DEPRECATION") intent?.getSerializableExtra("offerRequest") as OfferDAO
+        }
 
-        sendGetRequestOffers(latitude.toString(), longitude.toString()) { offers ->
+        sendGetRequestOffers(offersRequest) { offers ->
             val event = OffersResultEvent(offers)
             EventBus.getDefault().post(event)
         }
@@ -31,13 +39,27 @@ class OffresService : Service() {
         return START_STICKY
     }
 
-    fun sendGetRequestOffers(latitude: String, longitude: String, callback: (offers: List<Offer>) -> Unit) {
+    fun sendGetRequestOffers(offersRequest : OfferDAO, callback: (offers: List<Offer>) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
             // Je définis les paramètres de la requête
-            val reqParam = "latitude=" + URLEncoder.encode(latitude, "UTF-8") +
-                    "&longitude=" + URLEncoder.encode(longitude, "UTF-8")
+            val reqParamBuilder = StringBuilder()
+            offersRequest.metier?.let { reqParamBuilder.append("metier=" + URLEncoder.encode(it, "UTF-8") + "&") }
+            offersRequest.ville?.let { reqParamBuilder.append("ville=" + URLEncoder.encode(it, "UTF-8") + "&") }
+            offersRequest.latitude?.let { reqParamBuilder.append("latitude=" + URLEncoder.encode(it, "UTF-8") + "&") }
+            offersRequest.longitude?.let { reqParamBuilder.append("longitude=" + URLEncoder.encode(it, "UTF-8") + "&") }
+            reqParamBuilder.append("rayon=" + URLEncoder.encode(offersRequest.rayon.toString(), "UTF-8") + "&")
+            offersRequest.dateDebut?.let { reqParamBuilder.append("dateDebut=" + URLEncoder.encode(it, "UTF-8") + "&") }
+            offersRequest.dateFin?.let { reqParamBuilder.append("dateFin=" + URLEncoder.encode(it, "UTF-8") + "&") }
+
+            // Supprimez le dernier caractère '&' si nécessaire
+            if (reqParamBuilder.isNotEmpty() && reqParamBuilder.last() == '&') {
+                reqParamBuilder.setLength(reqParamBuilder.length - 1)
+            }
+
+            val reqParam = reqParamBuilder.toString()
+
 
             val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/offers/?$reqParam")
             println("La requête est : $reqParam")
