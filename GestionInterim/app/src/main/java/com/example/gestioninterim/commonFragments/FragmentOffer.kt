@@ -21,13 +21,17 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
+import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.gestioninterim.adapter.FilterDialogCallback
+import com.example.gestioninterim.adapter.FilterPopup
 import com.example.gestioninterim.models.Offer
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 
-class FragmentOffer : Fragment() {
+class FragmentOffer : Fragment(), FilterDialogCallback {
 
     private lateinit var offerAdapter: OfferAdapter
     private lateinit var recyclerView: RecyclerView
@@ -43,7 +47,7 @@ class FragmentOffer : Fragment() {
         // Initialisation des variables layout
         val inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
-
+        val moreFilter = view.findViewById<ImageButton>(R.id.imageButtonFiltres)
 
         // Initialise le RecyclerView et l'adaptateur.
         recyclerView = view.findViewById(R.id.vertical_recycler_view_offres)
@@ -64,9 +68,9 @@ class FragmentOffer : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         requestLocationPermission()
 
+
+        // Listener du bouton de validation
         searchButton.setOnClickListener {
-            println("L'input text est : ${inputMetier.text}")
-            println("L'input text est : ${inputMetier.text!!.isEmpty()}")
             if(inputMetier.text!!.isEmpty() && offerAdapter.getOffers().size != listOffers.size){
                 offerAdapter.updateOffers(listOffers)
             }
@@ -75,9 +79,15 @@ class FragmentOffer : Fragment() {
             }
         }
 
+        // Listener du bouton d'ajout de filtres
+        moreFilter.setOnClickListener{
+            FilterPopup(requireContext(), this).show()
+        }
+
         return view
     }
 
+    // Fonction qui permet la sélection uniquement des offres correspondant au métier "job"
     private fun getOffersByJob(job : String, offerList : List<Offer>){
 
         val offers = offerList
@@ -91,6 +101,7 @@ class FragmentOffer : Fragment() {
         offerAdapter.updateOffers(offersResult)
     }
 
+    // Fonction demandant la permission à l'utilisateur
     private fun requestLocationPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
@@ -165,5 +176,15 @@ class FragmentOffer : Fragment() {
     fun onGetOffersResult(event: OffersResultEvent) {
         offerAdapter.updateOffers(event.offres)
         listOffers = event.offres
+    }
+
+    override fun onFiltersApplied(ville: String, dateDebut: String, dateFin: String, rayon: Int) {
+        println("Ville : $ville")
+        println("Date : $dateDebut")
+        println("Date : $dateFin")
+        println("Rayon : $rayon")
+
+        // Modifier les offres à afficher
+        // offerAdapter.updateOffers(event.offres)
     }
 }

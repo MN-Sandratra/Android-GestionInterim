@@ -136,4 +136,12 @@
     <string name="slideGestionOffresTitle">Gestion des offres</string>
     <string name="slideGestionOffresText">Vous pouvez déposer une offre d\'emploi en remplissant les informations nécessaires, ou consulter et gérer les offres déjà déposées, y compris en créant des catégories pour mieux les organiser.</string>
 
+
+    <!-- FILTRE D'UNE OFFRE -->
+
+    <string name="villeFilter">Saisissez une ville et un rayon</string>
+    <string name="distanceFilter">Dans un rayon autour de : 30km</string>
+    <string name="dateDebutFilter">Saisissez une date de début</string>
+    <string name="dateFinFilter">Saisissez une date de fin</string>
+
 </resources>
