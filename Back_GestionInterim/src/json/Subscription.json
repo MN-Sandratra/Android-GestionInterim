@@ -1,0 +1,57 @@
+[
+    {
+      "type": "Ponctuel",
+      "price": 5,
+      "conditions": "Abonnement unique",
+      "cancellationConditions": "Non-remboursable",
+      "duration": {
+        "value": 30,
+        "unit": "jours"
+      },
+      "subscriptionName": "Ponctuel"
+    },
+    {
+      "type": "Mensuel",
+      "price": 10,
+      "conditions": "Facturé chaque mois",
+      "cancellationConditions": "Annulation possible à tout moment",
+      "duration": {
+        "value": 1,
+        "unit": "mois"
+      },
+      "subscriptionName": "Mensuel"
+    },
+    {
+      "type": "Trimestriel",
+      "price": 27,
+      "conditions": "Facturé chaque trimestre",
+      "cancellationConditions": "Annulation possible à tout moment",
+      "duration": {
+        "value": 3,
+        "unit": "mois"
+      },
+      "subscriptionName": "Trimestriel"
+    },
+    {
+      "type": "Semestriel",
+      "price": 50,
+      "conditions": "Facturé chaque semestre",
+      "cancellationConditions": "Annulation possible à tout moment",
+      "duration": {
+        "value": 6,
+        "unit": "mois"
+      },
+      "subscriptionName": "Semestriel"
+    },
+    {
+      "type": "Annuel",
+      "price": 90,
+      "conditions": "Facturé chaque année",
+      "cancellationConditions": "Annulation possible à tout moment",
+      "duration": {
+        "value": 1,
+        "unit": "an"
+      },
+      "subscriptionName": "Annuel"
+    }
+  ]

@@ -17,6 +17,21 @@ const subscriptionSchema = new Schema({
     cancellationConditions: {
         type: String,
         required: true
+    },
+    duration: {
+        value: {
+            type: Number,
+            required: true
+        },
+        unit: {
+            type: String,
+            enum: ['jours', 'semaines', 'mois'], 
+            required: true
+        }
+    },
+    subscriptionName: {
+        type: String,
+        required: true
     }
 });
 
