@@ -144,4 +144,23 @@
     <string name="dateDebutFilter">Saisissez une date de début</string>
     <string name="dateFinFilter">Saisissez une date de fin</string>
 
+    <!-- ABONNEMENT -->
+
+    <string name="abonnement">Abonnement</string>
+    <string name="abonnementConsult">Consultez nos abonnements</string>
+    <string name="abonnementChoix">Choix de l\'abonnement</string>
+    <string name="abonnementPaiement">Paiement de votre abonnement</string>
+    <string name="abonnementMoreDetails">Voir plus</string>
+    <string name="conditionsUtilisations">Les conditions d’utilisation</string>
+    <string name="conditionsUtilisation1">- Vous êtes responsable de la vérification que vous avez les droits nécessaires pour publier du contenu ou des offres d\'emploi sur notre plateforme.</string>
+    <string name="conditionsUtilisation2">- Vous acceptez de ne pas utiliser notre service pour publier du contenu ou des offres d\'emploi illégaux ou frauduleux.</string>
+    <string name="conditionsUtilisation3">- Vous acceptez de ne pas utiliser notre service pour envoyer du spam ou des messages non sollicités.</string>
+    <string name="conditionsDesabonnement">Les conditions de désabonnement</string>
+    <string name="abonnementBouton">Souscription</string>
+    <string name="abonnementPanier">Mon Panier</string>
+    <string name="abonnementChoisi">Vous avez choisi l\'abonnement </string>
+    <string name="abonnementNumeroCarte">Numéro de carte (obligatoire)</string>
+    <string name="abonnementDateExpiration">Date d\'expiration (obligatoire)</string>
+    <string name="abonnementCvv">Cryptogramme visuel (obligatoire)</string>
+
 </resources>

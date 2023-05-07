@@ -113,7 +113,9 @@ class SlidesActivity : AppCompatActivity() {
             }
         })
         skipButton!!.setOnClickListener {
-            val intent = Intent(this, MainEmployeurActivity::class.java)
+//            val intent = Intent(this, MainEmployeurActivity::class.java)
+            val intent = Intent(this, ActivityAbonnement::class.java)
+
             startActivity(intent)
         }
     }

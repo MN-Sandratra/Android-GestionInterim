@@ -219,6 +219,7 @@ class FragmentInterimaireInscription : Fragment() {
     fun launchServiceInscription(user : UtilisateurInterimaire){
         val intent = Intent(requireContext(), InscriptionService::class.java)
         intent.putExtra("utilisateur", user as Serializable)
+        intent.putExtra("type", "jobseekers")
         requireActivity().startService(intent)
     }
 

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+
+    <com.google.android.material.card.MaterialCardView
+        android:backgroundTint="@color/blue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="12dp"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/white"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DefaultMargin"
+            android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    style="@style/TypeAbonnement"
+                    android:text="@string/abonnement">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/PrixAbonnementText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    style="@style/TarifAbonnement"
+                    android:text="Prix">
+                </TextView>
+
+            </LinearLayout>
+
+
+
+            <TextView
+            android:id="@+id/typeAbonnementText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/TypeAbonnement"
+            android:text="Type abonnement">
+        </TextView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_height="50dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/ShortDescriptionAbonnementText"
+                    android:layout_width="0dp"
+                    android:layout_marginRight="@dimen/DefaultMargin"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                style="@style/ShortDescriptionAbonnement"
+                android:text="Short description">
+            </TextView>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/moreDetailsButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+            android:text="@string/abonnementMoreDetails">
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

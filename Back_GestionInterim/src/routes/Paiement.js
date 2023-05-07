@@ -29,15 +29,19 @@ router.get('/:id', async (req, res) => {
 // CREATE a new paiement
 router.post('/', async (req, res) => {
   try {
-    const { type } = req.body;
+    const { type, email, date } = req.body;
+
     // generate paiement token
     const paiementToken = Math.random().toString(36).substr(2, 10);
-    const paiement = new Paiement({ type, paiementToken });
+    const paiement = new Paiement({ type, email, date, paiementToken });
+
     await paiement.save();
-    res.send(paiement);
+
+    // Send response with validation status and created paiement object
+    res.json({ validation: true, paiement });
   } catch (err) {
     console.error(err.message);
-    res.status(500).send('Server Error');
+    res.status(500).json({ validation: false, message: 'Server Error' });
   }
 });
 

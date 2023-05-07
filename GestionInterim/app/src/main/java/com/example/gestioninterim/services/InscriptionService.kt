@@ -30,14 +30,16 @@ class InscriptionService : Service() {
             @Suppress("DEPRECATION") intent?.getSerializableExtra("utilisateur") as Utilisateur
         }
 
-        utilisateur?.let { sendPostRequest(it) }
+        val type = intent!!.getStringExtra("type")
+
+        utilisateur?.let { sendPostRequest(it, type!!) }
 
         return START_STICKY
     }
 
 
 
-    fun sendPostRequest(user: Utilisateur) {
+    fun sendPostRequest(user: Utilisateur, type: String) {
         Executors.newSingleThreadExecutor().execute {
 
             var reqParam : String? = ""
@@ -60,7 +62,7 @@ class InscriptionService : Service() {
             // Je supprime le dernier charactère de la chaîne
             val reqParambis = reqParam!!.substring(0, reqParam.length - 1)
 
-            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/jobseekers")
+            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
 
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET

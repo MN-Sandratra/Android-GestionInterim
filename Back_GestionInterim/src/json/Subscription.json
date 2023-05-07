@@ -1,57 +1,67 @@
 [
-    {
-      "type": "Ponctuel",
-      "price": 5,
-      "conditions": "Abonnement unique",
-      "cancellationConditions": "Non-remboursable",
-      "duration": {
-        "value": 30,
-        "unit": "jours"
-      },
-      "subscriptionName": "Ponctuel"
+  {
+    "type": "Ponctuel",
+    "price": 5,
+    "shortDescription": "Abonnement ponctuel pour la publication d'offres d'emploi",
+    "description": "Un abonnement ponctuel pour la publication d'offres d'emploi vous permet de publier des offres d'emploi de manière ponctuelle, lorsque vous en avez besoin.",
+    "conditions": "Abonnement unique",
+    "cancellationConditions": "Non-remboursable",
+    "duration": {
+      "value": 30,
+      "unit": "jours"
     },
-    {
-      "type": "Mensuel",
-      "price": 10,
-      "conditions": "Facturé chaque mois",
-      "cancellationConditions": "Annulation possible à tout moment",
-      "duration": {
-        "value": 1,
-        "unit": "mois"
-      },
-      "subscriptionName": "Mensuel"
+    "subscriptionName": "Ponctuel"
+  },
+  {
+    "type": "Mensuel",
+    "price": 10,
+    "shortDescription": "Abonnement mensuel pour la publication d'offres d'emploi",
+    "description": "Un abonnement mensuel pour la publication d'offres d'emploi vous permet de publier des offres d'emploi de manière régulière chaque mois.",
+    "conditions": "Facturé chaque mois",
+    "cancellationConditions": "Annulation possible à tout moment",
+    "duration": {
+      "value": 1,
+      "unit": "mois"
     },
-    {
-      "type": "Trimestriel",
-      "price": 27,
-      "conditions": "Facturé chaque trimestre",
-      "cancellationConditions": "Annulation possible à tout moment",
-      "duration": {
-        "value": 3,
-        "unit": "mois"
-      },
-      "subscriptionName": "Trimestriel"
+    "subscriptionName": "Mensuel"
+  },
+  {
+    "type": "Trimestriel",
+    "price": 27,
+    "shortDescription": "Abonnement trimestriel pour la publication d'offres d'emploi",
+    "description": "Un abonnement trimestriel pour la publication d'offres d'emploi vous permet de publier des offres d'emploi de manière régulière chaque trimestre.",
+    "conditions": "Facturé chaque trimestre",
+    "cancellationConditions": "Annulation possible à tout moment",
+    "duration": {
+      "value": 3,
+      "unit": "mois"
     },
-    {
-      "type": "Semestriel",
-      "price": 50,
-      "conditions": "Facturé chaque semestre",
-      "cancellationConditions": "Annulation possible à tout moment",
-      "duration": {
-        "value": 6,
-        "unit": "mois"
-      },
-      "subscriptionName": "Semestriel"
+    "subscriptionName": "Trimestriel"
+  },
+  {
+    "type": "Semestriel",
+    "price": 50,
+    "shortDescription": "Abonnement semestriel pour la publication d'offres d'emploi",
+    "description": "Un abonnement semestriel pour la publication d'offres d'emploi vous permet de publier des offres d'emploi de manière régulière chaque semestre.",
+    "conditions": "Facturé chaque semestre",
+    "cancellationConditions": "Annulation possible à tout moment",
+    "duration": {
+      "value": 6,
+      "unit": "mois"
     },
-    {
-      "type": "Annuel",
-      "price": 90,
-      "conditions": "Facturé chaque année",
-      "cancellationConditions": "Annulation possible à tout moment",
-      "duration": {
-        "value": 1,
-        "unit": "an"
-      },
-      "subscriptionName": "Annuel"
-    }
-  ]
+    "subscriptionName": "Semestriel"
+  },
+  {
+    "type": "Annuel",
+    "price": 90,
+    "shortDescription": "Abonnement annuel pour la publication d'offres d'emploi",
+    "description": "Un abonnement annuel pour la publication d'offres d'emploi vous permet de publier des offres d'emploi de manière régulière chaque année.",
+    "conditions": "Facturé chaque année",
+    "cancellationConditions": "Annulation possible à tout moment",
+    "duration": {
+      "value": 12,
+      "unit": "mois"
+    },
+    "subscriptionName": "Annuel"
+  }
+]

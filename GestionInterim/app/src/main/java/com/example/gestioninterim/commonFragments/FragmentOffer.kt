@@ -11,8 +11,6 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestioninterim.R
-import com.example.gestioninterim.adapter.OfferAdapter
-import com.example.gestioninterim.adapter.OfferDecorationItem
 import com.example.gestioninterim.resultEvent.OffersResultEvent
 import com.example.gestioninterim.services.OffresService
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -24,8 +22,7 @@ import android.Manifest;
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.gestioninterim.adapter.FilterDialogCallback
-import com.example.gestioninterim.adapter.FilterPopup
+import com.example.gestioninterim.adapter.*
 import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.services.InscriptionService

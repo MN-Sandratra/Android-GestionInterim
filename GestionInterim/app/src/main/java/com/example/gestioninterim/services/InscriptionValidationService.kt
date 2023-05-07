@@ -7,7 +7,11 @@ import android.os.IBinder
 import android.os.Looper
 import android.widget.Toast
 import com.example.gestioninterim.BuildConfig
+import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
+import com.example.gestioninterim.resultEvent.ValidationInscriptionResultEvent
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
+import org.greenrobot.eventbus.EventBus
+import org.json.JSONObject
 import java.io.BufferedReader
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
@@ -32,12 +36,11 @@ class InscriptionValidationService : Service() {
 
         println("Le code est : $code")
 
-        sendPostRequest(email.toString(), code?.toString(), isResendCode) { validate ->
+        sendPostRequest(email.toString(), code?.toString(), isResendCode) { validate, type ->
             handler.post {
                 if (validate) {
-                    val intent = Intent(applicationContext, MainInterimaireActivity::class.java)
-                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
-                    startActivity(intent)
+                    val event = ValidationInscriptionResultEvent(type)
+                    EventBus.getDefault().post(event)
                 }
                 else if (isResendCode) {
                     Toast.makeText(this, "Un nouveau code vient de vous être envoyé", Toast.LENGTH_SHORT).show()
@@ -52,7 +55,7 @@ class InscriptionValidationService : Service() {
     }
 
 
-    fun sendPostRequest(email: String, code: String?, resendCode: Boolean = false, callback: (Boolean) -> Unit) {
+    fun sendPostRequest(email: String, code: String?, resendCode: Boolean = false, callback: (validation: Boolean, type: String) -> Unit) {
 
         // Définition du endpoint
         val endpoint = if (resendCode) "code" else "validate"
@@ -70,6 +73,7 @@ class InscriptionValidationService : Service() {
 
         Executors.newSingleThreadExecutor().execute {
             var validate = false
+            var userType = ""
             with(mURL.openConnection() as HttpURLConnection) {
                 requestMethod = "POST"
                 val wr = OutputStreamWriter(outputStream)
@@ -83,11 +87,13 @@ class InscriptionValidationService : Service() {
                             response.append(inputLine)
                             inputLine = it.readLine()
                         }
+                        val jsonResponse = JSONObject(response.toString())
+                        userType = jsonResponse.optString("type", "") // Remplacez "type" par le nom réel du champ dans la réponse JSON
                         validate = !resendCode
                     }
                 }
             }
-            callback(validate)
+            callback(validate, userType)
         }
     }
 

@@ -12,13 +12,21 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.widget.TextView
 import android.widget.Toast
+import com.example.gestioninterim.resultEvent.OffersResultEvent
+import com.example.gestioninterim.resultEvent.ValidationInscriptionResultEvent
 import com.example.gestioninterim.services.InscriptionValidationService
+import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
+import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class FragmentValidationInscription : Fragment() {
 
     private lateinit var inputFields: Array<TextInputEditText>
+    private var username: String? = null
 
     @SuppressLint("Range")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -32,7 +40,7 @@ class FragmentValidationInscription : Fragment() {
         // Je récupère l'émail
         val args = arguments
         val email = args?.getString("email")
-
+        username = args?.getString("username")
 
         // Définition des chiffres
         val number1 = view.findViewById<TextInputEditText>(R.id.inputValidationNumber1)
@@ -91,5 +99,28 @@ class FragmentValidationInscription : Fragment() {
         intent.putExtra("email", email)
         intent.putExtra("code", codeValidation)
         requireActivity().startService(intent)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPostValidationResult(event: ValidationInscriptionResultEvent) {
+        if (event.type == "jobseekers") {
+            val intent = Intent(requireContext(), MainInterimaireActivity::class.java)
+            startActivity(intent)
+        }
+        if(event.type == "employers"){
+            val intent = Intent(requireContext(), SlidesActivity::class.java)
+            intent.putExtra("nom", username)
+            startActivity(intent)
+        }
     }
 }

@@ -37,12 +37,12 @@
             android:hint="@string/trouver_job_search"
             app:boxBackgroundColor="@color/darkblue"
             app:endIconMode="clear_text"
-            app:endIconTint="@color/grey_clair"
-            android:textColorHint="@color/grey_clair"
+            app:endIconTint="@color/white"
+            android:textColorHint="@color/white"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
             android:theme="@style/ShapeAppearanceOverlay.App.rounded"
             app:startIconDrawable="@drawable/ic_search"
-            app:startIconTint="@color/grey_clair">
+            app:startIconTint="@color/white">
 
 
             <com.google.android.material.textfield.TextInputEditText
@@ -50,7 +50,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
-                android:textColor="@color/grey_clair"
+                android:textColor="@color/white"
                 android:textColorLink="#FFFFFF" />
 
         </com.google.android.material.textfield.TextInputLayout>
