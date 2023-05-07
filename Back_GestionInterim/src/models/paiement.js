@@ -1,20 +1,20 @@
 const mongoose = require('mongoose');
 
-const paymentSchema = new mongoose.Schema({
+const paiementSchema = new mongoose.Schema({
     type: { 
         type: String, 
         required: true 
     },
-    paymentToken: { 
+    paiementToken: { 
         type: String, 
         required: true 
     },
-    paymentDate: { 
+    paiementDate: { 
         type: Date, 
         default: Date.now 
     },
 });
 
-const Payment = mongoose.model('Payment', paymentSchema);
+const Paiement = mongoose.model('Paiement', paiementSchema);
 
-module.exports = { Payment };
+module.exports = { Paiement };

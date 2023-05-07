@@ -11,11 +11,15 @@ const employerSubscriptionSchema = new mongoose.Schema({
         ref: 'Subscription', 
         required: true 
     },
-    payment: { 
+    paiement: { 
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'Payment', 
+        ref: 'Paiement', 
         required: true 
     },
+    expirationDate: {
+        type: Date,
+        required: true
+    }
   });
 
 module.exports = mongoose.model('EmployerSubscription', employerSubscriptionSchema);

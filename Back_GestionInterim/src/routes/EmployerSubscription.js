@@ -22,7 +22,7 @@ router.post('/', async (req, res) => {
   const employerSubscription = new EmployerSubscription({
     employer: req.body.employer,
     subscription: req.body.subscription,
-    payment: req.body.payment
+    paiement: req.body.paiement
   });
 
   try {
@@ -41,8 +41,8 @@ router.put('/:id', getEmployerSubscription, async (req, res) => {
   if (req.body.subscription != null) {
     res.employerSubscription.subscription = req.body.subscription;
   }
-  if (req.body.payment != null) {
-    res.employerSubscription.payment = req.body.payment;
+  if (req.body.paiement != null) {
+    res.employerSubscription.paiement = req.body.paiement;
   }
 
   try {

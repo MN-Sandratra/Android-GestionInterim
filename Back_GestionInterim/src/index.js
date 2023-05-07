@@ -14,7 +14,7 @@ const EmployerRouter =require("./routes/Employer");
 const SubscriptionRouter =require("./routes/Subscription");
 const LoginRouter =require("./routes/Login");
 const ValidationRouter =require("./routes/Validation");
-const PayementRouter =require("./routes/Payement");
+const PaiementRouter =require("./routes/Paiement");
 const EmployerSubscriptionRouter =require("./routes/EmployerSubscription");
 const OfferRouter =require("./routes/Offers");
 
@@ -34,7 +34,7 @@ app.use('/api/employers',EmployerRouter);
 app.use('/api/subscriptions',SubscriptionRouter);
 app.use('/api/login',LoginRouter);
 app.use('/api/validation', ValidationRouter);
-app.use('/api/payement',PayementRouter);
+app.use('/api/paiement',PaiementRouter);
 app.use('/api/empsubscription', EmployerSubscriptionRouter);
 app.use('/api/offers', OfferRouter);
 

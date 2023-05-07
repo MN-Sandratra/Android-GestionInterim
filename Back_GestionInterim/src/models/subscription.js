@@ -17,7 +17,7 @@ const subscriptionSchema = new Schema({
     cancellationConditions: {
         type: String,
         required: true
-    },
+    }
 });
 
 module.exports = mongoose.model('Subscription', subscriptionSchema);
