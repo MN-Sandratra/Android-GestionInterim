@@ -135,6 +135,8 @@
     <string name="slideGestionCandidaturesText">Vous pouvez consulter les candidatures aux offres déposées, les chercher selon différents critères, les accepter ou les refuser, les bloquer ou les signaler, et même les associer à des étiquettes pour mieux les organiser.</string>
     <string name="slideGestionOffresTitle">Gestion des offres</string>
     <string name="slideGestionOffresText">Vous pouvez déposer une offre d\'emploi en remplissant les informations nécessaires, ou consulter et gérer les offres déjà déposées, y compris en créant des catégories pour mieux les organiser.</string>
+    <string name="bottom_voir_annonces_item">Mes annonces</string>
+    <string name="bottom_deposer_item">Poster</string>
 
 
     <!-- FILTRE D'UNE OFFRE -->

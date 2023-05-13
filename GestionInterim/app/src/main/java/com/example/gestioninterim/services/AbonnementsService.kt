@@ -31,8 +31,6 @@ class AbonnementsService : Service() {
         val email = intent?.getStringExtra("email")
         val type = intent?.getStringExtra("type")
 
-        println("L EMAIL EST $email")
-
         if(email != null){
             sendPostRequestAbonnement(type!!, email) { validation ->
                 val event = AbonnementsResultEvent(validation = validation)
@@ -69,7 +67,7 @@ class AbonnementsService : Service() {
             .append(URLEncoder.encode(currentDate, "UTF-8"))
             .toString()
 
-        val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/paiement/")
+        val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/empsubscription/")
 
         Executors.newSingleThreadExecutor().execute {
             var validate = false

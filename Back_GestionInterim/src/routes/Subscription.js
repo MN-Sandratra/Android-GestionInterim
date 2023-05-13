@@ -17,11 +17,6 @@ router.get('/:id', getSubscription, (req, res) => {
   res.json(res.subscription);
 });
 
-// GET one subscription
-router.get('/:id', getSubscription, (req, res) => {
-  res.json(res.subscription);
-});
-
 // POST create subscription
 router.post('/', async (req, res) => {
   const subscription = new Subscription({

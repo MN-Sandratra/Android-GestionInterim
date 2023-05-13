@@ -2,6 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { Paiement } = require('../models/paiement');
 
+const Employer = require('../models/employer');
+const Subscription = require('../models/subscription');
+const EmployerSubscription = require('../models/employerSubscription');
+
+
 // GET all paiements
 router.get('/', async (req, res) => {
   try {

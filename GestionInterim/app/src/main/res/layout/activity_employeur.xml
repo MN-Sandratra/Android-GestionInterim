@@ -27,26 +27,27 @@
         app:layout_constraintTop_toBottomOf="@+id/title" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/containerAnonymeFragment"
+        android:id="@+id/containerInterimaireFragment"
         android:layout_width="match_parent"
-        android:layout_marginTop="@dimen/DefaultMargin"
-        android:layout_height="580dp"
-        app:layout_constraintBottom_toTopOf="@+id/navigation_anonyme"
-        app:layout_constraintTop_toBottomOf="@+id/subtitle"
-        tools:layout="@layout/fragment_anonyme_accueil" />
+        android:layout_height="500dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_interimaire_accueil" />
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/navigation_anonyme"
+        android:id="@+id/navigation_employeur"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:background="@color/darkblue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:labelVisibilityMode="labeled"
-        app:menu="@menu/bottom_navigation_menu_anonyme"
+        app:menu="@menu/bottom_navigation_menu_employeur"
         android:theme="@style/bottomNavigationMenu"
+        app:labelVisibilityMode="labeled"
         app:itemTextColor="@drawable/bottom_navigation_menu"
         app:itemIconTint="@drawable/bottom_navigation_menu"
         />

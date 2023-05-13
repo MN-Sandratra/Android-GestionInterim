@@ -1,11 +1,15 @@
 package com.example.gestioninterim.utilisateurEmployeur;
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.gestioninterim.R
+import com.google.android.material.bottomnavigation.BottomNavigationItemView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainEmployeurActivity : AppCompatActivity() {
 
@@ -13,7 +17,15 @@ class MainEmployeurActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_interimaire)
+        setContentView(R.layout.activity_employeur)
+
+//        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.navigation_employeur)
+//        for (i in 0 until bottomNavigationView.menu.size()) {
+//            val item = bottomNavigationView.menu.getItem(i)
+//            val itemView = bottomNavigationView.findViewById<View>(item.itemId) as BottomNavigationItemView
+//            itemView.setShifting(false)
+//        }
+
 
         val fragment = FragmentAccueilEmployeur()
         loadFragment(fragment, R.string.sub_title_accueil)
