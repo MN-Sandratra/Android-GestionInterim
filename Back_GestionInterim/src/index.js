@@ -17,6 +17,7 @@ const ValidationRouter =require("./routes/Validation");
 const PaiementRouter =require("./routes/Paiement");
 const EmployerSubscriptionRouter =require("./routes/EmployerSubscription");
 const OfferRouter =require("./routes/Offers");
+const GroupRouter =require("./routes/Group");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -37,6 +38,7 @@ app.use('/api/validation', ValidationRouter);
 app.use('/api/paiement',PaiementRouter);
 app.use('/api/empsubscription', EmployerSubscriptionRouter);
 app.use('/api/offers', OfferRouter);
+app.use('/api/groups', GroupRouter);
 
 
 app.get('/', (req, res) => {

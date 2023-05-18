@@ -49,8 +49,8 @@
       "conditions": "Facturé chaque année",
       "cancellationConditions": "Annulation possible à tout moment",
       "duration": {
-        "value": 1,
-        "unit": "an"
+        "value": 12,
+        "unit": "mois"
       },
       "subscriptionName": "Annuel"
     }
