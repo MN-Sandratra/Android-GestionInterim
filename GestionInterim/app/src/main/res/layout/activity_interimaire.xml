@@ -47,6 +47,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu_interimaire"
         android:theme="@style/bottomNavigationMenu"
+        app:labelVisibilityMode="labeled"
         app:itemTextColor="@drawable/bottom_navigation_menu"
         app:itemIconTint="@drawable/bottom_navigation_menu"
         />

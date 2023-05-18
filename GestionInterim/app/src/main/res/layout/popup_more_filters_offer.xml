@@ -98,7 +98,6 @@
             android:layout_marginTop="@dimen/DefaultMargin"
             app:startIconDrawable="@drawable/ic_calendar"
             app:startIconTint="@color/white"
-
             android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText

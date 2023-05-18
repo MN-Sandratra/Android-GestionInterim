@@ -7,38 +7,41 @@ const crypto = require('crypto');
 router.post('/validate', async (req, res) => {
   const email = req.body.email;
   const validationCode = req.body.validationCode;
-  console.log("my email: "+email);
+  console.log("my email: " + email);
 
   try {
-      const jobSeeker = await JobSeeker.findOne({ email: email });
-      const employer = await Employer.findOne({ email1: email});
-      
-      if (!jobSeeker && !employer) {
-        return res.status(404).json({ message: 'Utilisateur non trouvé' });
-      }
+    const jobSeeker = await JobSeeker.findOne({ email: email });
+    const employer = await Employer.findOne({ email1: email });
 
-      if (jobSeeker && jobSeeker.validationCode !== validationCode) {
-          return res.status(400).json({ message: "Code de validation incorrect" });
-      }
-
-      if (employer && employer.validationCode !== validationCode) {
-        return res.status(400).json({ message: "Code de validation incorrect" });
+    if (!jobSeeker && !employer) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
 
-    if(jobSeeker){
+    if (jobSeeker && jobSeeker.validationCode !== validationCode) {
+      return res.status(400).json({ message: "Code de validation incorrect" });
+    }
+
+    if (employer && employer.validationCode !== validationCode) {
+      return res.status(400).json({ message: "Code de validation incorrect" });
+    }
+
+    let userType = "";
+    if (jobSeeker) {
       jobSeeker.isValidated = true;
       await jobSeeker.save();
-    }
-    else if(employer){
+      userType = "jobseekers";
+    } else if (employer) {
       employer.isValidated = true;
       await employer.save();
+      userType = "employers";
     }
-    
-      return res.status(200).json({ message: "Validation réussie" });
+
+    return res.status(200).json({ message: "Validation réussie", type: userType });
   } catch (err) {
-      return res.status(500).json({ message: err.message });
+    return res.status(500).json({ message: err.message });
   }
 });
+
 
 
 //Envoyer le code de validation

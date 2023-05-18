@@ -98,6 +98,7 @@ class FragmentEmployeurInscription : Fragment() {
                 // Lancement du fragment de validation
                 val fragment = FragmentValidationInscription()
                 val args = Bundle()
+                args.putString("username", inputNomEntreprise.text.toString())
                 args.putString("email", inputMailContact1.text.toString())
                 fragment.arguments = args
                 val fragmentManager = requireActivity().supportFragmentManager
@@ -120,6 +121,7 @@ class FragmentEmployeurInscription : Fragment() {
     fun launchServiceInscription(user : UtilisateurEmployeur){
         val intent = Intent(requireContext(), InscriptionService::class.java)
         intent.putExtra("utilisateur", user as Serializable)
+        intent.putExtra("type", "employers")
         requireActivity().startService(intent)
     }
 

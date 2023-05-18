@@ -23,6 +23,7 @@
         <service android:name=".services.LoginService"/>
         <service android:name=".services.InscriptionValidationService"/>
         <service android:name=".services.OffresService"/>
+        <service android:name=".services.AbonnementsService"/>
 
         <activity
             android:name=".slides.FirstSlidesActivity"
@@ -61,6 +62,12 @@
             />
         <activity
             android:name=".utilisateurEmployeur.SlidesActivity"
+            android:windowSoftInputMode="adjustPan"
+            android:exported="false"
+            />
+
+        <activity
+            android:name=".utilisateurEmployeur.ActivityAbonnement"
             android:windowSoftInputMode="adjustPan"
             android:exported="false"
             />

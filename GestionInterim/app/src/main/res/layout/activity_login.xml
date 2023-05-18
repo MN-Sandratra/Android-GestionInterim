@@ -79,16 +79,16 @@
             android:hint="@string/nomUtilisateurAdresseMail"
             android:layout_marginTop="10dp"
             app:endIconMode="clear_text"
-            app:endIconTint="@color/grey_clair"
-            app:startIconTint="@color/grey_clair"
+            app:endIconTint="@color/white"
+            app:startIconTint="@color/white"
             app:startIconDrawable="@drawable/ic_user"
-            android:textColorHint="@color/grey_clair">
+            android:textColorHint="@color/white">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/inputUsernameLogin"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/grey_clair"
+                android:textColor="@color/white"
                 android:inputType="text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -103,16 +103,16 @@
             android:hint="@string/password"
             android:layout_marginTop="10dp"
             app:endIconMode="password_toggle"
-            app:endIconTint="@color/grey_clair"
-            app:startIconTint="@color/grey_clair"
+            app:endIconTint="@color/white"
+            app:startIconTint="@color/white"
             app:startIconDrawable="@drawable/ic_mdp"
-            android:textColorHint="@color/grey_clair">
+            android:textColorHint="@color/white">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/grey_clair"
+            android:textColor="@color/white"
             android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>

@@ -23,8 +23,8 @@ class LoginService : Service(){
         val password = intent?.getStringExtra("password")
 
 
-        sendPostRequestLogin(email.toString(), password.toString()) { message, type, nom ->
-            val event = LoginResultEvent(message, type, nom)
+        sendPostRequestLogin(email.toString(), password.toString()) { message, type, nom, hasSubscription ->
+            val event = LoginResultEvent(message, type, nom, hasSubscription)
             EventBus.getDefault().post(event)
         }
 
@@ -33,7 +33,7 @@ class LoginService : Service(){
 
 
 
-    fun sendPostRequestLogin(email: String, password: String, callback: (message: String?, type: String?, nom : String?) -> Unit) {
+    fun sendPostRequestLogin(email: String, password: String, callback: (message: String?, type: String?, nom : String?, hasSubscription: Boolean?) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -52,8 +52,6 @@ class LoginService : Service(){
                 wr.write(reqParam);
                 wr.flush();
 
-                println("URL : $url")
-                println("Response Code : $responseCode")
                 if (responseCode == HttpURLConnection.HTTP_OK) {
                     BufferedReader(InputStreamReader(inputStream)).use {
                         val response = StringBuffer()
@@ -67,11 +65,12 @@ class LoginService : Service(){
                         val message = jsonObject.getString("message")
                         val type = jsonObject.getString("type")
                         val nom = jsonObject.getString("nom")
-                        callback(message, type, nom)
+                        val hasSubscription = jsonObject.getBoolean("hasSubscription")
+                        callback(message, type, nom, hasSubscription)
                     }
                 }
                 else {
-                    callback(null, null, null)
+                    callback(null, null, null, null)
                 }
             }
         }

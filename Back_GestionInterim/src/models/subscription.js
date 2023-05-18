@@ -10,6 +10,14 @@ const subscriptionSchema = new Schema({
         type: Number,
         required: true
     },
+    shortDescription :{
+        type: String,
+        required: true
+    },
+    description:{
+        type: String,
+        required: true
+    },
     conditions: {
         type: String,
         required: true

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="match_parent"
+        android:layout_height="500dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/DefaultMargin"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/DefaultMargin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    style="@style/TypeAbonnement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/abonnement"></TextView>
+
+                <TextView
+                    android:id="@+id/PrixAbonnementText"
+                    style="@style/TarifAbonnement"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:text="Prix"></TextView>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/typeAbonnementText"
+                style="@style/TypeAbonnement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ponctuel"></TextView>
+
+            <TextView
+                android:id="@+id/descriptionAbonnement"
+                style="@style/ShortDescriptionAbonnement"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DefaultMargin"
+                android:text="Un abonnement ponctuel pour la publication d'offres d'emploi vous permet de publier des offres d'emploi de manière ponctuelle, lorsque vous en avez besoin. Cet abonnement est idéal pour les employeurs qui recrutent occasionnellement et qui n'ont pas besoin d'un abonnement régulier."></TextView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="250dp"
+                app:cardElevation="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white"
+                android:layout_marginTop="@dimen/DefaultMargin"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="10dp">
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginHorizontal="@dimen/DefaultMargin"
+                    android:layout_marginTop="@dimen/DefaultMargin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TitleTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+
+                        android:text="@string/conditionsUtilisations"></TextView>
+
+                    <TextView
+                        style="@style/texteAbonnementConditionsUtilisation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/DefaultMargin"
+                        android:text="@string/conditionsUtilisation1"></TextView>
+
+                    <TextView
+                        style="@style/texteAbonnementConditionsUtilisation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/DefaultMargin"
+                        android:text="@string/conditionsUtilisation2"></TextView>
+
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/DefaultMargin"
+                app:cardElevation="10dp"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/white"
+                app:cardBackgroundColor="@color/blue"
+                app:cardCornerRadius="10dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/DefaultMargin"
+                    android:layout_marginBottom="@dimen/DefaultMargin"
+                    android:orientation="vertical">
+
+                    <TextView
+                        style="@style/TitleTextStyle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/conditionsDesabonnement"></TextView>
+
+                    <TextView
+                        android:id="@+id/conditionDesabonnement"
+                        style="@style/texteAbonnementConditionsUtilisation"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/DefaultMargin"
+                        android:text="@string/conditionsDesabonnement"></TextView>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/boutonValidationAbonnement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="@string/abonnementBouton"
+        android:layout_marginTop="@dimen/DefaultMargin"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView2">
+
+    </com.google.android.material.button.MaterialButton>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
