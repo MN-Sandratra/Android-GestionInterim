@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const JobSeeker = require('../models/jobSeeker');
+const Group = require('../models/group');
 
 // Créer un groupe
 router.post('/', async (req, res) => {
