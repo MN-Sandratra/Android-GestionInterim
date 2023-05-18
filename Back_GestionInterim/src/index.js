@@ -18,6 +18,7 @@ const PaiementRouter =require("./routes/Paiement");
 const EmployerSubscriptionRouter =require("./routes/EmployerSubscription");
 const OfferRouter =require("./routes/Offers");
 const GroupRouter =require("./routes/Group");
+const NotificationRouter =require("./routes/Notification");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -39,6 +40,7 @@ app.use('/api/paiement',PaiementRouter);
 app.use('/api/empsubscription', EmployerSubscriptionRouter);
 app.use('/api/offers', OfferRouter);
 app.use('/api/groups', GroupRouter);
+app.use('/api/notifications',NotificationRouter);
 
 
 app.get('/', (req, res) => {
