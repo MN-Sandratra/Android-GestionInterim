@@ -146,9 +146,15 @@
     <string name="add_offers_title">Ajouter une annonce</string>
     <string name="addOfferButton">Ajouter l\'offre</string>
     <string name="add_offers_experience">Expérience requise</string>
+    <string name="top_menu_consult_annonces_deposees">Annonces déposées</string>
+    <string name="top_menu_consult_candidatures_traiter">Candidatures à traiter</string>
+    <string name="top_menu_consult_missions_validées">Missions validées</string>
+    <string name="voirCandidatures">Voir candidature</string>
+
 
     <!-- FILTRE D'UNE OFFRE -->
 
+    <string name="metierFilter">Saisissez un métier</string>
     <string name="villeFilter">Saisissez une ville et un rayon</string>
     <string name="distanceFilter">Dans un rayon autour de : 30km</string>
     <string name="dateDebutFilter">Saisissez une date de début</string>
