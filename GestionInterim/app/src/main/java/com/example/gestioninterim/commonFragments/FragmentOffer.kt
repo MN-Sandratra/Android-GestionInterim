@@ -54,6 +54,7 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
         val view = inflater.inflate(R.layout.fragment_menu_top_search, container, false)
 
+        listOffers= emptyList();
         // Initialisation des variables layout
         inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
@@ -85,7 +86,9 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
                 offerAdapter.updateOffers(listOffers)
             }
             else{
+
                 getOffersByJob(inputMetier.text.toString(), listOffers)
+
             }
         }
 
@@ -106,20 +109,24 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
     // Fonction demandant la permission à l'utilisateur
     private fun requestLocationPermission() {
+        println("location request");
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
+            println("Permission non accorder?")
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 locationRequestCode
             )
         } else {
+            println("je suis la location ");
             getLastKnownLocation()
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        println("j'entre ici");
         if (requestCode == locationRequestCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLastKnownLocation()
@@ -132,20 +139,22 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     }
 
     private fun getLastKnownLocation() {
+        println("pour savoir le last know location")
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
+            println("condition accepter")
             requestLocationPermission()
             // Si la permission n'est pas accordée, je met les coordonnées de Paris
             latitude = "48.85"
             longitude = "2.34"
+            println("je suis la ");
             launchServiceOffers(latitude, longitude)
             return
         }
-
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-
+                println("location==null")
 
 //                val latitude = location.latitude.toString()
 //                val longitude = location.longitude.toString()
@@ -154,9 +163,11 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
                 latitude = "43.61"
                 longitude = "3.87"
 
+                println("encore la ");
                 launchServiceOffers(latitude, longitude)
             } else {
                 // Gérez le cas où la localisation est null
+                println("ca rentre la")
             }
         }
     }
