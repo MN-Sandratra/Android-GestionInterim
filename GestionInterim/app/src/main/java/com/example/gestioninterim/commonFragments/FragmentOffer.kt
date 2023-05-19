@@ -41,6 +41,13 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     private lateinit var listOffers: List<Offer>
     private lateinit var latitude : String
     private lateinit var longitude : String
+
+    init {
+        // Initialisation par défaut à Paris
+        latitude = "48.85"
+        longitude = "2.34"
+    }
+
     private lateinit var inputMetier : TextInputEditText
 
     private var filterVille: String = ""
@@ -122,45 +129,42 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == locationRequestCode) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Si l'utilisateur accepte la permission, je met les coordonnées de Montpellier
                 getLastKnownLocation()
             } else {
                 // Si la permission n'est pas accordée, je met les coordonnées de Paris
                 latitude = "48.85"
                 longitude = "2.34"
+                launchServiceOffers(latitude, longitude)
             }
         }
     }
 
     private fun getLastKnownLocation() {
+
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
             requestLocationPermission()
-            // Si la permission n'est pas accordée, je met les coordonnées de Paris
-            latitude = "48.85"
-            longitude = "2.34"
-            launchServiceOffers(latitude, longitude)
             return
         }
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
-
-
-//                val latitude = location.latitude.toString()
-//                val longitude = location.longitude.toString()
-
-                // Je met les coordonnées de Montpellier car les coordonnées de l'émulateur sont biaisées
+                // Les coordonnées de l'utilisateur réel
                 latitude = "43.61"
                 longitude = "3.87"
+//                latitude = location.latitude.toString()
+//                longitude = location.longitude.toString()
 
-                launchServiceOffers(latitude, longitude)
             } else {
-                // Gérez le cas où la localisation est null
+                // Si la localisation est null, je met les coordonnées de Paris
+                latitude = "48.85"
+                longitude = "2.34"
             }
+            launchServiceOffers(latitude, longitude)
         }
     }
-
 
     fun launchServiceOffers(latitude: String, longitude: String) {
 
