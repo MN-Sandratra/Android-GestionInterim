@@ -81,6 +81,7 @@
     <string name="inscriptionEmployeurTelephone1">Téléphone - contact 1 (optionnel)</string>
     <string name="inscriptionEmployeurTelephone2">Téléphone - contact 2 (optionnel)</string>
     <string name="inscriptionEmployeurAdresse">Adresse (obligatoire)</string>
+    <string name="inscriptionEmployeurVille">Ville : (obligatoire)</string>
 
     <!-- INSCRIPTION AGENCE -->
 
@@ -137,7 +138,14 @@
     <string name="slideGestionOffresText">Vous pouvez déposer une offre d\'emploi en remplissant les informations nécessaires, ou consulter et gérer les offres déjà déposées, y compris en créant des catégories pour mieux les organiser.</string>
     <string name="bottom_voir_annonces_item">Mes annonces</string>
     <string name="bottom_deposer_item">Poster</string>
-
+    <string name="add_offers_intitule">Intitulé de la mission</string>
+    <string name="add_offers_description">Description de la mission</string>
+    <string name="add_offers_periode_debut">Date de début</string>
+    <string name="add_offers_periode_fin">Date de fin</string>
+    <string name="add_offers_remuneration">Rémunération taux horaire</string>
+    <string name="add_offers_title">Ajouter une annonce</string>
+    <string name="addOfferButton">Ajouter l\'offre</string>
+    <string name="add_offers_experience">Expérience requise</string>
 
     <!-- FILTRE D'UNE OFFRE -->
 

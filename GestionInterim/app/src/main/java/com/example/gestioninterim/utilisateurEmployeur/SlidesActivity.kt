@@ -17,6 +17,8 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
+import com.example.gestioninterim.models.UtilisateurEmployeur
+import com.google.gson.Gson
 
 class SlidesActivity : AppCompatActivity() {
 
@@ -31,13 +33,18 @@ class SlidesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_slides_employeur)
 
+        val sharedPreferences = getSharedPreferences("user_infos", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val jsonUser = sharedPreferences.getString("user", "")
+        val user = gson.fromJson(jsonUser, UtilisateurEmployeur::class.java)
+
         val res = resources
         val intent = intent
 
 
         val bienvenueTextView = findViewById<TextView>(R.id.welcomeEmployeur)
 
-        val username = intent.getStringExtra("nom")
+        val username = user.companyName
 
         val bienvenueText = res.getString(R.string.welcomeEmployeur, username)
         val formattedText = Html.fromHtml(bienvenueText, Html.FROM_HTML_MODE_LEGACY)

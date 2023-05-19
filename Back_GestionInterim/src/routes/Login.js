@@ -45,27 +45,27 @@ router.post('/', async (req, res) => {
       hasSubscription = !!employerSubscription;
     }
 
+    let user = null;
     let userType = "";
-    let nom = "";
-    
+
     if(jobSeeker) {
       userType = "jobSeeker";
-      nom = jobSeeker.lastName
+      user = jobSeeker;
     } else if (employer1 || employer2) {
       userType = "employer";
       if(employer1){
-        nom = employer1.companyName
+        user = employer1
       }
       else{
-        nom = employer2.companyName
+        user = employer2
       }
     }
 
     return res.status(200).json({ 
       message: 'Connexion réussie', 
       type: userType, 
-      nom: nom, 
-      hasSubscription: hasSubscription // add subscription status to the response
+      hasSubscription: hasSubscription,
+      user: user
     });
   } catch (err) {
     console.error(err);

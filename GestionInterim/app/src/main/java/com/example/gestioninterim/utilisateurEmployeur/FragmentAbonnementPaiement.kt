@@ -1,5 +1,6 @@
 package com.example.gestioninterim.utilisateurEmployeur
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -9,10 +10,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
+import com.example.gestioninterim.models.UtilisateurEmployeur
 import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
 import com.example.gestioninterim.services.AbonnementsService
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -21,15 +24,20 @@ import java.util.*
 
 class FragmentAbonnementPaiement(private val prixAbonnement: Int, private val typeAbonnement: String) : Fragment() {
 
-    private lateinit var inputMailEditText : TextInputEditText
+
+    private lateinit var user : UtilisateurEmployeur
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_paiement_abonnement, container, false)
 
+        val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val jsonUser = sharedPreferences!!.getString("user", "")
+        user = gson.fromJson(jsonUser, UtilisateurEmployeur::class.java)
+
         val abonnementChoisiTextView: TextView = view.findViewById(R.id.chooseAbonnementText)
         val prixAbonnementTextView: TextView = view.findViewById(R.id.prixAbonnementChoisi)
         val abonnementBoutonValidation: MaterialButton = view.findViewById(R.id.validationPaiementButton)
-        inputMailEditText = view.findViewById(R.id.inputTextContact)
 
         val inputTextDateExpiration = view.findViewById<TextInputEditText>(R.id.inputTextDateExpiration)
         inputTextDateExpiration.setOnClickListener {
@@ -66,9 +74,8 @@ class FragmentAbonnementPaiement(private val prixAbonnement: Int, private val ty
     }
 
     fun launchServiceAbonnementPaiement() {
-        println("JE SUIS LAA")
         val intent = Intent(requireContext(), AbonnementsService::class.java)
-        intent.putExtra("email", inputMailEditText.text.toString())
+        intent.putExtra("email", user.email1)
         intent.putExtra("type", typeAbonnement)
         requireContext().startService(intent)
     }
@@ -85,10 +92,7 @@ class FragmentAbonnementPaiement(private val prixAbonnement: Int, private val ty
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onPostAbonnementsResult(event: AbonnementsResultEvent) {
         val validation = event.validation
-        println("JE SUIS LA 4")
-        println(validation)
         if(validation == true){
-            println("JE SUIS LA 5")
             val intent = Intent(requireContext(), MainEmployeurActivity::class.java)
             requireActivity().startActivity(intent)
         }

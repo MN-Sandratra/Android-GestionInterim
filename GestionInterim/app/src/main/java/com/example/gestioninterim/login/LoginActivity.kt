@@ -1,5 +1,6 @@
 package com.example.gestioninterim.login
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gestioninterim.inscription.InscriptionActivity
 import com.example.gestioninterim.R
+import com.example.gestioninterim.models.Utilisateur
+import com.example.gestioninterim.models.UtilisateurEmployeur
+import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.example.gestioninterim.resultEvent.LoginResultEvent
 import com.example.gestioninterim.services.LoginService
 import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
@@ -17,6 +21,7 @@ import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
@@ -25,6 +30,7 @@ import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class LoginActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
@@ -49,8 +55,7 @@ class LoginActivity : AppCompatActivity() {
 
         // Redirection vers l'utilisateur concerné
         connectButton.setOnClickListener{
-
-            if(! (inputUsername.text?.isEmpty() == true || inputPassword.text?.isEmpty() == true)){
+            if(!(inputUsername.text?.isEmpty() == true || inputPassword.text?.isEmpty() == true)){
                     // Je lance le service
                     launchServiceLogin(inputUsername.text.toString(), hashPassword(inputPassword.text.toString()))
                 }
@@ -96,10 +101,13 @@ class LoginActivity : AppCompatActivity() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onLoginResult(event: LoginResultEvent) {
+
+        val sharedPreferences = getSharedPreferences("user_infos", Context.MODE_PRIVATE)
+        val gson = Gson()
+
         if(event.message != null){
             if(event.type == "jobSeeker"){
                 val intent = Intent(this, MainInterimaireActivity::class.java)
-                intent.putExtra("nom", event.nom)
                 startActivity(intent)
             }
             else if (event.type == "employer"){
@@ -109,7 +117,6 @@ class LoginActivity : AppCompatActivity() {
                 }
                 else{
                     val intent = Intent(this, SlidesActivity::class.java)
-                    intent.putExtra("nom", event.nom)
                     startActivity(intent)
                 }
 

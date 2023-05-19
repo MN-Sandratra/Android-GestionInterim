@@ -188,6 +188,28 @@
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/inscriptionEmployeurVille"
+                android:layout_marginTop="10dp"
+                app:startIconTint="@color/white"
+                app:startIconDrawable="@drawable/ic_location"
+                android:textColorHint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextVille"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurNumeroNational"
                 android:layout_marginTop="10dp"
                 app:startIconTint="@color/white"

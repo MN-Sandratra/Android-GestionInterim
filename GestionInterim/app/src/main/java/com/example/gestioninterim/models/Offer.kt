@@ -8,12 +8,11 @@ data class Offer (
     val intitule: String,
     val dateDebut: Date,
     val dateFin: Date,
-    val experienceRequise: Int,
+    val experienceRequise: String,
     val description: String,
     val tauxHoraire: Double,
     val disponibilite: Boolean,
     val etat: String,
-    val remuneration: Double,
     val ville: String,
     val adressePostale: String
 ) : Serializable

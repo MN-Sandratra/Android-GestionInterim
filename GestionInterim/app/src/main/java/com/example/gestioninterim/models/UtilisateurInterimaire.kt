@@ -1,17 +1,18 @@
 package com.example.gestioninterim.models
 
+import com.google.gson.annotations.Expose
 import java.io.Serializable
 import java.util.Date
 
 data class UtilisateurInterimaire(
-    val firstName: String,
-    val lastName: String,
-    val nationality: String? = null,
-    val dateOfBirth : String? = null,
-    val phoneNumber : String? = null,
-    val email : String? = null,
-    val city : String? = null,
-    val cv : String? = null,
-    val comments : String? = null,
-    val password : String
+    @Expose val firstName: String,
+    @Expose val lastName: String,
+    @Expose val nationality: String? = null,
+    @Expose val dateOfBirth : String? = null,
+    @Expose val phoneNumber : String? = null,
+    @Expose val email : String? = null,
+    @Expose val city : String? = null,
+    @Expose val cv : String? = null,
+    @Expose val comments : String? = null,
+    @Expose val password : String
 ) : Serializable, Utilisateur

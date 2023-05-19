@@ -42,6 +42,10 @@ const employerSchema = new mongoose.Schema({
         type: String, 
         required: true 
     },
+    ville: {
+        type: String,
+        required: true
+    },
     validationCode: {
         type: String,
     },

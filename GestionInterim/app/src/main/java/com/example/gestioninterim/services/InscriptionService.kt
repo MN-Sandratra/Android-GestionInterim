@@ -7,7 +7,11 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Utilisateur
+import okhttp3.*
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.BufferedReader
+import java.io.IOException
 import java.io.InputStreamReader
 import java.io.OutputStreamWriter
 import java.net.HttpURLConnection
@@ -40,53 +44,52 @@ class InscriptionService : Service() {
 
 
     fun sendPostRequest(user: Utilisateur, type: String) {
-        Executors.newSingleThreadExecutor().execute {
+        val client = OkHttpClient()
 
-            var reqParam : String? = ""
-
-            // J'ajoute à la requete les parameters si ils sont pas null ou vide ("")
-            user.let {
-                it.javaClass.declaredFields.forEach {
-                    it.isAccessible = true
-                    val propName = it.name
-                    val propValue = it.get(user)
-                    println("$propName = $propValue")
-                    if (propValue != null) {
-                        if (!propValue.toString().isEmpty()) {
-                            reqParam += URLEncoder.encode(propName,"UTF-8") + "=" + URLEncoder.encode(propValue.toString(), "UTF-8") + "&"
-                        }
-                    }
-                }
-            }
-
-            // Je supprime le dernier charactère de la chaîne
-            val reqParambis = reqParam!!.substring(0, reqParam.length - 1)
-
-            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
-
-            with(mURL.openConnection() as HttpURLConnection) {
-                // optional default is GET
-                requestMethod = "POST"
-
-                val wr = OutputStreamWriter(outputStream);
-                wr.write(reqParambis);
-                wr.flush();
-
-                println("URL : $url")
-                println("Response Code : $responseCode")
-
-                BufferedReader(InputStreamReader(inputStream)).use {
-                    val response = StringBuffer()
-
-                    var inputLine = it.readLine()
-                    while (inputLine != null) {
-                        response.append(inputLine)
-                        inputLine = it.readLine()
-                    }
-                    println("Response : $response")
+        var requestBodyContent = ""
+        user.let {
+            it.javaClass.declaredFields.forEach { field ->
+                field.isAccessible = true
+                val propName = field.name
+                val propValue = field.get(user)
+                println("$propName = $propValue")
+                if (propValue != null && propValue.toString().isNotEmpty()) {
+                    requestBodyContent += "${URLEncoder.encode(propName, "UTF-8")}=${URLEncoder.encode(propValue.toString(), "UTF-8")}&"
                 }
             }
         }
+        // Remove the last '&' character
+        if (requestBodyContent.isNotEmpty()) {
+            requestBodyContent = requestBodyContent.substring(0, requestBodyContent.length - 1)
+        }
+
+        val mediaType = "application/x-www-form-urlencoded; charset=utf-8".toMediaType()
+        val body: RequestBody = requestBodyContent.toRequestBody(mediaType)
+
+        val request = Request.Builder()
+            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
+            .post(body)
+            .build()
+
+        client.newCall(request).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                e.printStackTrace()
+            }
+
+            @Throws(IOException::class)
+            override fun onResponse(call: Call, response: Response) {
+                if (response.isSuccessful) {
+                    println("URL : ${call.request().url}")
+                    println("Response Code : ${response.code}")
+
+                    response.body?.string()?.let { responseBody ->
+                        println("Response : $responseBody")
+                    }
+                } else {
+                    println("Request failed with response code ${response.code}")
+                }
+            }
+        })
     }
 
     override fun onBind(intent: Intent?): IBinder? {

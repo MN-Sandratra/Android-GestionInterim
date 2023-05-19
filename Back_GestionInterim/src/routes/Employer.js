@@ -50,6 +50,7 @@ router.post('/', async (req, res) => {
         phone1: req.body.phone1,
         phone2: req.body.phone2,
         address: req.body.address,
+        ville: req.body.ville,
         publicLinks: req.body.publicLinks,
         validationCode:confirmationCode,
     });

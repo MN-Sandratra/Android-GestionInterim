@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginHorizontal="@dimen/DefaultMargin"
+        android:orientation="vertical">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+            android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+            app:boxBackgroundColor="@color/darkblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_offers_intitule"
+            app:startIconTint="@color/white"
+            app:startIconDrawable="@drawable/ic_work"
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTextIntituleMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+            android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+            app:boxBackgroundColor="@color/darkblue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_offers_description"
+            app:startIconTint="@color/white"
+            app:startIconDrawable="@drawable/ic_work"
+            android:layout_marginTop="10dp"
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTextDescriptionMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="textMultiLine"
+                android:scrollbars="vertical"
+                android:scrollHorizontally="false"
+                android:maxLines="4" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+            android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+            app:boxBackgroundColor="@color/darkblue"
+            app:boxBackgroundMode="outline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_offers_experience"
+            android:layout_marginTop="10dp"
+            app:startIconTint="@color/white"
+            app:startIconDrawable="@drawable/ic_work"
+            app:endIconTint="@color/white"
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/inputTextExperienceMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="none"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputDateDebutLayoutMission"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+            android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+            app:boxBackgroundColor="@color/darkblue"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="5dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_offers_periode_debut"
+            app:startIconDrawable="@drawable/ic_calendar"
+            app:startIconTint="@color/white"
+            android:layout_marginTop="10dp"
+
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputDateDebutMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="date"
+                android:focusable="false"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputDateFinLayoutMission"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+            android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+            app:boxBackgroundColor="@color/darkblue"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:hint="@string/add_offers_periode_fin"
+            app:startIconDrawable="@drawable/ic_calendar"
+            app:startIconTint="@color/white"
+            android:layout_marginTop="10dp"
+
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputDateFinMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="date"
+                android:focusable="false"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+            android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+            app:boxBackgroundColor="@color/darkblue"
+            android:layout_width="280dp"
+            android:layout_height="wrap_content"
+            android:hint="@string/add_offers_remuneration"
+            app:startIconTint="@color/white"
+            android:layout_marginTop="10dp"
+            app:startIconDrawable="@drawable/ic_price"
+            android:textColorHint="@color/white">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/inputTextRemunerationMission"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:inputType="numberDecimal" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addOfferButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cornerRadius="10dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:backgroundTint="@color/orange"
+            android:paddingHorizontal="30dp"
+            android:text="@string/addOfferButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

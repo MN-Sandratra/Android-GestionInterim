@@ -30,13 +30,15 @@ router.post('/validate', async (req, res) => {
       jobSeeker.isValidated = true;
       await jobSeeker.save();
       userType = "jobseekers";
+      user = jobSeeker;
     } else if (employer) {
       employer.isValidated = true;
       await employer.save();
       userType = "employers";
+      user = employer;
     }
 
-    return res.status(200).json({ message: "Validation réussie", type: userType });
+    return res.status(200).json({ message: "Validation réussie", type: userType, user:user});
   } catch (err) {
     return res.status(500).json({ message: err.message });
   }

@@ -7,10 +7,14 @@ import android.os.IBinder
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
-import com.example.gestioninterim.models.Utilisateur
+import com.example.gestioninterim.resultEvent.AddOfferResultEvent
 import com.example.gestioninterim.resultEvent.OffersResultEvent
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -22,19 +26,39 @@ import java.util.concurrent.Executors
 class OffresService : Service() {
 
     lateinit var offersRequest : OfferDAO
+    lateinit var offer : Offer
+
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        offersRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent!!.getSerializableExtra("offerRequest", OfferDAO::class.java) as OfferDAO
-        } else {
-            @Suppress("DEPRECATION") intent?.getSerializableExtra("offerRequest") as OfferDAO
+        val isOffer = intent!!.getBooleanExtra("isOffer", false)
+
+        if(isOffer){
+            offer = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent!!.getSerializableExtra("offerRequest", Offer::class.java) as Offer
+            } else {
+                @Suppress("DEPRECATION") intent?.getSerializableExtra("offerRequest") as Offer
+            }
+            sendPostRequestOffer(offer) { success ->
+                println(success)
+                val event = AddOfferResultEvent(success)
+                EventBus.getDefault().post(event)
+            }
+        }
+                else{
+            offersRequest = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                intent!!.getSerializableExtra("offerRequest", OfferDAO::class.java) as OfferDAO
+            } else {
+                @Suppress("DEPRECATION") intent?.getSerializableExtra("offerRequest") as OfferDAO
+            }
+            sendGetRequestOffers(offersRequest) { offers ->
+                val event = OffersResultEvent(offers)
+                EventBus.getDefault().post(event)
+            }
         }
 
-        sendGetRequestOffers(offersRequest) { offers ->
-            val event = OffersResultEvent(offers)
-            EventBus.getDefault().post(event)
-        }
+
+
 
         return START_STICKY
     }
@@ -91,6 +115,38 @@ class OffresService : Service() {
             }
         }
     }
+
+    fun sendPostRequestOffer(newOffer : Offer, callback: (success: Boolean) -> Unit) {
+        Executors.newSingleThreadExecutor().execute {
+            val gson = Gson()
+            val offerJson = gson.toJson(newOffer)
+
+            val jsonMediaType = "application/json; charset=utf-8".toMediaType()
+            val body = offerJson.toRequestBody(jsonMediaType)
+
+            val request = Request.Builder()
+                .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/offers")
+                .post(body)
+                .build()
+
+            val client = OkHttpClient()
+
+            client.newCall(request).execute().use { response ->
+                if (response.isSuccessful) {
+                    // Successfully created
+                    callback(true)
+                } else {
+                    // Failed to create
+                    val inputLine = response.body?.string()
+                    println("Response error body : $inputLine")
+                    callback(false)
+                }
+            }
+        }
+    }
+
+
+
 
     override fun onBind(intent: Intent?): IBinder? {
         return null

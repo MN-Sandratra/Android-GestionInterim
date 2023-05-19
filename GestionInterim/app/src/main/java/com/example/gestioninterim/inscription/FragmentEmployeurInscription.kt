@@ -43,6 +43,7 @@ class FragmentEmployeurInscription : Fragment() {
         val inputConfirmMdp = view.findViewById<TextInputEditText>(R.id.inputTextConfirmPassword)
         val inputNumeroEntite = view.findViewById<TextInputEditText>(R.id.inputTextNumeroEntite)
         val inputAdresse = view.findViewById<TextInputEditText>(R.id.inputTextAdresse)
+        val inputVille = view.findViewById<TextInputEditText>(R.id.inputTextVille)
 
         val inputNomContact1 = view.findViewById<TextInputEditText>(R.id.inputTextNomContact1)
         val inputTelephoneContact1 = view.findViewById<TextInputEditText>(R.id.inputTextTelephoneContact1)
@@ -57,7 +58,7 @@ class FragmentEmployeurInscription : Fragment() {
             val isMdpMatching = inputMdp.text.toString() == inputConfirmMdp.text.toString()
 
             // Test du remplissage des champs et de la correspondance des mots de passe
-            val allInputsFilled = listOf(inputNomEntreprise, inputNumeroEntite,inputAdresse, inputMailContact1 ,inputMdp, inputConfirmMdp).all {
+            val allInputsFilled = listOf(inputNomEntreprise, inputNumeroEntite,inputAdresse, inputMailContact1 ,inputMdp, inputConfirmMdp, inputVille).all {
                 it.text?.isNotEmpty() == true
             } && isMdpMatching
 
@@ -87,6 +88,7 @@ class FragmentEmployeurInscription : Fragment() {
                     inputTelephoneContact1Text,
                     inputTelephoneContact2Text,
                     inputAdresse.text.toString(),
+                    inputVille.text.toString(),
                     "",
                     "",
                     ""

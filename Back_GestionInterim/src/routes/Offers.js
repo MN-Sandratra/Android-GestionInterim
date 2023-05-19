@@ -4,7 +4,6 @@ const Offer = require('../models/offer');
 const Employer = require('../models/employer');
 const cityService = require('../services/Cities');
 
-
 router.get('/', async (req, res) => {
   try {
     const { metier, ville, latitude, longitude, rayon, dateDebut, dateFin } = req.query;
@@ -88,19 +87,21 @@ router.get('/:id', async (req, res) => {
 
 // POST /offers
 router.post('/', async (req, res) => {
-    try {
-      const employer = await Employer.findById(req.body.employeur); // Recherche l'employeur
+  
+  console.log(req.body);  
+  try {
+      const employer = await Employer.findOne({ email1: req.body.employeur });
       if (!employer) { // Vérifie si l'employeur n'a pas été trouvé
         return res.status(400).json({ message: 'Employer not found' });
       }
 
-      const coordinates = await cityService.getCoordinatesFromCity(req.body.ville);
-        if (!coordinates) {
-            return res.status(400).json({ message: 'Unable to find coordinates for the provided city' });
-        }
+      const locationData = await cityService.getCoordinatesFromAddress(req.body.adressePostale);
+      if (!locationData) {
+        return res.status(400).json({ message: 'Unable to find city and coordinates from address' });
+      }
   
       const offer = new Offer({
-        employeur: req.body.employeur,
+        employeur: employer.id,
         intitule: req.body.intitule,
         dateDebut: req.body.dateDebut,
         dateFin: req.body.dateFin,
@@ -109,11 +110,10 @@ router.post('/', async (req, res) => {
         tauxHoraire: req.body.tauxHoraire,
         disponibilite: req.body.disponibilite,
         etat: req.body.etat,
-        remuneration: req.body.remuneration,
         ville: req.body.ville, // Ajout de la ville
         adressePostale: req.body.adressePostale, // Ajout de l'adresse postale
-        latitude: coordinates.latitude, // Ajout de la latitude
-        longitude: coordinates.longitude // Ajout de la longitude
+        latitude: locationData.latitude, // Ajout de la latitude
+        longitude: locationData.longitude // Ajout de la longitude
       });
   
       const newOffer = await offer.save();

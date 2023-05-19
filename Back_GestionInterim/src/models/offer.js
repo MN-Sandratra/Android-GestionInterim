@@ -22,7 +22,7 @@ const offerSchema = new mongoose.Schema({
         required: true
     },
     experienceRequise:{
-        type: Number,
+        type: String,
         required: true
     },
     description:{
@@ -41,10 +41,6 @@ const offerSchema = new mongoose.Schema({
         type: String,
         enum: etatsEnum,
         default:'en cours'
-    },
-    remuneration: {
-        type: Number, 
-        required: true
     },
     ville:{
         type: String,

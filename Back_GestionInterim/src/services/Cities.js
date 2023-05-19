@@ -19,6 +19,30 @@ async function getCoordinatesFromCity(city) {
   }
 }
 
+async function getCoordinatesFromAddress(address) {
+  try {
+    const response = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`
+    );
+    const data = await response.json();
+
+    if (data.length > 0) {
+      console.log(data[0])
+  
+      const { lat, lon} = data[0];
+    
+      return {latitude: parseFloat(lat), longitude: parseFloat(lon) };
+    } else {
+      throw new Error(`No coordinates found for address ${address}`);
+    }
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+}
+
+
+
 function getDistanceInKm(lat1, lon1, lat2, lon2) {
     const R = 6371; // rayon de la Terre en km
     const dLat = toRadians(lat2 - lat1);
@@ -40,5 +64,6 @@ function toRadians(degrees) {
 
 module.exports = {
   getCoordinatesFromCity,
-  getDistanceInKm
+  getDistanceInKm,
+  getCoordinatesFromAddress
 };

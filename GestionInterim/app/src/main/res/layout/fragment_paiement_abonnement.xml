@@ -74,36 +74,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardView">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textInputLayout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inscriptionEmployeurMail1"
-                android:textColorHint="@color/white"
-                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
-                app:boxBackgroundColor="@color/darkblue"
-                app:layout_constraintTop_toBottomOf="@+id/cardView"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
-                app:startIconDrawable="@drawable/ic_user"
-                app:startIconTint="@color/white"
-                tools:layout_editor_absoluteX="20dp">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTextContact"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="textEmailAddress"
-                    android:textColor="@color/white" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
 
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:hint="@string/abonnementNumeroCarte"
                 android:textColorHint="@color/white"
                 android:theme="@style/ShapeAppearanceOverlay.App.rounded"
