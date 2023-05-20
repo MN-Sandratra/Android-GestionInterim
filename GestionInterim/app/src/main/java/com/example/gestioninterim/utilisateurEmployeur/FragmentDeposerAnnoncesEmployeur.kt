@@ -63,7 +63,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
 
         val items = listOf("1", "2", "3+", "Aucune expérience")
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_dropdown_item_1line, items)
-        val dropdownMenu: MaterialAutoCompleteTextView = view.findViewById(R.id.inputTextExperienceMission)
+        dropdownMenu = view.findViewById(R.id.inputTextExperienceMission)
         dropdownMenu.setAdapter(adapter)
 
 

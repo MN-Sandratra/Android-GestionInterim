@@ -50,7 +50,6 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     }
 
     private lateinit var inputMetier : TextInputEditText
-
     private var filterVille: String = ""
     private var filterDateDebut: String = ""
     private var filterDateFin: String = ""

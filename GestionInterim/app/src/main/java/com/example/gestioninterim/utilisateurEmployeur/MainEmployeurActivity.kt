@@ -38,7 +38,7 @@ class MainEmployeurActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.voir_annonces_page -> {
-                    val fragment = FragmentAccueilEmployeur()
+                    val fragment = FragmentConsultEmployer()
                     loadFragment(fragment, R.string.sub_title_search)
                     return@setOnItemSelectedListener true
                 }

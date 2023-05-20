@@ -70,6 +70,56 @@ router.get('/', async (req, res) => {
   }
 });
 
+// GET /offers/:email
+router.get('/employers', async (req, res) => {
+  try {
+    const { email, metier, dateDebut, dateFin} = req.query;
+    const employer = await Employer.findOne({ email1: email });
+    if (!employer) {
+      return res.status(404).json({ message: 'Employer not found' });
+    }
+
+    const offers = await Offer.find({ employeur: employer._id }).populate('employeur', 'companyName -_id');
+    const filteredOffers = [];
+
+    // Pour chaque offre
+    for (const offer of offers) {
+      // Comparaison de la distance entre l'utilisateur et les offres
+  
+      if (metier && offer.intitule !== metier) {
+        continue;
+      }
+
+      if (dateDebut) {
+        const [jour, mois, annee] = dateDebut.split("/");
+        if (new Date(annee, mois - 1, jour) > new Date(formatDate(offer.dateDebut))) {
+          continue;
+        }
+      }
+      
+      if (dateFin) {
+        const [jourFin, moisFin, anneeFin] = dateFin.split("/");
+        if (new Date(anneeFin, moisFin - 1, jourFin) < new Date(formatDate(offer.dateFin))) {
+          continue;
+        }
+      }
+
+      filteredOffers.push(offer);
+    }
+
+    const modifiedOffers = filteredOffers.map(offer => {
+      const modifiedOffer = offer.toObject();
+      modifiedOffer.employeur = offer.employeur.companyName;
+      return modifiedOffer;
+    });
+
+    res.json(modifiedOffers);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 
 // GET /offers/:id
 router.get('/:id', async (req, res) => {
@@ -95,7 +145,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ message: 'Employer not found' });
       }
 
-      const locationData = await cityService.getCoordinatesFromAddress(req.body.adressePostale);
+      const locationData = await cityService.getCoordinatesFromCity(req.body.ville);
       if (!locationData) {
         return res.status(400).json({ message: 'Unable to find city and coordinates from address' });
       }

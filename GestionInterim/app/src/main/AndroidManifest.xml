@@ -23,6 +23,7 @@
         <service android:name=".services.InscriptionValidationService"/>
         <service android:name=".services.OffresService"/>
         <service android:name=".services.AbonnementsService"/>
+        <service android:name=".services.MissionEmployerService"/>
 
         <activity
             android:name=".slides.FirstSlidesActivity"
