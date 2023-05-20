@@ -44,6 +44,7 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
     init {
         // Initialisation par défaut à Paris
+        listOffers= emptyList()
         latitude = "48.85"
         longitude = "2.34"
     }
