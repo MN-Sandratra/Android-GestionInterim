@@ -1,6 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const { Candidature } = require('../models/candidature');
+const jobSeeker = require('../models/jobSeeker');
 
 const router = express.Router();
 
@@ -77,15 +78,18 @@ router.put('/:id', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, 
 
 router.post('/', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, res) => {
     try {
-      const { firstName, lastName, nationality, dateOfBirth, jobSeekerId } = req.body;
+      const { firstName, lastName, nationality, dateOfBirth, email } = req.body;
       const { cv, lm } = req.files;
   
+      const jobSeeker = await JobSeeker.findOne({ email: email });
+
+
       const candidature = new Candidature({
         firstName,
         lastName,
         nationality,
         dateOfBirth,
-        jobSeeker: jobSeekerId
+        jobSeeker: jobSeeker.id
       });
   
       if (cv && cv.length > 0) {
