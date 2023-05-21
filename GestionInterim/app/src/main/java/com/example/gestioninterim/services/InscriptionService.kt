@@ -7,7 +7,9 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Utilisateur
+import com.example.gestioninterim.models.UtilisateurEmployeur
 import com.example.gestioninterim.models.UtilisateurInterimaire
+import com.google.gson.JsonObject
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -47,36 +49,49 @@ class InscriptionService : Service() {
 
     fun sendPostRequest(user: Utilisateur, type: String) {
         val client = OkHttpClient()
-        var cvName : String? = null
-        val multipartBodyBuilder = MultipartBody.Builder()
-            .setType(MultipartBody.FORM)
+        var requestBody: RequestBody
 
-        if(user is UtilisateurInterimaire)
-        {
-            cvName = user.cv
-        }
+        if(user is UtilisateurInterimaire) {
+            var cvName: String? = user.cv
 
-        user.let {
-            it.javaClass.declaredFields.forEach { field ->
-                field.isAccessible = true
-                val propName = field.name
-                val propValue = field.get(user)
-                if (propValue != null) {
-                    if (propValue is ByteArray && propName == "contenuCv") {
-                        val fileRequestBody = propValue.toRequestBody("application/pdf".toMediaTypeOrNull())
-                        multipartBodyBuilder.addFormDataPart(propName, cvName, fileRequestBody)
-                    } else {
-                        multipartBodyBuilder.addFormDataPart(propName, propValue.toString())
+            val multipartBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
+            user.let {
+                it.javaClass.declaredFields.forEach { field ->
+                    field.isAccessible = true
+                    val propName = field.name
+                    val propValue = field.get(user)
+                    if (propValue != null && propValue.toString().isNotEmpty()) {
+                        if (propValue is ByteArray && propName == "contenuCv") {
+                            val fileRequestBody = propValue.toRequestBody("application/pdf".toMediaTypeOrNull())
+                            multipartBodyBuilder.addFormDataPart(propName, cvName, fileRequestBody)
+                        } else {
+                            multipartBodyBuilder.addFormDataPart(propName, propValue.toString())
+                        }
                     }
                 }
             }
+            requestBody = multipartBodyBuilder.build()
+        } else if(user is UtilisateurEmployeur) {
+            val json = JsonObject()
+            user.let {
+                it.javaClass.declaredFields.forEach { field ->
+                    field.isAccessible = true
+                    val propName = field.name
+                    val propValue = field.get(user)
+                    if (propValue != null && propValue.toString().isNotEmpty()) {
+                        json.addProperty(propName, propValue.toString())
+                    }
+                    // Pas d'ajout de propriété si propValue est null
+                }
+            }
+            requestBody = json.toString().toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull())
+        } else {
+            return  // Or handle this case as appropriate for your application.
         }
-
-        val multipartBody = multipartBodyBuilder.build()
 
         val request = Request.Builder()
             .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
-            .post(multipartBody)
+            .post(requestBody)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
@@ -99,6 +114,7 @@ class InscriptionService : Service() {
             }
         })
     }
+
 
     override fun onBind(intent: Intent?): IBinder? {
         return null
