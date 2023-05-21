@@ -75,72 +75,100 @@ router.post('/', async (req, res) => {
 });
 
 // Route pour mettre à jour un employeur
-router.put('/:id', getEmployer, async (req, res) => {
-    if (req.body.companyName != null) {
-        res.employer.companyName = req.body.companyName;
-    }
-
-    if (req.body.department != null) {
-        res.employer.department = req.body.department;
-    }
-
-    if (req.body.subDepartment != null) {
-        res.employer.subDepartment = req.body.subDepartment;
-    }
-
-    if (req.body.nationalNumber != null) {
-        res.employer.nationalNumber = req.body.nationalNumber;
-    }
-
-    if (req.body.contactPerson1 != null) {
-        res.employer.contactPerson1 = req.body.contactPerson1;
-    }
-
-    if (req.body.contactPerson2 != null) {
-        res.employer.contactPerson2 = req.body.contactPerson2;
-    }
-
-    if (req.body.email1 != null) {
-        res.employer.email1 = req.body.email1;
-    }
-
-    if (req.body.email2 != null) {
-        res.employer.email2 = req.body.email2;
-    }
-
-    if (req.body.phone1 != null) {
-        res.employer.phone1 = req.body.phone1;
-    }
-
-    if (req.body.phone2 != null) {
-        res.employer.phone2 = req.body.phone2;
-    }
-
-    if (req.body.address != null) {
-        res.employer.address = req.body.address;
-    }
-
-    if (req.body.publicLinks != null) {
-        res.employer.publicLinks = req.body.publicLinks;
-    }
-
+router.put('/:email1', async (req, res) => {
     try {
-        const updatedEmployer = await res.employer.save();
-        res.json(updatedEmployer);
+      const employer = await Employer.findOne({ email1: req.params.email1 });
+  
+      if (!employer) {
+        return res.status(404).json({ message: 'Employer not found' });
+      }
+  
+      if (req.body.companyName != null) {
+        employer.companyName = req.body.companyName;
+      }
+  
+      if (req.body.department != null) {
+        employer.department = req.body.department;
+      }
+  
+      if (req.body.subDepartment != null) {
+        employer.subDepartment = req.body.subDepartment;
+      }
+  
+      if (req.body.nationalNumber != null) {
+        employer.nationalNumber = req.body.nationalNumber;
+      }
+  
+      if (req.body.contactPerson1 != null) {
+        employer.contactPerson1 = req.body.contactPerson1;
+      }
+  
+      if (req.body.contactPerson2 != null) {
+        employer.contactPerson2 = req.body.contactPerson2;
+      }
+  
+      if (req.body.email2 != null) {
+        employer.email2 = req.body.email2;
+      }
+  
+      if (req.body.phone1 != null) {
+        employer.phone1 = req.body.phone1;
+      }
+  
+      if (req.body.phone2 != null) {
+        employer.phone2 = req.body.phone2;
+      }
+  
+      if (req.body.address != null) {
+        employer.address = req.body.address;
+      }
+
+      if (req.body.ville != null) {
+        employer.ville = req.body.ville;
+      }
+  
+      if (req.body.website != null) {
+        employer.website = req.body.website;
+      }
+  
+      if (req.body.linkedin != null) {
+        employer.linkedin = req.body.linkedin;
+      }
+
+      if (req.body.facebook != null) {
+        employer.facebook = req.body.facebook;
+      }
+  
+      const updatedEmployer = await employer.save();
+      res.json(updatedEmployer);
     } catch (error) {
-        res.status(400).json({ message: error.message });
+      res.status(400).json({ message: error.message });
     }
 });
 
-// Route pour supprimer un employeur
-router.delete('/:id', getEmployer, async (req, res) => {
+
+  
+
+router.delete('/:email1', async (req, res) => {
     try {
-        await res.employer.remove();
-        res.json({ message: 'Employer deleted successfully' });
+        // Trouver l'employeur à supprimer
+        const employerToDelete = await Employer.findOneAndDelete({ email1: req.params.email1 });
+
+        if (employerToDelete) {
+            // Supprimer toutes les offres associées à cet employeur
+            const Offer = require('../models/offer'); // Importer le modèle Offer
+            await Offer.deleteMany({ employeur: employerToDelete._id });
+
+            res.json({ message: 'Employer and associated offers deleted successfully' });
+        } else {
+            res.status(404).json({ message: 'Employer not found' });
+        }
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 });
+
+
 
 
 

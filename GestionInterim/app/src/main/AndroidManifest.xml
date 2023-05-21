@@ -12,6 +12,16 @@
         android:theme="@style/Theme.GestionInterim"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        
+        <service android:name=".services.InscriptionService"/>
+        <service android:name=".services.LoginService"/>
+        <service android:name=".services.InscriptionValidationService"/>
+        <service android:name=".services.OffresService"/>
+        <service android:name=".services.AbonnementsService"/>
+        <service android:name=".services.MissionEmployerService"/>
+        <service android:name=".services.ProfilEmployerService"/>
+        <service android:name=".services.SuppresionCompteService"/>
+
         <activity
             android:name=".ConversationListActivity"
             android:exported="false" />
