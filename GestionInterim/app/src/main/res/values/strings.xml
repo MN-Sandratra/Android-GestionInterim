@@ -113,7 +113,6 @@
     <string name="bottom_missions_item">Missions</string>
     <string name="bottom_candidatures_item">Candidatures</string>
     <string name="bottom_profil_item">Profil</string>
-    <string name="welcomeEmployeur">Bienvenue <font color="#FF0000">%1$s</font> !</string>
 
 
     <!-- UTILISATEUR EMPLOYEUR -->
@@ -191,6 +190,7 @@
     <string name="abonnementNumeroCarte">Numéro de carte (obligatoire)</string>
     <string name="abonnementDateExpiration">Date d\'expiration (obligatoire)</string>
     <string name="abonnementCvv">Cryptogramme visuel (obligatoire)</string>
+    <string name="metierFilter">Saisissez un métier</string>
     <string-array name="nationalities">
         <item>France</item>
         <item>Allemagne</item>
