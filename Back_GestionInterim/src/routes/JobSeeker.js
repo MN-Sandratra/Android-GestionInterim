@@ -30,7 +30,7 @@ const upload = multer({
 });
 
 // Route pour créer un nouveau chercheur d'emploi
-router.post('/', upload.single('cv'), async (req, res) => {
+router.post('/', upload.single('contenuCv'), async (req, res) => {
     const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
     try {
         const jobSeeker = new JobSeeker({

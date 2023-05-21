@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
@@ -15,6 +16,7 @@ import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -33,6 +35,16 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class FragmentInterimaireInscription : Fragment() {
+
+    // Définition de l'URI du CV
+    private var selectedFileUri: Uri? = null
+    private var nomFichier: String? = null
+
+    // Explorateur de fichier
+    private lateinit var myLauncher: ActivityResultLauncher<Intent>
+
+    // Je vais demander la permission
+    private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
 
 
     @SuppressLint("Range")
@@ -69,27 +81,32 @@ class FragmentInterimaireInscription : Fragment() {
         autoCompleteTextView.setAdapter(adapter)
 
         // Explorateur de fichier
-        val myLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        myLauncher = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
+                // Récupération du Uri du fichier sélectionné
+                val uri: Uri? = result.data?.data
+                // Utilisation du Uri (ex: affichage du nom du fichier dans un TextView)
+                uri?.let {
+                    val cursor: Cursor? = activity?.contentResolver?.query(it, null, null, null, null, null)
+                    cursor?.use { c ->
+                        val nameIndex: Int = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                        if (c.moveToFirst()) {
+                            val name: String = c.getString(nameIndex)
+                            nomFichier = name.replace(" ", "_")
+                            nomCv.setText(name)
+                            getCv.setEndIconDrawable(R.drawable.ic_import)
+                        }
+                    }
+                    selectedFileUri = uri
 
-                selectedFileUri = result.data?.data
-                val contentResolver = requireContext().contentResolver
-
-                // Récupérer le nom du fichier à partir de l'URI
-                val cursor = contentResolver.query(selectedFileUri!!, null, null, null, null)
-                cursor?.moveToFirst()
-
-                val displayName = cursor?.getString(cursor.getColumnIndex(OpenableColumns.DISPLAY_NAME))
-
-                // Je modifie le nom du fichier courant
-                nomCv.setText("$displayName")
-                getCv.setEndIconDrawable(R.drawable.ic_delete)
-                cursor?.close()
+                }
             }
         }
 
         // Je vais demander la permission
-        val requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
+        requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
                 isGranted: Boolean ->
 
             // Si permission acceptée
@@ -105,10 +122,10 @@ class FragmentInterimaireInscription : Fragment() {
         // Listener du bouton CV
         getCv.setEndIconOnClickListener {
 
-            // Si aucun cv n'est selectionné
+            // Si aucun cv n'est sélectionné
             if (nomCv.text.toString().isEmpty()) {
                 when {
-                    // Si la permission a déjà été accepté
+                    // Si la permission a déjà été acceptée
                     ContextCompat.checkSelfPermission(
                         requireContext(),
                         Manifest.permission.READ_EXTERNAL_STORAGE
@@ -124,7 +141,7 @@ class FragmentInterimaireInscription : Fragment() {
                         requestPermissionLauncher.launch(Manifest.permission.READ_EXTERNAL_STORAGE)
                     }
                 }
-                // Si un cv est déjà selectionné
+                // Si un cv est déjà sélectionné
             } else {
                 nomCv.setText("")
                 getCv.setEndIconDrawable(R.drawable.ic_import)
@@ -133,8 +150,10 @@ class FragmentInterimaireInscription : Fragment() {
                     "Vous venez de supprimer votre CV",
                     Toast.LENGTH_SHORT
                 ).show()
-                }
+                selectedFileUri = null
             }
+        }
+
 
         // Si j'ai déjà un compte, je vais me connecter
         clickHere.setOnClickListener{
@@ -142,9 +161,6 @@ class FragmentInterimaireInscription : Fragment() {
             startActivity(intent)
 
         }
-
-        println("La date de naissance est : " + inputDateNaissance.text)
-
 
         // Listener du bouton de validation
         buttonValidate.setOnClickListener{
@@ -170,6 +186,7 @@ class FragmentInterimaireInscription : Fragment() {
                 val inputCommentairesText: String? = inputCommentaires?.text?.toString()
                 val inputPasswordEncrypt : String = hashPassword(inputMdp.text.toString())
 
+
                 val date: String? = if (!inputDate?.isEmpty()!!) {
                     val originalDateFormat = SimpleDateFormat("dd/MM/yyyy")
                     val parsedDate = originalDateFormat.parse(inputDate.toString())
@@ -179,6 +196,13 @@ class FragmentInterimaireInscription : Fragment() {
                     ""
                 }
 
+                var cvByteArray: ByteArray? = null
+                selectedFileUri?.let {
+                    val inputStream = requireContext().contentResolver.openInputStream(it)
+                    cvByteArray = inputStream?.readBytes()
+                }
+
+
                 val user = UtilisateurInterimaire(
                     inputPrenom.text.toString(),
                     inputNom.text.toString(),
@@ -187,7 +211,8 @@ class FragmentInterimaireInscription : Fragment() {
                     inputTelephoneText,
                     inputMailText,
                     inputVilleText,
-                    "",
+                    cvByteArray,
+                    nomFichier,
                     inputCommentairesText,
                     inputPasswordEncrypt
                 )
