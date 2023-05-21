@@ -24,6 +24,9 @@
         <service android:name=".services.OffresService"/>
         <service android:name=".services.AbonnementsService"/>
         <service android:name=".services.MissionEmployerService"/>
+        <service android:name=".services.ProfilEmployerService"/>
+        <service android:name=".services.SuppresionCompteService"/>
+
 
         <activity
             android:name=".slides.FirstSlidesActivity"

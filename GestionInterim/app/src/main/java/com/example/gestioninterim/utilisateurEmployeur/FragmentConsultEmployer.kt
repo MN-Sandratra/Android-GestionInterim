@@ -37,6 +37,8 @@ class FragmentConsultEmployer : Fragment() {
 
     }
 
+
+
     private class ScreenSlidePageAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
@@ -55,4 +57,6 @@ class FragmentConsultEmployer : Fragment() {
     companion object {
         private const val NUM_SLIDES = 3
     }
+
+
 }

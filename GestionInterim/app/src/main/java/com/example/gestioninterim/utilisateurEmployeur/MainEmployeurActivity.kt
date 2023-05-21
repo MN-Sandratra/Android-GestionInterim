@@ -48,8 +48,8 @@ class MainEmployeurActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.profil_page -> {
-                    val fragment = FragmentAccueilEmployeur()
-                    loadFragment(fragment, R.string.add_offers_title)
+                    val fragment = FragmentProfilEmployeur()
+                    loadFragment(fragment, R.string.profilUtilisateurTitle)
                     return@setOnItemSelectedListener true
                 }
                 else -> false

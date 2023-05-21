@@ -43,17 +43,18 @@ router.get('/', async (req, res) => {
 
       if (dateDebut) {
         const [jour, mois, annee] = dateDebut.split("/");
-        if (new Date(annee, mois - 1, jour) > new Date(formatDate(offer.dateDebut))) {
+        if (new Date(annee, mois - 1, jour) > offer.dateDebut) {
           continue;
         }
       }
       
       if (dateFin) {
         const [jourFin, moisFin, anneeFin] = dateFin.split("/");
-        if (new Date(anneeFin, moisFin - 1, jourFin) < new Date(formatDate(offer.dateFin))) {
+        if (new Date(anneeFin, moisFin - 1, jourFin) < offer.dateFin) {
           continue;
         }
       }
+      
 
       filteredOffers.push(offer);
     }
@@ -92,17 +93,18 @@ router.get('/employers', async (req, res) => {
 
       if (dateDebut) {
         const [jour, mois, annee] = dateDebut.split("/");
-        if (new Date(annee, mois - 1, jour) > new Date(formatDate(offer.dateDebut))) {
+        if (new Date(annee, mois - 1, jour) > offer.dateDebut) {
           continue;
         }
       }
       
       if (dateFin) {
         const [jourFin, moisFin, anneeFin] = dateFin.split("/");
-        if (new Date(anneeFin, moisFin - 1, jourFin) < new Date(formatDate(offer.dateFin))) {
+        if (new Date(anneeFin, moisFin - 1, jourFin) < offer.dateFin) {
           continue;
         }
       }
+      
 
       filteredOffers.push(offer);
     }
