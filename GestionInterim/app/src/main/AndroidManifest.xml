@@ -2,76 +2,72 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:usesCleartextTraffic="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/Theme.GestionInterim"
+        android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <service android:name=".services.InscriptionService"/>
-        <service android:name=".services.LoginService"/>
-        <service android:name=".services.InscriptionValidationService"/>
-        <service android:name=".services.OffresService"/>
-        <service android:name=".services.AbonnementsService"/>
-        <service android:name=".services.MissionEmployerService"/>
+        <activity
+            android:name=".ConversationListActivity"
+            android:exported="false" />
 
         <activity
             android:name=".slides.FirstSlidesActivity"
-            android:windowSoftInputMode="adjustPan"
-            android:exported="true">
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".login.LoginActivity"
             android:exported="false"
-            android:parentActivityName=".slides.FirstSlidesActivity"/>
+            android:parentActivityName=".slides.FirstSlidesActivity" />
         <activity
             android:name=".inscription.InscriptionActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            android:parentActivityName=".slides.FirstSlidesActivity"/>
+            android:parentActivityName=".slides.FirstSlidesActivity"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".utilisateurAnonyme.MainAnonymeActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".utilisateurInterimaire.MainInterimaireActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            />
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".utilisateurEmployeur.MainEmployeurActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            />
+            android:windowSoftInputMode="adjustPan" />
+
         <activity
             android:name=".utilisateurEmployeur.SlidesActivity"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            />
-
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".utilisateurEmployeur.ActivityAbonnement"
-            android:windowSoftInputMode="adjustPan"
             android:exported="false"
-            />
-
+            android:windowSoftInputMode="adjustPan" />
+        <service android:name=".services.InscriptionService" />
+        <service android:name=".services.LoginService" />
+        <service android:name=".services.InscriptionValidationService" />
+        <service android:name=".services.OffresService" />
+        <service android:name=".services.AbonnementsService" />
+        <service android:name=".services.MissionEmployerService" />
     </application>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
 </manifest>

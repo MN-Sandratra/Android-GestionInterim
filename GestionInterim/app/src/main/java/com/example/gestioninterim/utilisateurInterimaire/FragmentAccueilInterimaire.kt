@@ -9,6 +9,7 @@ import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
 import com.example.gestioninterim.login.LoginActivity
+import com.example.gestioninterim.message.ConversationListActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
@@ -20,6 +21,12 @@ class FragmentAccueilInterimaire : Fragment() {
 
         val cardViewAccueil = view.findViewById<MaterialCardView>(R.id.cardViewLogin)
         val cardViewSearch = view.findViewById<MaterialCardView>(R.id.cardViewSearch)
+        val cardMessage=view.findViewById<MaterialCardView>(R.id.cardViewMessage);
+
+        cardMessage.setOnClickListener {
+            val intent = Intent(context, ConversationListActivity::class.java)
+            startActivity(intent)
+        }
 
 
 //        val parentActivity = activity as MainInterimaireActivity

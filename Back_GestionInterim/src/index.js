@@ -19,6 +19,9 @@ const EmployerSubscriptionRouter =require("./routes/EmployerSubscription");
 const OfferRouter =require("./routes/Offers");
 const GroupRouter =require("./routes/Group");
 const NotificationRouter =require("./routes/Notification");
+const CandidatureRouter =require("./routes/Candidature");
+const MessageRouter =require("./routes/Chat");
+const candidatureOffreRouter =require("./routes/CandidatureOffre");
 
 
 app.use(bodyParser.urlencoded({ extended: false }))
@@ -41,6 +44,9 @@ app.use('/api/empsubscription', EmployerSubscriptionRouter);
 app.use('/api/offers', OfferRouter);
 app.use('/api/groups', GroupRouter);
 app.use('/api/notifications',NotificationRouter);
+app.use('/api/candidatures',CandidatureRouter);
+app.use('/api/messages',MessageRouter);
+app.use('/api/candidatureOffres',candidatureOffreRouter);
 
 
 app.get('/', (req, res) => {

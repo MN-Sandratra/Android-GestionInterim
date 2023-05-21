@@ -17,20 +17,19 @@
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardViewLogin"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="60dp"
+        android:layout_marginHorizontal="10dp"
         android:backgroundTint="@color/darkblue"
-        app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
+        android:layout_marginTop="30dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
-        android:layout_marginTop="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view"
         app:strokeColor="@color/white"
-        app:strokeWidth="1dp">
+        app:strokeWidth="1dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,6 +50,48 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="@string/accueil_voir_profil"
+                android:textAlignment="center"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardViewMessage"
+        android:layout_width="200dp"
+        android:layout_marginTop="30dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="10dp"
+        android:backgroundTint="@color/darkblue"
+        app:cardCornerRadius="10dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/view"
+        app:strokeColor="@color/white"
+        app:strokeWidth="1dp"
+        tools:ignore="MissingConstraints">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="124dp"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/ic_user_large"
+                android:backgroundTint="@color/white" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="10dp"
+                android:text="Voir les Messages"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -134,7 +175,6 @@
                 android:layout_marginTop="10dp"
                 android:text="@string/accueil_voir_missions"
                 android:textColor="@color/white" />
-
         </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>

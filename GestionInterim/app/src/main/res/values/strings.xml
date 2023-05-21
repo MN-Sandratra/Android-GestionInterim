@@ -14,7 +14,7 @@
     <string name="texteInterimaire">Notre application d\'intérim est le moyen le plus rapide et le plus facile de trouver un emploi temporaire. Nous avons rassemblé des centaines d\'offres d\'emploi provenant d\'entreprises de tous secteurs, et nous les avons rendues accessibles en quelques clics.
         Une fois que vous avez postulé à une offre, nous vous tenons informé de l\'avancement de votre candidature.
         Inscrivez-vous dès maintenant et trouvez les offres parfaites en un rien de temps !</string>
-    
+
     <!-- SECOND SLIDE -->
     <string name="titreEmployeur">Vous êtes un employeur à la recherche de volontaire ?</string>
     <string name="texteEmployeur">Notre application vous permet de rechercher parmi des milliers d\'intérimaires inscrits, afin de trouver les profils qui correspondent aux besoins de votre entreprise.
@@ -89,22 +89,10 @@
 
     <!-- NATIONALITE -->
 
-    <string-array name="nationalities">
-        <item>France</item>
-        <item>Allemagne</item>
-        <item>États-Unis</item>
-        <item>Japon</item>
-        <item>Canada</item>
-        <item>Chine</item>
-        <item>Royaume-Uni</item>
-        <item>Italie</item>
-        <item>Espagne</item>
-        <item>Australie</item>
-    </string-array>
+    <string name="bottom_home_item">Accueil</string>
 
     <!-- UTILISATEUR ANONYME -->
 
-    <string name="bottom_home_item">Accueil</string>
     <string name="bottom_search_item">Trouver un job</string>
     <string name="bottom_connect_item">Se connecter</string>
     <string name="accueil_create_login_account">Créer un compte ou se connecter</string>
@@ -114,22 +102,22 @@
     <string name="trouver_job_faites_recherche">Faites votre recherche : </string>
     <string name="trouver_job_plus_filtres">Plus de filtres : </string>
     <string name="trouver_job_search">Recherchez un métier</string>
+    <string name="accueil_voir_profil">Voir mon profil intérimaire</string>
 
 
     <!-- UTILISATEUR INTERIMAIRE -->
 
-    <string name="accueil_voir_profil">Voir mon profil intérimaire</string>
     <string name="accueil_voir_missions">Voir ses missions</string>
     <string name="accueil_voir_missions_a_valider">Missions à valider</string>
     <string name="accueil_voir_candidatures">Voir ses candidatures</string>
     <string name="bottom_missions_item">Missions</string>
     <string name="bottom_candidatures_item">Candidatures</string>
     <string name="bottom_profil_item">Profil</string>
+    <string name="welcomeEmployeur">Bienvenue <font color="#FF0000">%1$s</font> !</string>
 
 
     <!-- UTILISATEUR EMPLOYEUR -->
 
-    <string name="welcomeEmployeur">Bienvenue <font color="#FF0000">%1$s</font> !</string>
     <string name="slideTypeAbonnementTitle">Types d\'abonnement</string>
     <string name="slideTypeAbonnementText">Vous pouvez choisir entre différents types d\'abonnement, allant d\'un abonnement ponctuel à un abonnement indéterminé, avec différents avantages et conditions pour chaque type.</string>
     <string name="slideGestionCandidaturesTitle">Gestion des candidatures</string>
@@ -150,19 +138,19 @@
     <string name="top_menu_consult_candidatures_traiter">Candidatures à traiter</string>
     <string name="top_menu_consult_missions_validées">Missions validées</string>
     <string name="voirCandidatures">Voir candidature</string>
+    <string name="metierFilter">Saisissez un métier</string>
 
 
     <!-- FILTRE D'UNE OFFRE -->
 
-    <string name="metierFilter">Saisissez un métier</string>
     <string name="villeFilter">Saisissez une ville et un rayon</string>
     <string name="distanceFilter">Dans un rayon autour de : 30km</string>
     <string name="dateDebutFilter">Saisissez une date de début</string>
     <string name="dateFinFilter">Saisissez une date de fin</string>
+    <string name="abonnement">Abonnement</string>
 
     <!-- ABONNEMENT -->
 
-    <string name="abonnement">Abonnement</string>
     <string name="abonnementConsult">Consultez nos abonnements</string>
     <string name="abonnementChoix">Choix de l\'abonnement</string>
     <string name="abonnementPaiement">Paiement de votre abonnement</string>
@@ -178,5 +166,17 @@
     <string name="abonnementNumeroCarte">Numéro de carte (obligatoire)</string>
     <string name="abonnementDateExpiration">Date d\'expiration (obligatoire)</string>
     <string name="abonnementCvv">Cryptogramme visuel (obligatoire)</string>
+    <string-array name="nationalities">
+        <item>France</item>
+        <item>Allemagne</item>
+        <item>États-Unis</item>
+        <item>Japon</item>
+        <item>Canada</item>
+        <item>Chine</item>
+        <item>Royaume-Uni</item>
+        <item>Italie</item>
+        <item>Espagne</item>
+        <item>Australie</item>
+    </string-array>
 
 </resources>
