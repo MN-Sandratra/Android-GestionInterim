@@ -34,6 +34,7 @@ app.use(function (req, res, next) {
   next();
 });
 
+
 app.use('/api/jobseekers',JobSeekerRouter);
 app.use('/api/employers',EmployerRouter);
 app.use('/api/subscriptions',SubscriptionRouter);

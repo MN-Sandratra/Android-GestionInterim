@@ -7,8 +7,10 @@ import android.os.IBinder
 import androidx.annotation.RequiresApi
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Utilisateur
+import com.example.gestioninterim.models.UtilisateurInterimaire
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.BufferedReader
 import java.io.IOException
@@ -45,30 +47,36 @@ class InscriptionService : Service() {
 
     fun sendPostRequest(user: Utilisateur, type: String) {
         val client = OkHttpClient()
+        var cvName : String? = null
+        val multipartBodyBuilder = MultipartBody.Builder()
+            .setType(MultipartBody.FORM)
 
-        var requestBodyContent = ""
+        if(user is UtilisateurInterimaire)
+        {
+            cvName = user.cv
+        }
+
         user.let {
             it.javaClass.declaredFields.forEach { field ->
                 field.isAccessible = true
                 val propName = field.name
                 val propValue = field.get(user)
-                println("$propName = $propValue")
-                if (propValue != null && propValue.toString().isNotEmpty()) {
-                    requestBodyContent += "${URLEncoder.encode(propName, "UTF-8")}=${URLEncoder.encode(propValue.toString(), "UTF-8")}&"
+                if (propValue != null) {
+                    if (propValue is ByteArray && propName == "contenuCv") {
+                        val fileRequestBody = propValue.toRequestBody("application/pdf".toMediaTypeOrNull())
+                        multipartBodyBuilder.addFormDataPart(propName, cvName, fileRequestBody)
+                    } else {
+                        multipartBodyBuilder.addFormDataPart(propName, propValue.toString())
+                    }
                 }
             }
         }
-        // Remove the last '&' character
-        if (requestBodyContent.isNotEmpty()) {
-            requestBodyContent = requestBodyContent.substring(0, requestBodyContent.length - 1)
-        }
 
-        val mediaType = "application/x-www-form-urlencoded; charset=utf-8".toMediaType()
-        val body: RequestBody = requestBodyContent.toRequestBody(mediaType)
+        val multipartBody = multipartBodyBuilder.build()
 
         val request = Request.Builder()
             .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
-            .post(body)
+            .post(multipartBody)
             .build()
 
         client.newCall(request).enqueue(object : Callback {

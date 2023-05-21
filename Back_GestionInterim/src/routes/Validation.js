@@ -37,6 +37,7 @@ router.post('/validate', async (req, res) => {
       userType = "employers";
       user = employer;
     }
+    
 
     return res.status(200).json({ message: "Validation réussie", type: userType, user:user});
   } catch (err) {
