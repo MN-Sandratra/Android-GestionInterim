@@ -24,7 +24,7 @@ class FragmentAccueilInterimaire : Fragment() {
         val cardMessage=view.findViewById<MaterialCardView>(R.id.cardViewMessage);
 
         cardMessage.setOnClickListener {
-            val intent = Intent(context, ConversationListActivity::class.java)
+            val intent = Intent(requireContext(), ConversationListActivity::class.java)
             startActivity(intent)
         }
 

@@ -23,7 +23,7 @@
         <service android:name=".services.SuppresionCompteService"/>
 
         <activity
-            android:name=".ConversationListActivity"
+            android:name=".message.ConversationListActivity"
             android:exported="false" />
 
         <activity
