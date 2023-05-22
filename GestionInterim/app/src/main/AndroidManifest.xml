@@ -21,6 +21,7 @@
         <service android:name=".services.MissionEmployerService"/>
         <service android:name=".services.ProfilEmployerService"/>
         <service android:name=".services.SuppresionCompteService"/>
+        <service android:name=".services.CandidatureResultService"/>
 
         <activity
             android:name=".message.ConversationListActivity"

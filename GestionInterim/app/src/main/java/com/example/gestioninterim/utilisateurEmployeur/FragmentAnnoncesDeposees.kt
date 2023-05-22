@@ -52,7 +52,6 @@ class FragmentAnnoncesDeposees : Fragment(), FilterDialogCallbackEmployer{
         val jsonUser = sharedPreferences!!.getString("user", "")
         user = gson.fromJson(jsonUser, UtilisateurEmployeur::class.java)
 
-
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
         val moreFilter = view.findViewById<ImageButton>(R.id.imageButtonFiltres)
         val deleteFilter = view.findViewById<ImageButton>(R.id.imageButtonDeleteFilters)
