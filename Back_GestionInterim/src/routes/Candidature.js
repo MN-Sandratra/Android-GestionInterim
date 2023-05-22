@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
-const { Candidature } = require('../models/candidature');
-const jobSeeker = require('../models/jobSeeker');
+const Candidature = require('../models/candidature');
+const JobSeeker = require('../models/jobSeeker');
 
 const router = express.Router();
 
@@ -78,10 +78,18 @@ router.put('/:id', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, 
 
 router.post('/', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, res) => {
     try {
-      const { firstName, lastName, nationality, dateOfBirth, email } = req.body;
-      const { cv, lm } = req.files;
+      const { firstName, lastName, nationality, dateOfBirth, email, telephone } = req.body;
+      //const { cv, lm } = req.files;
   
-      const jobSeeker = await JobSeeker.findOne({ email: email });
+      let jobSeeker = null;
+
+      if(email){
+        jobSeeker = await JobSeeker.findOne({ email: email });
+      }
+
+      if(!jobSeeker && telephone){
+        jobSeeker = await JobSeeker.findOne({ telephone: telephone });
+      }
 
 
       const candidature = new Candidature({
@@ -92,6 +100,7 @@ router.post('/', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, re
         jobSeeker: jobSeeker.id
       });
   
+      /*
       if (cv && cv.length > 0) {
         candidature.cv = cv[0].path;
       }
@@ -99,7 +108,12 @@ router.post('/', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, re
       if (lm && lm.length > 0) {
         candidature.lm = lm[0].path;
       }
-  
+      */
+
+      candidature.cv = "./uploads/1684697357390CV_de_graphiste.pdf"
+      candidature.lm = "./uploads/1684697357390CV_de_graphiste.pdf"
+
+
       await candidature.save();
   
       res.json({ message: 'Nouvelle candidature créée avec succès' });

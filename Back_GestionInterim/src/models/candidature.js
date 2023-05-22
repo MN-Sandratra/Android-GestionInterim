@@ -28,10 +28,6 @@ const CandidatureSchema = new mongoose.Schema({
     },
     lm: {
         type: String
-    },
-    status: {
-        type: String,
-        required: true,
     }
 });
 
