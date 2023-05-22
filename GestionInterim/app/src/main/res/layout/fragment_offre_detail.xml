@@ -1,14 +1,191 @@
-<?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".utilisateurInterimaire.OffreDetail">
+    android:orientation="vertical"
+    android:padding="16dp">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/employeurTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_light" />
+
+            <TextView
+                android:id="@+id/intituleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/AdresseLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Adresse"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/villeTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@android:color/white" />
+
+                <TextView
+                    android:id="@+id/adresseTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@android:color/white" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/dateLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/dateDebutTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/dateFinTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/experienceLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Experience"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/experienceTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/descriptionLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Description"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/tauxHoraireLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Taux Horaire"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/tauxHoraireTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/disponibiliteLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Disponibilité"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/disponibiliteTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+            <TextView
+                android:id="@+id/etatLabelTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="État"
+                android:textStyle="bold"
+                android:textColor="@android:color/white"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/etatTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/white" />
+
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/postulerButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Postuler"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/white"
+        android:padding="12dp" />
+
+</LinearLayout>

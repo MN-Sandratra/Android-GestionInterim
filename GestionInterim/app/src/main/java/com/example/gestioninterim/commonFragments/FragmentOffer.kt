@@ -19,17 +19,12 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
-import android.content.ContentValues
-import android.util.Log
 import android.widget.ImageButton
 import android.widget.ProgressBar
-import android.widget.Toast
 import com.example.gestioninterim.adapter.*
-import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.models.OfferResult
-import com.example.gestioninterim.services.InscriptionService
-import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.example.gestioninterim.utilisateurInterimaire.OffreDetail
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import java.io.Serializable
@@ -74,6 +69,12 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
         offerAdapter = OfferAdapter { offer ->
             // Gestion des clics sur les éléments de la liste.
             // Remplacez ceci par le code souhaité pour gérer les clics.
+            val fragment = OffreDetail.newInstance(offer)
+            requireFragmentManager().beginTransaction()
+                .replace(R.id.containerInterimaireFragment, fragment)
+                .addToBackStack(null)
+                .commit()
+
         }
 
         recyclerView.apply {
