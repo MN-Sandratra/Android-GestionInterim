@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const etatsCandidaturesEnum = ['acceptée', 'en attente', 'refusée'];
+
 const candidatureOffreSchema = new mongoose.Schema({
   candidature: {
     type: mongoose.Schema.Types.ObjectId,
@@ -10,7 +12,12 @@ const candidatureOffreSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Offre',
     required: true
-  }
+  },
+  status: {
+    type: String,
+    enum: etatsCandidaturesEnum,
+    default:'en attente'
+}
 });
 
 module.exports = mongoose.model('CandidatureOffre', candidatureOffreSchema);
