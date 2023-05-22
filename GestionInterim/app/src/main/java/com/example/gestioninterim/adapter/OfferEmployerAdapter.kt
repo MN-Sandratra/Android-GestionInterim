@@ -13,15 +13,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.gestioninterim.R
+import com.example.gestioninterim.models.OfferResult
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 
-class OfferEmployerAdapter(private val onClickListener: (Offer) -> Unit) :
+class OfferEmployerAdapter(private val onClickListener: (OfferResult) -> Unit) :
 
     RecyclerView.Adapter<OfferEmployerAdapter.OfferViewHolder>() {
 
-    private var offers: List<Offer> = listOf()
+    private var offers: List<OfferResult> = listOf()
 
     inner class OfferViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val metierTextView: TextView = view.findViewById(R.id.offreMetier)
@@ -31,7 +32,7 @@ class OfferEmployerAdapter(private val onClickListener: (Offer) -> Unit) :
         val voirPlusTextView: TextView = view.findViewById(R.id.voirPlus)
         val readMoreImage: ImageView = view.findViewById(R.id.readMoreImage)
 
-        fun bind(offer: Offer) {
+        fun bind(offer: OfferResult) {
             metierTextView.text = offer.intitule
             lieuTextView.text = offer.ville
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
@@ -49,12 +50,12 @@ class OfferEmployerAdapter(private val onClickListener: (Offer) -> Unit) :
 
     }
 
-    fun updateOffers(newOffers: List<Offer>) {
+    fun updateOffers(newOffers: List<OfferResult>) {
         offers = newOffers
         notifyDataSetChanged()
     }
 
-    fun getOffers(): List<Offer> {
+    fun getOffers(): List<OfferResult> {
         return offers
     }
 

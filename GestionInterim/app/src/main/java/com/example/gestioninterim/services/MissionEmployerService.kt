@@ -8,6 +8,7 @@ import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.models.OfferEmployerDAO
+import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.resultEvent.AddOfferResultEvent
 import com.example.gestioninterim.resultEvent.OffersResultEmployerEvent
 import com.example.gestioninterim.resultEvent.OffersResultEvent
@@ -43,7 +44,7 @@ class MissionEmployerService : Service(){
         return START_STICKY
     }
 
-    fun sendGetRequestOffers(offersRequest : OfferEmployerDAO, callback: (offers: List<Offer>) -> Unit) {
+    fun sendGetRequestOffers(offersRequest : OfferEmployerDAO, callback: (offers: List<OfferResult>) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -82,8 +83,8 @@ class MissionEmployerService : Service(){
                         }
                         // Convert JSON response to a list of Offer objects
                         val gson = Gson()
-                        val offersType = object : TypeToken<List<Offer>>() {}.type
-                        val offers: List<Offer> = gson.fromJson(response.toString(), offersType)
+                        val offersType = object : TypeToken<List<OfferResult>>() {}.type
+                        val offers: List<OfferResult> = gson.fromJson(response.toString(), offersType)
                         callback(offers)
                     }
                 } else {

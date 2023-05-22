@@ -1,12 +1,15 @@
 package com.example.gestioninterim.services
 
 import android.app.Service
+import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
+import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.resultEvent.AddOfferResultEvent
 import com.example.gestioninterim.resultEvent.OffersResultEvent
 import com.google.gson.Gson
@@ -33,6 +36,8 @@ class OffresService : Service() {
 
         val isOffer = intent!!.getBooleanExtra("isOffer", false)
 
+        println("JE SUIS LAAAAA")
+        Log.d(TAG, "onStartCommand: LALALAALAL")        
         if(isOffer){
             offer = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent!!.getSerializableExtra("offerRequest", Offer::class.java) as Offer
@@ -63,7 +68,7 @@ class OffresService : Service() {
         return START_STICKY
     }
 
-    fun sendGetRequestOffers(offersRequest : OfferDAO, callback: (offers: List<Offer>) -> Unit) {
+    fun sendGetRequestOffers(offersRequest : OfferDAO, callback: (offers: List<OfferResult>) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -105,8 +110,8 @@ class OffresService : Service() {
                         }
                         // Convert JSON response to a list of Offer objects
                         val gson = Gson()
-                        val offersType = object : TypeToken<List<Offer>>() {}.type
-                        val offers: List<Offer> = gson.fromJson(response.toString(), offersType)
+                        val offersType = object : TypeToken<List<OfferResult>>() {}.type
+                        val offers: List<OfferResult> = gson.fromJson(response.toString(), offersType)
                         callback(offers)
                     }
                 } else {
