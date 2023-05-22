@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const CandidatureSchema = new mongoose.Schema({
+    identifiant: {
+        type : String
+    },
     jobSeeker: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'JobSeeker',
@@ -29,6 +32,12 @@ const CandidatureSchema = new mongoose.Schema({
     lm: {
         type: String
     }
+});
+
+CandidatureSchema.pre('save', function(next) {
+    // Affecter l'ID généré par Mongoose à la propriété identifiant avant de sauvegarder le document
+    this.identifiant = this._id;
+    next();
 });
 
 module.exports = mongoose.model('Candidature', CandidatureSchema);

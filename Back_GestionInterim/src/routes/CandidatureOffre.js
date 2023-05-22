@@ -1,5 +1,11 @@
 const express = require('express');
-const { CandidatureOffre } = require('../models/candidatureOffre');
+
+const Offer = require('../models/offer');
+const CandidatureOffre = require('../models/candidatureOffre'); 
+const Employer = require('../models/employer'); 
+const JobSeeker = require('../models/jobSeeker'); 
+
+
 
 const router = express.Router();
 
@@ -27,6 +33,42 @@ router.get('/', async (req, res) => {
   try {
     const associations = await CandidatureOffre.find().populate('candidature offre');
     res.json(associations);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur est survenue lors de la récupération des associations candidature-offre' });
+  }
+});
+// Candidature - Offre pour un employeur spécifique
+router.get('/employers', async (req, res) => {
+  try {
+    const { email } = req.query; 
+
+    const employer = await Employer.findOne({ email1: email });
+
+    if (!employer) {
+        return res.status(404).json({ message: 'Employeur non trouvé.' });
+    }
+
+    const offers = await Offer.find({ employeur: employer._id });
+    const offerIds = offers.map(offer => offer._id);
+
+    const candidatureOffres = await CandidatureOffre.find({ 
+      offre: { $in: offerIds } 
+    }).populate('candidature').populate('offre');
+
+    const enrichedCandidatureOffres = await Promise.all(candidatureOffres.map(async (candidatureOffre) => {
+      const jobSeeker = await JobSeeker.findById(candidatureOffre.candidature.jobSeeker);
+      return {
+        ...candidatureOffre._doc,
+        candidature: {
+          ...candidatureOffre.candidature._doc,
+          email: jobSeeker.email,
+          phoneNumber: jobSeeker.phoneNumber
+        }
+      };
+    }));
+
+    res.json(enrichedCandidatureOffres);
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Une erreur est survenue lors de la récupération des associations candidature-offre' });

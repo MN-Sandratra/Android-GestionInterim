@@ -10,7 +10,7 @@ const candidatureOffreSchema = new mongoose.Schema({
   },
   offre: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Offre',
+    ref: 'Offer',
     required: true
   },
   status: {
