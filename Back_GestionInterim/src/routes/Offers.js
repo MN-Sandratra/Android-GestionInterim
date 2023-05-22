@@ -104,8 +104,7 @@ router.get('/employers', async (req, res) => {
           continue;
         }
       }
-      
-
+    
       filteredOffers.push(offer);
     }
 

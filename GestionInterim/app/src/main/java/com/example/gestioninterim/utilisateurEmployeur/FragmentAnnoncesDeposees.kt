@@ -15,6 +15,7 @@ import com.example.gestioninterim.adapter.*
 import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.models.OfferEmployerDAO
+import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.models.UtilisateurEmployeur
 import com.example.gestioninterim.resultEvent.OffersResultEmployerEvent
 import com.example.gestioninterim.resultEvent.OffersResultEvent
@@ -34,7 +35,7 @@ class FragmentAnnoncesDeposees : Fragment(), FilterDialogCallbackEmployer{
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var offerAdapter: OfferEmployerAdapter
-    private lateinit var listOffers: List<Offer>
+    private lateinit var listOffers: List<OfferResult>
     private lateinit var inputMetier : TextInputEditText
     private var filterMetier: String = ""
     private var filterDateDebut: String = ""

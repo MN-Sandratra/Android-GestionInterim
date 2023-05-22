@@ -19,12 +19,15 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
+import android.content.ContentValues
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ProgressBar
 import android.widget.Toast
 import com.example.gestioninterim.adapter.*
 import com.example.gestioninterim.models.Offer
 import com.example.gestioninterim.models.OfferDAO
+import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.services.InscriptionService
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
@@ -38,7 +41,7 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     private val locationRequestCode = 1000
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var progressBar: ProgressBar
-    private lateinit var listOffers: List<Offer>
+    private lateinit var listOffers: List<OfferResult>
     private lateinit var latitude : String
     private lateinit var longitude : String
 
@@ -95,7 +98,6 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
                 getOffersByJob(inputMetier.text.toString(), listOffers)
             }
         }
-
         // Listener du bouton d'ajout de filtres
         moreFilter.setOnClickListener{
             FilterPopup(requireContext(), this, filterVille, filterDateDebut, filterDateFin, filterRayon).show()
@@ -105,7 +107,7 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     }
 
     // Fonction qui permet la sélection uniquement des offres correspondant au métier "job"
-    private fun getOffersByJob(job : String, offerList : List<Offer>) {
+    private fun getOffersByJob(job : String, offerList : List<OfferResult>) {
         val offersResult = offerList.filter { offer -> offer.intitule.contains(job) }
         offerAdapter.updateOffers(offersResult)
     }
@@ -162,12 +164,12 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
                 latitude = "48.85"
                 longitude = "2.34"
             }
+        }.addOnCompleteListener {
             launchServiceOffers(latitude, longitude)
         }
     }
 
     fun launchServiceOffers(latitude: String, longitude: String) {
-
         val offerRequest = OfferDAO(latitude = latitude, longitude = longitude)
         val intent = Intent(requireContext(), OffresService::class.java)
         intent.putExtra("offerRequest", offerRequest as Serializable)
@@ -185,7 +187,6 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetOffersResult(event: OffersResultEvent) {
-
         offerAdapter.updateOffers(event.offres)
         listOffers = event.offres
     }
