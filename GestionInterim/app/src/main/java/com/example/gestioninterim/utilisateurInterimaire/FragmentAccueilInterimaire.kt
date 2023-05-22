@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
+import com.example.gestioninterim.commonFragments.FragmentOffer
 import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.message.ConversationListActivity
+import com.example.gestioninterim.utilisateurAnonyme.FragmentSearchAnonyme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
@@ -29,8 +31,8 @@ class FragmentAccueilInterimaire : Fragment() {
         }
 
 
-//        val parentActivity = activity as MainInterimaireActivity
-//        val navigationView = parentActivity.findViewById<BottomNavigationView>(R.id.navigation_anonyme)
+        val parentActivity = activity as MainInterimaireActivity
+        val navigationView = parentActivity.findViewById<BottomNavigationView>(R.id.navigation_interimaire)
 
 //        cardViewAccueil.setOnClickListener{
 //            val intent = Intent(requireContext(), LoginActivity::class.java)
@@ -38,11 +40,11 @@ class FragmentAccueilInterimaire : Fragment() {
 //            navigationView.selectedItemId = R.id.profil_page
 //        }
 //
-//        cardViewSearch.setOnClickListener{
-//            val fragment = FragmentSearchAnonyme()
-//            parentActivity.loadFragment(fragment, R.string.sub_title_search)
-//            navigationView.selectedItemId = R.id.search_page
-//        }
+        cardViewSearch.setOnClickListener{
+            val fragment = FragmentOffer()
+            parentActivity.loadFragment(fragment, R.string.sub_title_search)
+            navigationView.selectedItemId = R.id.search_page
+        }
 
         return view
     }
