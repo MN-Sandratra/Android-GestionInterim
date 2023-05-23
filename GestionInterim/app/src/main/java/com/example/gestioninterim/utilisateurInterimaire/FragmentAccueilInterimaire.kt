@@ -39,7 +39,7 @@ class FragmentAccueilInterimaire : Fragment() {
 //
         cardViewSearch.setOnClickListener{
             val fragment = FragmentOffer()
-            parentActivity.loadFragment(fragment, "Recherchez des offres parmis des centaines !")
+            parentActivity.loadFragment(fragment, R.string.sub_title_search)
             navigationView.selectedItemId = R.id.search_page
         }
 

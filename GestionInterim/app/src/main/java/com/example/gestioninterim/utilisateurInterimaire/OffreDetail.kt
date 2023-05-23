@@ -60,7 +60,7 @@ class OffreDetail : Fragment() {
         // Gestion du clic sur le bouton "Postuler"
         postulerButton.setOnClickListener {
             val fragment = CandidatureFormFragment()
-            parentActivity.loadFragment(fragment, "Postuler pour une offre")
+            parentActivity.loadFragment(fragment, R.string.postule_offres)
             navigationView.selectedItemId = R.id.search_page }
 
         return view

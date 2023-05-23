@@ -76,10 +76,9 @@ router.put('/:id', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, 
   }
 });
 
-router.post('/', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, res) => {
+router.post('/', upload.fields([{ name: 'contenuCv' }, { name: 'contenuLm' }]), async (req, res) => {
     try {
-      const { firstName, lastName, nationality, dateOfBirth, email, telephone } = req.body;
-      //const { cv, lm } = req.files;
+      const { firstName, lastName, nationality, dateOfBirth, email, telephone, cv, lm } = req.body;
   
       let jobSeeker = null;
 
@@ -100,18 +99,18 @@ router.post('/', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, re
         jobSeeker: jobSeeker.id
       });
   
-      /*
+      
       if (cv && cv.length > 0) {
-        candidature.cv = cv[0].path;
+        candidature.cv = cv;
       }
   
       if (lm && lm.length > 0) {
-        candidature.lm = lm[0].path;
+        candidature.lm = lm;
       }
-      */
+      
 
-      candidature.cv = "./uploads/1684697357390CV_de_graphiste.pdf"
-      candidature.lm = "./uploads/1684697357390CV_de_graphiste.pdf"
+     // candidature.cv = "./uploads/1684697357390CV_de_graphiste.pdf"
+      // candidature.lm = "./uploads/1684697357390CV_de_graphiste.pdf"
 
 
       await candidature.save();

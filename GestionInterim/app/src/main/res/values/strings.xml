@@ -113,7 +113,8 @@
     <string name="bottom_missions_item">Missions</string>
     <string name="bottom_candidatures_item">Candidatures</string>
     <string name="bottom_profil_item">Profil</string>
-
+    <string name="sub_title_consult_missions">Consultez vos missions</string>
+    <string name="postule_offres">Postulez pour une offre !</string>
 
     <!-- UTILISATEUR EMPLOYEUR -->
     <string name="accueil_suppression_profil">Supprimer le compte</string>
@@ -146,7 +147,6 @@
     <string name="top_menu_consult_missions_validées">Missions validées</string>
     <string name="voirCandidatures">Voir candidature</string>
     <string name="nameEmployer">Nom employeur</string>
-    =
     <string name="nameService">Nom service</string>
     <string name="nameSousService">Nom sous-service</string>
     <string name="numeroEntite">Numéro national de l\'entité dépositaire</string>

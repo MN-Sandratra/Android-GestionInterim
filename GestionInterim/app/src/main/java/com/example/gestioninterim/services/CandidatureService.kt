@@ -4,55 +4,65 @@ import android.app.Service
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.*
+import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
+import com.example.gestioninterim.resultEvent.ValidationBooleanEvent
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.greenrobot.eventbus.EventBus
 import java.io.File
 import java.io.IOException
 
 class CandidatureService : Service() {
 
-    var candidature : CandidatureToSend? = null
 
     override fun onBind(p0: Intent?): IBinder? {
         return null
     }
 
+    var candidature : CandidatureToSend? = null
+
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        println("On commence ohhh")
+
         candidature = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent?.getSerializableExtra("candidature", CandidatureToSend::class.java)
         } else {
-            @Suppress("DEPRECATION") intent?.getSerializableExtra("candidature") as CandidatureToSend
+            @Suppress("DEPRECATION") intent?.getSerializableExtra("candidature") as CandidatureToSend?
         }
 
-        val type = intent!!.getStringExtra("type")
-
-        candidature?.let { sendPostRequest(it, type!!) }
+        sendPostRequestCandidature(candidature!!) { validation ->
+            val event = ValidationBooleanEvent(validation)
+            EventBus.getDefault().post(event)
+        }
 
         return START_STICKY
     }
 
-    private fun sendPostRequest(candidature: CandidatureToSend, type: String?) {
+    private fun sendPostRequestCandidature(candidature: CandidatureToSend, callback: (validation: Boolean) -> Unit) {
         println("candidatures service")
-        val cvFile = File(candidature.cv)
-        val lmFile = File(candidature.lm)
+
         val client = OkHttpClient()
 
+        Log.d("Affichage", "====> $candidature")
         val requestBodyBuilder = MultipartBody.Builder().setType(MultipartBody.FORM)
+
         candidature.javaClass.declaredFields.forEach { field ->
             field.isAccessible = true
             val propName = field.name
             val propValue = field.get(candidature)
-            if (propValue != null && propValue.toString().isNotEmpty()) {
-                if (propName == "cv" || propName == "lm") {
-                    val file = if (propName == "cv") cvFile else lmFile
-                    val fileRequestBody = file.asRequestBody("application/octet-stream".toMediaTypeOrNull())
-                    requestBodyBuilder.addFormDataPart(propName, file.name, fileRequestBody)
+
+            if (propValue != null) {
+                if (propName == "contenuCv" || propName == "contenuLm") {
+                    val byteArray = propValue as ByteArray
+                    val filename = if (propName == "contenuCv") candidature.cv else candidature.lm
+                    val fileRequestBody = byteArray.toRequestBody("application/octet-stream".toMediaTypeOrNull())
+                    requestBodyBuilder.addFormDataPart(propName, filename, fileRequestBody)
                 } else {
                     requestBodyBuilder.addFormDataPart(propName, propValue.toString())
                 }
@@ -62,13 +72,14 @@ class CandidatureService : Service() {
         val requestBody = requestBodyBuilder.build()
 
         val request = Request.Builder()
-            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
+            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatures")
             .post(requestBody)
             .build()
 
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()
+                callback(false)
             }
 
             @Throws(IOException::class)
@@ -80,8 +91,10 @@ class CandidatureService : Service() {
                     response.body?.string()?.let { responseBody ->
                         println("Response : $responseBody")
                     }
+                    callback(true)
                 } else {
                     println("Request failed with response code ${response.code}")
+                    callback(false)
                 }
             }
         })

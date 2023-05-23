@@ -9,6 +9,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.FileUtils
 import android.provider.OpenableColumns
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -22,27 +23,22 @@ import com.example.gestioninterim.R
 import com.example.gestioninterim.inscription.FragmentValidationInscription
 import com.example.gestioninterim.models.CandidatureToSend
 import com.example.gestioninterim.models.UtilisateurInterimaire
+import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
+import com.example.gestioninterim.resultEvent.ValidationBooleanEvent
 import com.example.gestioninterim.services.CandidatureService
+import com.example.gestioninterim.utilisateurEmployeur.MainEmployeurActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.io.Serializable
 import java.text.SimpleDateFormat
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [CandidatureFormFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class CandidatureFormFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var selectedFileUri: Uri? = null
+
     private var lmFilePath: String? = null
     private var cvFilePath: String? = null
     private lateinit var user : UtilisateurInterimaire
@@ -67,7 +63,6 @@ class CandidatureFormFragment : Fragment() {
         val getLm = view.findViewById<TextInputLayout>(R.id.inscriptionInterimaireLm)
         val nomLm = view.findViewById<TextInputEditText>(R.id.inputLm)
 
-
         // Définition du bouton de validation
         val buttonValidate = view.findViewById<MaterialButton>(R.id.buttonValidationInscription)
 
@@ -83,6 +78,7 @@ class CandidatureFormFragment : Fragment() {
         val jsonUser = sharedPreferences!!.getString("user", "")
         user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
 
+        Log.d("Affichage", "====> ${user.email}")
 
         // Définition de l'URI du CV
         var selectedFileUri: Uri? = null
@@ -90,7 +86,7 @@ class CandidatureFormFragment : Fragment() {
 
         // Adapter pour la sélection des pays
         val nationalities = resources.getStringArray(R.array.nationalities)
-        val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, nationalities)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, nationalities)
         val autoCompleteTextView = view.findViewById<AutoCompleteTextView>(R.id.inputNationnalite)
         autoCompleteTextView.setAdapter(adapter)
 
@@ -113,7 +109,7 @@ class CandidatureFormFragment : Fragment() {
                         val nameIndex: Int = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
                         if (c.moveToFirst()) {
                             val name: String = c.getString(nameIndex)
-                            var cvFilePath = name.replace(" ", "_")
+                            cvFilePath = name.replace(" ", "_")
                             nomCv.setText(name)
                             getCv.setEndIconDrawable(R.drawable.ic_delete)
                         }
@@ -216,7 +212,7 @@ class CandidatureFormFragment : Fragment() {
                 var cvByteArraylm: ByteArray? = null
                 selectedFileUriLm?.let {
                     val inputStream = requireContext().contentResolver.openInputStream(it)
-                    cvByteArray = inputStream?.readBytes()
+                    cvByteArraylm = inputStream?.readBytes()
                 }
 
                 val candidat = CandidatureToSend(
@@ -232,8 +228,6 @@ class CandidatureFormFragment : Fragment() {
                 )
 
                 launchServiceCandidater(candidat)
-
-                Toast.makeText(requireContext(), "Candidature enregistrer", Toast.LENGTH_SHORT).show()
 
             }
             else {
@@ -255,8 +249,27 @@ class CandidatureFormFragment : Fragment() {
     fun launchServiceCandidater(candidat : CandidatureToSend){
         val intent = Intent(requireContext(), CandidatureService::class.java)
         intent.putExtra("candidature", candidat as Serializable)
-        intent.putExtra("type", "candidatures")
         requireActivity().startService(intent)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPostCandidatureResult(event: ValidationBooleanEvent) {
+        if(event.validateRequest){
+            Toast.makeText(requireContext(), "Candidature enregistrée", Toast.LENGTH_SHORT).show()
+        }
+        else{
+            Toast.makeText(requireContext(), "Erreur lors de l'enregistrement de la candidature", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
