@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import androidx.annotation.RequiresApi
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.*
 import okhttp3.*
@@ -20,7 +21,9 @@ class CandidatureService : Service() {
         return null
     }
 
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        println("On commence ohhh")
         candidature = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent?.getSerializableExtra("candidature", CandidatureToSend::class.java)
         } else {
@@ -35,6 +38,7 @@ class CandidatureService : Service() {
     }
 
     private fun sendPostRequest(candidature: CandidatureToSend, type: String?) {
+        println("candidatures service")
         val cvFile = File(candidature.cv)
         val lmFile = File(candidature.lm)
         val client = OkHttpClient()

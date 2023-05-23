@@ -76,6 +76,14 @@ class CandidatureFormFragment : Fragment() {
         val inputPrenom = view.findViewById<TextInputEditText>(R.id.inputTextPrenom)
         val inputDateNaissance = view.findViewById<TextInputEditText>(R.id.inputDateNaissance)
 
+
+
+        val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val jsonUser = sharedPreferences!!.getString("user", "")
+        user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
+
+
         // Définition de l'URI du CV
         var selectedFileUri: Uri? = null
         var selectedFileUriLm: Uri? = null
@@ -85,6 +93,11 @@ class CandidatureFormFragment : Fragment() {
         val adapter = ArrayAdapter<String>(requireContext(), android.R.layout.simple_list_item_1, nationalities)
         val autoCompleteTextView = view.findViewById<AutoCompleteTextView>(R.id.inputNationnalite)
         autoCompleteTextView.setAdapter(adapter)
+
+        inputNom.setText(user.lastName)
+        inputPrenom.setText(user.firstName)
+        inputDateNaissance.setText(user.dateOfBirth)
+
 
         // Explorateur de fichier
         val myCvLauncher = registerForActivityResult(
@@ -173,12 +186,10 @@ class CandidatureFormFragment : Fragment() {
             }
         }
 
-
-
         // Listener du bouton de validation
         buttonValidate.setOnClickListener{
             // Vérification que chaque input soit remplis
-            val allInputsFilled = listOf(inputNom, inputPrenom).all {
+            val allInputsFilled = listOf(inputNom, inputPrenom,inputDateNaissance).all {
                 it.text?.isNotEmpty() == true
             }
 
@@ -208,16 +219,8 @@ class CandidatureFormFragment : Fragment() {
                     cvByteArray = inputStream?.readBytes()
                 }
 
-                val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
-                val gson = Gson()
-                val jsonUser = sharedPreferences!!.getString("user", "")
-                user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
-
-                //comment recuperer mon id
-
-
                 val candidat = CandidatureToSend(
-                    "",
+                    user.email,
                     inputPrenom.text.toString(),
                     inputNom.text.toString(),
                     inputNationalite.toString(),
@@ -230,14 +233,7 @@ class CandidatureFormFragment : Fragment() {
 
                 launchServiceCandidater(candidat)
 
-                val fragment = FragmentValidationInscription()
-
-                val args = Bundle()
-
-                fragment.arguments = args
-
-                val fragmentManager = requireActivity().supportFragmentManager
-                fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
+                Toast.makeText(requireContext(), "Candidature enregistrer", Toast.LENGTH_SHORT).show()
 
             }
             else {
@@ -249,16 +245,16 @@ class CandidatureFormFragment : Fragment() {
         return view
     }
 
-    private fun selectFile(requestCode: ActivityResultLauncher<Intent>) {
+    private fun selectFile(launcher: ActivityResultLauncher<Intent>) {
         val intent = Intent(Intent.ACTION_OPEN_DOCUMENT)
         intent.addCategory(Intent.CATEGORY_OPENABLE)
         intent.type = "application/pdf"
-        //startActivityForResult(intent, requestCode)
+        launcher.launch(intent)
     }
 
     fun launchServiceCandidater(candidat : CandidatureToSend){
         val intent = Intent(requireContext(), CandidatureService::class.java)
-        intent.putExtra("candidat", candidat as Serializable)
+        intent.putExtra("candidature", candidat as Serializable)
         intent.putExtra("type", "candidatures")
         requireActivity().startService(intent)
     }

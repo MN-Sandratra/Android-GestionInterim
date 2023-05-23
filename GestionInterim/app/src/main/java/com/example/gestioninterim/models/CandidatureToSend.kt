@@ -6,7 +6,7 @@ import java.io.Serializable
 import java.util.*
 
 data class CandidatureToSend (
-    @Expose var jobSeeker : String?,
+    @Expose var email : String?,
     @Expose val firstName: String,
     @Expose val lastName: String,
     @Expose val nationality: String? = null,

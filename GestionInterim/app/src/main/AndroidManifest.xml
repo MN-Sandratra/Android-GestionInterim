@@ -22,7 +22,7 @@
         <service android:name=".services.ProfilEmployerService"/>
         <service android:name=".services.SuppresionCompteService"/>
         <service android:name=".services.CandidatureResultService"/>
-
+        <service android:name=".services.CandidatureService"/>
         <activity
             android:name=".message.ConversationListActivity"
             android:exported="false" />
