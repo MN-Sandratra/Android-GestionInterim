@@ -193,6 +193,8 @@
     <string name="abonnementDateExpiration">Date d\'expiration (obligatoire)</string>
     <string name="abonnementCvv">Cryptogramme visuel (obligatoire)</string>
     <string name="metierFilter">Saisissez un métier</string>
+    <string name="inscriptionInterimaireLm">Lettre de motivation</string>
+    <string name="candidatureInterimaire">Veuillez remplir le formulaire ci dessous pour postuler à cette offre</string>
     <string-array name="nationalities">
         <item>France</item>
         <item>Allemagne</item>

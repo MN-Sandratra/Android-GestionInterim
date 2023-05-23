@@ -1,13 +1,11 @@
 package com.example.gestioninterim.utilisateurInterimaire;
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.gestioninterim.R
-import com.example.gestioninterim.inscription.FragmentChooseInscription
 import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.utilisateurAnonyme.FragmentAccueilAnonyme
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -21,7 +19,7 @@ class MainInterimaireActivity : AppCompatActivity() {
         setContentView(R.layout.activity_interimaire)
 
         val fragment = FragmentAccueilInterimaire()
-        loadFragment(fragment, R.string.sub_title_accueil)
+        loadFragment(fragment, "Mon Accueil")
 
 //        val navigationView = findViewById<BottomNavigationView>(R.id.navigation_anonyme)
 
@@ -49,9 +47,9 @@ class MainInterimaireActivity : AppCompatActivity() {
 
     }
 
-    fun loadFragment(fragment : Fragment, string: Int){
+    fun loadFragment(fragment: Fragment, string: String){
 
-        findViewById<TextView>(R.id.subtitle).text = resources.getString(string)
+        findViewById<TextView>(R.id.subtitle).text = string
         fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager!!.beginTransaction()
         fragmentTransaction.replace(R.id.containerInterimaireFragment, fragment)

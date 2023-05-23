@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.gestioninterim.R
 import com.example.gestioninterim.models.OfferResult
+import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class OffreDetail : Fragment() {
 
@@ -52,10 +53,15 @@ class OffreDetail : Fragment() {
         disponibiliteTextView.text = offer.disponibilite.toString()
         etatTextView.text = offer.etat
 
+        val parentActivity = activity as MainInterimaireActivity
+        val navigationView = parentActivity.findViewById<BottomNavigationView>(R.id.navigation_interimaire)
+
+
         // Gestion du clic sur le bouton "Postuler"
         postulerButton.setOnClickListener {
-            // Ajoutez le code pour gérer l'action de postuler à l'offre ici
-        }
+            val fragment = CandidatureFormFragment()
+            parentActivity.loadFragment(fragment, "Postuler pour une offre")
+            navigationView.selectedItemId = R.id.search_page }
 
         return view
     }

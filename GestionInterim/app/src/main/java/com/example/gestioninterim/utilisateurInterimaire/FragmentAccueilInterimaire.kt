@@ -5,13 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
 import com.example.gestioninterim.commonFragments.FragmentOffer
-import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.message.ConversationListActivity
-import com.example.gestioninterim.utilisateurAnonyme.FragmentSearchAnonyme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
 
@@ -42,7 +39,7 @@ class FragmentAccueilInterimaire : Fragment() {
 //
         cardViewSearch.setOnClickListener{
             val fragment = FragmentOffer()
-            parentActivity.loadFragment(fragment, R.string.sub_title_search)
+            parentActivity.loadFragment(fragment, "Recherchez des offres parmis des centaines !")
             navigationView.selectedItemId = R.id.search_page
         }
 
