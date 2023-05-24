@@ -3,6 +3,7 @@ package com.example.gestioninterim.inscription
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
@@ -162,6 +163,10 @@ class FragmentInterimaireInscription : Fragment() {
 
         }
 
+        inputDateNaissance.setOnClickListener {
+            showDatePicker(inputDateNaissance)
+        }
+
         // Listener du bouton de validation
         buttonValidate.setOnClickListener{
 
@@ -178,7 +183,6 @@ class FragmentInterimaireInscription : Fragment() {
 
             if (allInputsFilled) {
 
-                val inputDate : String? = inputDateNaissance?.text?.toString()
                 val inputMailText: String? = inputMail?.text?.toString()
                 val inputTelephoneText: String? = inputTelephone?.text?.toString()
                 val inputNationalite : String? = autoCompleteTextView?.text?.toString()
@@ -187,14 +191,13 @@ class FragmentInterimaireInscription : Fragment() {
                 val inputPasswordEncrypt : String = hashPassword(inputMdp.text.toString())
 
 
-                val date: String? = if (!inputDate?.isEmpty()!!) {
-                    val originalDateFormat = SimpleDateFormat("dd/MM/yyyy")
-                    val parsedDate = originalDateFormat.parse(inputDate.toString())
-                    val newDateFormat = SimpleDateFormat("yyyy/MM/dd")
-                    newDateFormat.format(parsedDate)
-                } else {
-                    ""
-                }
+                val inputDateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val outputDateFormat = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+                val inputDate : String? = inputDateNaissance?.text?.toString()
+
+                val date = inputDateFormat.parse(inputDate)
+                val formattedDate = outputDateFormat.format(date)
 
                 var cvByteArray: ByteArray? = null
                 selectedFileUri?.let {
@@ -207,7 +210,7 @@ class FragmentInterimaireInscription : Fragment() {
                     inputPrenom.text.toString(),
                     inputNom.text.toString(),
                     inputNationalite,
-                    date,
+                    formattedDate,
                     inputTelephoneText,
                     inputMailText,
                     inputVilleText,
@@ -261,5 +264,22 @@ class FragmentInterimaireInscription : Fragment() {
         } catch (e: NoSuchAlgorithmException) {
             throw RuntimeException("Error hashing password", e)
         }
+    }
+
+    fun showDatePicker(textDate : TextInputEditText){
+        // Créez une instance de DatePickerDialog
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+                // Mettez à jour l'entrée de texte avec la date sélectionnée
+                textDate.setText(String.format("%02d/%02d/%04d", dayOfMonth, month + 1, year))
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        // Affichez le DatePickerDialog
+        datePickerDialog.show()
     }
 }

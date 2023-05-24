@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.gestioninterim.R
-import com.example.gestioninterim.commonFragments.FragmentOffer
+import com.example.gestioninterim.commonFragments.FragmentOfferAnonyme
 import com.example.gestioninterim.message.ConversationListActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.card.MaterialCardView
@@ -38,7 +38,7 @@ class FragmentAccueilInterimaire : Fragment() {
 //        }
 //
         cardViewSearch.setOnClickListener{
-            val fragment = FragmentOffer()
+            val fragment = FragmentOfferAnonyme()
             parentActivity.loadFragment(fragment, R.string.sub_title_search)
             navigationView.selectedItemId = R.id.search_page
         }

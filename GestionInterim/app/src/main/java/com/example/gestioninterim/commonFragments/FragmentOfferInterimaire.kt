@@ -19,17 +19,23 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
+import android.util.Log
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import com.example.gestioninterim.adapter.*
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.models.OfferResult
+import com.example.gestioninterim.utilisateurInterimaire.FragmentAddCandidature
+import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails
+import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.example.gestioninterim.utilisateurInterimaire.OffreDetail
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import com.google.gson.Gson
 import java.io.Serializable
 
-class FragmentOffer : Fragment(), FilterDialogCallback {
+class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
 
     private lateinit var offerAdapter: OfferAdapter
     private lateinit var recyclerView: RecyclerView
@@ -52,8 +58,7 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     private var filterDateDebut: String = ""
     private var filterDateFin: String = ""
     private var filterRayon: Int = 30
-
-
+    private lateinit var imageViewEmpty: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
@@ -63,18 +68,22 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
         inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
         val moreFilter = view.findViewById<ImageButton>(R.id.imageButtonFiltres)
+        imageViewEmpty = view.findViewById(R.id.imageViewEmpty)
 
         // Initialise le RecyclerView et l'adaptateur.
         recyclerView = view.findViewById(R.id.vertical_recycler_view_offres)
         offerAdapter = OfferAdapter { offer ->
-            // Gestion des clics sur les éléments de la liste.
-            // Remplacez ceci par le code souhaité pour gérer les clics.
-            val fragment = OffreDetail.newInstance(offer)
-            requireFragmentManager().beginTransaction()
-                .replace(R.id.containerInterimaireFragment, fragment)
-                .addToBackStack(null)
-                .commit()
+            val activity = activity
+            if (activity is MainInterimaireActivity) {
+                val gson = Gson()
+                val offerJson = gson.toJson(offer)
+                val fragment = FragmentOfferDetails()
+                val args = Bundle()
+                args.putString(FragmentOfferDetails.ARG_OFFER, offerJson)
+                fragment.arguments = args
 
+                activity.loadFragment(fragment, R.string.sub_title_consult_missions)
+            }
         }
 
         recyclerView.apply {
@@ -119,6 +128,7 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
+            Log.d("Debug","JE SUIS LA")
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -144,13 +154,15 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
     }
 
     private fun getLastKnownLocation() {
-
+        Log.d("Debug", "About to launch service with coordinates: $latitude, $longitude")
         if (ActivityCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             != PackageManager.PERMISSION_GRANTED
         ) {
+            Log.d("Debug","JE SUIS LA1")
             requestLocationPermission()
             return
         }
+        Log.d("Debug","JE SUIS LA2")
 
         fusedLocationClient.lastLocation.addOnSuccessListener { location ->
             if (location != null) {
@@ -166,11 +178,14 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
                 longitude = "2.34"
             }
         }.addOnCompleteListener {
+            Log.d("Debug","JE SUIS LA3")
             launchServiceOffers(latitude, longitude)
         }
+        launchServiceOffers(latitude, longitude)
     }
 
     fun launchServiceOffers(latitude: String, longitude: String) {
+        Log.d("Debug", "Launching service with coordinates: $latitude, $longitude")
         val offerRequest = OfferDAO(latitude = latitude, longitude = longitude)
         val intent = Intent(requireContext(), OffresService::class.java)
         intent.putExtra("offerRequest", offerRequest as Serializable)
@@ -181,15 +196,30 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
         EventBus.getDefault().register(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("Debug", "onResume called")
+        getLastKnownLocation()
+    }
+
     override fun onStop() {
         super.onStop()
         EventBus.getDefault().unregister(this)
+    }
+
+    private fun updateEmptyView() {
+        if (offerAdapter.itemCount == 0) {
+            imageViewEmpty.visibility = View.VISIBLE
+        } else {
+            imageViewEmpty.visibility = View.GONE
+        }
     }
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetOffersResult(event: OffersResultEvent) {
         offerAdapter.updateOffers(event.offres)
         listOffers = event.offres
+        updateEmptyView()
     }
 
     override fun onFiltersApplied(ville: String, dateDebut: String, dateFin: String, rayon: Int) {
@@ -204,5 +234,10 @@ class FragmentOffer : Fragment(), FilterDialogCallback {
         val intent = Intent(requireContext(), OffresService::class.java)
         intent.putExtra("offerRequest", offerRequest as Serializable)
         requireContext().startService(intent)
+    }
+
+    companion object {
+        const val ARG_OFFER = "arg_offer"
+        // Autres constantes et méthodes ici...
     }
 }

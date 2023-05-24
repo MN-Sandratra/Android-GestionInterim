@@ -92,7 +92,7 @@
     <string name="bottom_home_item">Accueil</string>
 
     <!-- UTILISATEUR ANONYME -->
-
+    <string name="bottom_search_item_job">Recherche</string>
     <string name="bottom_search_item">Trouver un job</string>
     <string name="bottom_connect_item">Se connecter</string>
     <string name="accueil_create_login_account">Créer un compte ou se connecter</string>
@@ -115,6 +115,15 @@
     <string name="bottom_profil_item">Profil</string>
     <string name="sub_title_consult_missions">Consultez vos missions</string>
     <string name="postule_offres">Postulez pour une offre !</string>
+    <string name="add_candidature">Ajouter une candidature !</string>
+    <string name="list_candidature">Voir mes candidatures crées !</string>
+    <string name="candidatures_envoyees">Candidatures envoyées</string>
+    <string name="candidatures_a_valider">Candidatures à valider</string>
+    <string name="candidatures_refusees">Candidatures refusées</string>
+    <string name="candidature_spontanée">Candidature spontanée</string>
+    <string name="offre_details">Détails de l\'offre</string>
+    <string name="offre_candidature">Candidater</string>
+
 
     <!-- UTILISATEUR EMPLOYEUR -->
     <string name="accueil_suppression_profil">Supprimer le compte</string>

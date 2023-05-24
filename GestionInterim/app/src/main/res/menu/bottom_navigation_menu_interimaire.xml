@@ -9,7 +9,7 @@
 
     <item
         android:id="@+id/search_page"
-        android:title="@string/bottom_search_item"
+        android:title="@string/bottom_search_item_job"
         android:icon="@drawable/ic_search"/>
 
     <item

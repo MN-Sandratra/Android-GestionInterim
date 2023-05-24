@@ -1,15 +1,12 @@
 package com.example.gestioninterim.utilisateurInterimaire;
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.gestioninterim.R
-import com.example.gestioninterim.commonFragments.FragmentOffer
-import com.example.gestioninterim.login.LoginActivity
-import com.example.gestioninterim.utilisateurAnonyme.FragmentAccueilAnonyme
+import com.example.gestioninterim.commonFragments.FragmentOfferAnonyme
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainInterimaireActivity : AppCompatActivity() {
@@ -34,17 +31,17 @@ class MainInterimaireActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.search_page -> {
-                    val fragment = FragmentOffer()
+                    val fragment = FragmentSearchInterimaire()
                     loadFragment(fragment, R.string.sub_title_search)
                     return@setOnItemSelectedListener true
                 }
                 R.id.missions_page -> {
-                    val fragment = FragmentOffer()
+                    val fragment = FragmentOfferAnonyme()
                     loadFragment(fragment, R.string.sub_title_search)
                     return@setOnItemSelectedListener true
                 }
                 R.id.candidatures_page -> {
-                    val fragment = CandidatureFormFragment()
+                    val fragment = FragmentCandidaturesInterimaire()
                     loadFragment(fragment, R.string.sub_title_consult_missions)
                     return@setOnItemSelectedListener true
                 }

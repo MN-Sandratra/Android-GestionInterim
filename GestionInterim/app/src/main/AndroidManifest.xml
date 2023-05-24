@@ -23,6 +23,10 @@
         <service android:name=".services.SuppresionCompteService"/>
         <service android:name=".services.CandidatureResultService"/>
         <service android:name=".services.CandidatureService"/>
+        <service android:name=".services.CandidatureJobSeekersResultService"/>
+        <service android:name=".services.SendCandidatureOfferService"/>
+        <service android:name=".services.SendCandidatureOfferBisService"/>
+
         <activity
             android:name=".message.ConversationListActivity"
             android:exported="false" />

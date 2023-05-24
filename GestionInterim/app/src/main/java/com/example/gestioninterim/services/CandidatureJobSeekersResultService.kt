@@ -5,21 +5,15 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import com.example.gestioninterim.BuildConfig
+import com.example.gestioninterim.models.Candidature
 import com.example.gestioninterim.models.CandidatureEmployerResult
 import com.example.gestioninterim.resultEvent.CandidaturesResultEvent
+import com.example.gestioninterim.resultEvent.CandidaturesResultInterimaireEvent
 import com.google.gson.Gson
-import com.google.gson.GsonBuilder
-import com.google.gson.JsonDeserializationContext
-import com.google.gson.JsonDeserializer
-import com.google.gson.JsonElement
 import com.google.gson.reflect.TypeToken
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
 import java.io.BufferedReader
 import java.io.InputStreamReader
-import java.lang.reflect.Type
 import java.net.HttpURLConnection
 import java.net.URL
 import java.net.URLEncoder
@@ -27,27 +21,22 @@ import java.util.concurrent.Executors
 
 
 
-class CandidatureResultService : Service() {
+class CandidatureJobSeekersResultService : Service() {
 
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
         val contact = intent!!.getStringExtra("contact")
-        val type = intent!!.getStringExtra("type")
 
-
-        sendGetRequestOffers(contact, type) { candidatures ->
-            val event = CandidaturesResultEvent(candidatures)
+        sendGetRequestOffers(contact) { candidatures ->
+            val event = CandidaturesResultInterimaireEvent(candidatures)
             EventBus.getDefault().post(event)
-            Log.d("CANDIDATURES", "affichage => $candidatures")
         }
-
-
 
         return START_STICKY
     }
 
-    fun sendGetRequestOffers(contact : String?, type : String?,  callback: (candidatures: List<CandidatureEmployerResult>) -> Unit) {
+    fun sendGetRequestOffers(contact : String?,  callback: (candidatures: List<Candidature>) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -62,7 +51,7 @@ class CandidatureResultService : Service() {
 
             val reqParam = reqParamBuilder.toString()
 
-            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatureOffres/$type/?$reqParam")
+            val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatures/jobseekers?$reqParam")
 
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET
@@ -79,8 +68,8 @@ class CandidatureResultService : Service() {
                         }
                         // Convert JSON response to a list of Offer objects
                         val gson = Gson()
-                        val offersType = object : TypeToken<List<CandidatureEmployerResult>>() {}.type
-                        val candidatures: List<CandidatureEmployerResult> = gson.fromJson(response.toString(), offersType)
+                        val offersType = object : TypeToken<List<Candidature>>() {}.type
+                        val candidatures: List<Candidature> = gson.fromJson(response.toString(), offersType)
                         callback(candidatures)
                     }
                 } else {

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestioninterim.R
-import com.example.gestioninterim.adapter.CandidatureEmployerResultAdapter
+import com.example.gestioninterim.adapter.CandidatureEmployerAdapter
 import com.example.gestioninterim.adapter.OfferDecorationItem
 import com.example.gestioninterim.adapter.OfferEmployerAdapter
 import com.example.gestioninterim.models.Candidature
@@ -33,7 +33,7 @@ import org.greenrobot.eventbus.ThreadMode
 class FragmentCandidaturesTraiterEmployer : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var candidaturesAdapter: CandidatureEmployerResultAdapter
+    private lateinit var candidaturesAdapter: CandidatureEmployerAdapter
     private lateinit var listCandidatures : List<CandidatureEmployerResult>
 
     private lateinit var user : UtilisateurEmployeur
@@ -52,7 +52,7 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
 
         // Initialise le RecyclerView et l'adaptateur.
         recyclerView = view.findViewById(R.id.vertical_recycler_view_offres)
-        candidaturesAdapter = CandidatureEmployerResultAdapter { candidature ->
+        candidaturesAdapter = CandidatureEmployerAdapter { candidature ->
             // Gestion des clics sur les éléments de la liste.
             // Remplacez ceci par le code souhaité pour gérer les clics.
         }
@@ -73,7 +73,8 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
 
     fun launchServiceCandidatures() {
         val intent = Intent(requireContext(), CandidatureResultService::class.java)
-        intent.putExtra("email", user.email1)
+        intent.putExtra("contact", user.email1)
+        intent.putExtra("type", "employers")
         requireContext().startService(intent)
     }
     override fun onStart() {

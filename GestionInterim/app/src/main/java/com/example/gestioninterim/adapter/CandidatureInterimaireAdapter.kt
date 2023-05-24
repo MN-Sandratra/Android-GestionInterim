@@ -12,8 +12,8 @@ import com.example.gestioninterim.models.CandidatureEmployerResult
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CandidatureEmployerAdapter(private val onClickListener: (CandidatureEmployerResult) -> Unit) :
-    RecyclerView.Adapter<CandidatureEmployerAdapter.CandidatureEmployerResultViewHolder>() {
+class CandidatureInterimaireAdapter(private val onClickListener: (CandidatureEmployerResult) -> Unit) :
+    RecyclerView.Adapter<CandidatureInterimaireAdapter.CandidatureEmployerResultViewHolder>() {
 
     private var candidatures: List<CandidatureEmployerResult> = listOf()
 
@@ -51,7 +51,7 @@ class CandidatureEmployerAdapter(private val onClickListener: (CandidatureEmploy
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CandidatureEmployerResultViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_vertical_candidature_employer, parent, false)
+            .inflate(R.layout.item_vertical_candidature_interimaire, parent, false)
         return CandidatureEmployerResultViewHolder(view)
     }
 

@@ -17,5 +17,7 @@ data class OfferResult (
     val disponibilite: Boolean,
     val etat: String,
     val ville: String,
-    val adressePostale: String
+    val adressePostale: String,
+    val latitude: Double,
+    val longitude: Double
 ) : Serializable
