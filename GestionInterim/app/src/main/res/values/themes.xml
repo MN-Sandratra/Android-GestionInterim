@@ -75,11 +75,6 @@
 
     </style>
 
-    <style name="AppTheme.TabLayout" parent="Widget.MaterialComponents.TabLayout">
-        <item name="android:background">@color/white</item>
-        <item name="colorPrimary">@color/orange</item>
-    </style>
-
     <style name="ShapeAppearanceOverlay.App.rounded" parent="">
         <item name="colorPrimary">@color/white</item>
         <item name="cornerFamily">rounded</item>

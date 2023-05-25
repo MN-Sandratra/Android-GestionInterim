@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">GestionInterim</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="skip">Passer</string>
 
     <!-- SLIDER -->
@@ -46,13 +45,11 @@
     <string name="agenceInterim">Agence d\'intérim</string>
     <string name="validez">Validez !</string>
     <string name="yesAccount">Vous avez déjà un compte ?</string>
-    <string name="connectezvousbis">Connectez-vous !</string>
     <string name="inscriptionLater">S\'inscrire plus tard</string>
     <string name="inscriptionMDP">Mot de passe : (obligatoire)</string>
     <string name="inscriptionConfirmationMDP">Confirmez votre mot de passe : (obligatoire)</string>
     <string name="inscriptionValidation">Veuillez renseignez le code de validation</string>
     <string name="inscriptionValidationResendCode">Vous n’avez pas recu le code?</string>
-    <string name="inscriptionValidationResendCodeClickHere">Cliquez ici pour renvoyer le code de validation</string>
 
     <!-- INSCRIPTION INTERIMAIRE -->
 
@@ -145,7 +142,6 @@
     <string name="top_menu_consult_annonces_deposees">Annonces déposées</string>
     <string name="top_menu_consult_candidatures_traiter">Candidatures à traiter</string>
     <string name="top_menu_consult_missions_validées">Missions validées</string>
-    <string name="voirCandidatures">Voir candidature</string>
     <string name="nameEmployer">Nom employeur</string>
     <string name="nameService">Nom service</string>
     <string name="nameSousService">Nom sous-service</string>
@@ -158,9 +154,6 @@
     <string name="phonePersonneContact2">Téléphone personne - contact 2</string>
     <string name="adresseProfilEmployeur">Adresse postale</string>
     <string name="villeProfilEmployeur">Ville</string>
-    <string name="websiteProfilEmployeur">Site web</string>
-    <string name="linkedinProfilEmployeur">Linkedin</string>
-    <string name="facebookProfilEmployeur">Facebook</string>
     <string name="profilUtilisateurTitle">Consultez votre profil utilisateur !</string>
     <string name="modifyButton">Modifiez !</string>
     <string name="infosEmployer">Vos informations personnelles :</string>
@@ -179,12 +172,10 @@
 
     <string name="abonnementConsult">Consultez nos abonnements</string>
     <string name="abonnementChoix">Choix de l\'abonnement</string>
-    <string name="abonnementPaiement">Paiement de votre abonnement</string>
     <string name="abonnementMoreDetails">Voir plus</string>
     <string name="conditionsUtilisations">Les conditions d’utilisation</string>
     <string name="conditionsUtilisation1">- Vous êtes responsable de la vérification que vous avez les droits nécessaires pour publier du contenu ou des offres d\'emploi sur notre plateforme.</string>
     <string name="conditionsUtilisation2">- Vous acceptez de ne pas utiliser notre service pour publier du contenu ou des offres d\'emploi illégaux ou frauduleux.</string>
-    <string name="conditionsUtilisation3">- Vous acceptez de ne pas utiliser notre service pour envoyer du spam ou des messages non sollicités.</string>
     <string name="conditionsDesabonnement">Les conditions de désabonnement</string>
     <string name="abonnementBouton">Souscription</string>
     <string name="abonnementPanier">Mon Panier</string>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- activity_message.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+  <!-- Toolbar -->
+  <androidx.appcompat.widget.Toolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="?attr/colorPrimary"
+      android:elevation="4dp"
+      android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
+
+  <!-- RecyclerView for displaying messages -->
+  <androidx.recyclerview.widget.RecyclerView
+      android:id="@+id/recyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:padding="8dp" />
+
+  <!-- Message input layout -->
+  <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="?android:attr/colorBackground"
+      android:padding="8dp">
+
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:padding="10dp"
+        android:hint="Aa"
+        android:layout_marginRight="4dp"
+        android:layout_gravity="bottom"
+        android:singleLine="true"
+        android:background="@drawable/edittext_background"
+        android:imeOptions="actionDone"
+        />
+
+    <Button
+        android:id="@+id/buttonSend"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/sends"
+        android:textColor="#ffffff" />
+  </LinearLayout>
+
+</LinearLayout>

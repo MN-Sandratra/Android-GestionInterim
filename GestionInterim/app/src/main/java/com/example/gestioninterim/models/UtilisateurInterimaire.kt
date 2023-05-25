@@ -6,6 +6,7 @@ import java.io.Serializable
 import java.util.Date
 
 data class UtilisateurInterimaire(
+    @Expose val _id:String,
     @Expose val firstName: String,
     @Expose val lastName: String,
     @Expose val nationality: String? = null,

@@ -88,7 +88,6 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetCandidaturesResult(event: CandidaturesResultEvent) {
-
         candidaturesAdapter.updateCandidatures(event.candidatures)
         listCandidatures = event.candidatures
         Log.d("CANDIDATURES", "list => ${listCandidatures[0].candidature.email}")

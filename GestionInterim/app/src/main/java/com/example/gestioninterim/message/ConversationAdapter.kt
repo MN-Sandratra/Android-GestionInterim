@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gestioninterim.R
+import com.example.gestioninterim.models.ListConversationDao
 
-class ConversationAdapter:RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>() {
-
-    private val conversations: List<Conversation> = mutableListOf() // Replace with your conversation data
+class ConversationAdapter(private val conversations: List<ListConversationDao>) : RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_conversation, parent, false)
@@ -26,17 +25,18 @@ class ConversationAdapter:RecyclerView.Adapter<ConversationAdapter.ConversationV
     }
 
     inner class ConversationViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val userNameTextView: TextView = itemView.findViewById(R.id.textViewUserName)
-        private val lastMessageTextView: TextView = itemView.findViewById(R.id.textViewLastMessage)
-        private val dateTextView: TextView = itemView.findViewById(R.id.textViewDate)
+        private val userNameTextView: TextView = itemView.findViewById(R.id.textName)
+        private val lastMessageTextView: TextView = itemView.findViewById(R.id.textMessage)
+        private val dateTextView: TextView = itemView.findViewById(R.id.textDate)
 
-        fun bind(conversation: Conversation) {
+        fun bind(conversation: ListConversationDao) {
             // Set the user name, last message, and date to the respective TextViews
             userNameTextView.text = conversation.userName
             lastMessageTextView.text = conversation.lastMessage
             dateTextView.text = conversation.date
-        }
+
+            }
     }
 }
 
-data class Conversation(val userName: String, val lastMessage: String, val date:String)
+

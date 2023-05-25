@@ -204,6 +204,7 @@ class FragmentInterimaireInscription : Fragment() {
 
 
                 val user = UtilisateurInterimaire(
+                    "",
                     inputPrenom.text.toString(),
                     inputNom.text.toString(),
                     inputNationalite,
