@@ -5,5 +5,6 @@ import java.util.*
 
 data class CandidatureEmployerResult (
     val candidature : Candidature,
-    val offre: OfferResult
+    val offre: OfferResult,
+    val status: String
 ) : Serializable

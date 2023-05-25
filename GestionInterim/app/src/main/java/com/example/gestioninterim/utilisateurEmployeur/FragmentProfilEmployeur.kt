@@ -223,11 +223,12 @@ class FragmentProfilEmployeur : Fragment() {
         val updatedUserJson = gson.toJson(event.employer)
         editor.putString("user", updatedUserJson)
         editor.apply()
+        Toast.makeText(requireContext(), "Profil mis à jour avec succès", Toast.LENGTH_SHORT).show()
     }
 
     fun launchServiceDeleteAccount() {
         val intent = Intent(requireContext(), SuppresionCompteService::class.java)
-        intent.putExtra("email", user.email1)
+        intent.putExtra("contact", user.email1)
         intent.putExtra("type", "employers")
         requireContext().startService(intent)
     }

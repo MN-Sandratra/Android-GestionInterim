@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const JobSeeker = require('../models/jobSeeker');
+const mongoose = require('mongoose');
+
 const multer=require('multer');
 const mailService = require('../services/Mail');
 
@@ -33,6 +35,12 @@ const upload = multer({
 router.post('/', upload.single('contenuCv'), async (req, res) => {
     const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
     try {
+
+        const existingJobSeeker = await JobSeeker.findOne({ email: req.body.email });
+        if (existingJobSeeker) {
+            return res.status(400).json({ message: "Un chercheur d'emploi avec cet email existe déjà" });
+        }
+
         const jobSeeker = new JobSeeker({
             firstName: req.body.firstName,
             lastName: req.body.lastName,
@@ -84,59 +92,94 @@ router.get('/:id', getJobSeeker, (req, res) => {
 });
 
 // Route pour mettre à jour un chercheur d'emploi spécifique
-router.put('/:id', getJobSeeker,upload.single('cv'), async (req, res) => {
-    console.log(req.body);
-    if (req.body.firstName != null) {
-        res.jobSeeker.firstName = req.body.firstName;
-    }
-    if (req.body.lastName != null) {
-        res.jobSeeker.lastName = req.body.lastName;
-    }
-    if (req.body.nationality != null) {
-        res.jobSeeker.nationality = req.body.nationality;
-    }
-    if (req.body.dateOfBirth != null) {
-        res.jobSeeker.dateOfBirth = req.body.dateOfBirth;
-    }
-    if (req.body.phoneNumber != null) {
-        res.jobSeeker.phoneNumber = req.body.phoneNumber;
-    }
-    if (req.body.email != null) {
-        res.jobSeeker.email = req.body.email;
-    }
-    if (req.body.city != null) {
-        res.jobSeeker.city = req.body.city;
-    }
-    if (req.file) {
-        res.jobSeeker.cv = req.file.path;
+router.put('/', upload.single('contenuCv'), async (req, res) => {    
+
+    let jobSeeker;
+    // Determine if contact is an email or a phone number
+    if (req.body.phoneNumber) {
+        jobSeeker = await JobSeeker.findOne({ phoneNumber: req.body.phoneNumber });
+    } 
+    
+    if(!jobSeeker){
+        jobSeeker = await JobSeeker.findOne({ email: req.body.email });
     }
 
+    if (!jobSeeker) {
+        return res.status(404).json({ message: 'Chercheur d\'emploi non trouvé' });
+    }
+
+    if (req.body.firstName != null) {
+        jobSeeker.firstName = req.body.firstName;
+    }
+    if (req.body.lastName != null) {
+        jobSeeker.lastName = req.body.lastName;
+    }
+    if (req.body.nationality != null) {
+        jobSeeker.nationality = req.body.nationality;
+    }
+    if (req.body.dateOfBirth != null) {
+        jobSeeker.dateOfBirth = req.body.dateOfBirth;
+    }
+    if (req.body.phoneNumber != null) {
+        jobSeeker.phoneNumber = req.body.phoneNumber;
+    }
+    if (req.body.email != null) {
+        jobSeeker.email = req.body.email;
+    }
+    if (req.body.city != null) {
+        jobSeeker.city = req.body.city;
+    }
+    if (req.file) {
+        jobSeeker.cv = req.file.path;
+    }
     if (req.body.comments != null) {
-        res.jobSeeker.comments = req.body.comments;
+        jobSeeker.comments = req.body.comments;
     }
     if (req.body.password != null) {
-        res.jobSeeker.password = req.body.password;
+        jobSeeker.password = req.body.password;
     }
     try {
-        const updatedJobSeeker = await res.jobSeeker.save();
+        const updatedJobSeeker = await jobSeeker.save();
         res.json(updatedJobSeeker);
     } catch (err) {
         res.status(400).json({ message: err.message });
     }
 });
 
-// Route pour supprimer un chercheur d'emploi spécifique
-router.delete('/:id', async (req, res) => {
+router.delete('/:contact', async (req, res) => {
     try {
-      const result = await JobSeeker.findByIdAndDelete(req.params.id);
-      if (!result) {
-        return res.status(404).json({ message: 'Chercheur d\'emploi non trouvé' });
-      }
-      res.json({ message: 'Chercheur d\'emploi supprimé' });
+        let jobSeeker;
+
+        // Determine if contact is an email or a phone number
+        if (req.params.contact.includes('@')) {
+            // It's an email
+            jobSeeker = await JobSeeker.findOne({ email: req.params.contact });
+        } else {
+            // It's a phone number
+            jobSeeker = await JobSeeker.findOne({ phoneNumber: req.params.contact });
+        }
+
+        if (!jobSeeker) {
+            return res.status(404).json({ message: 'Job seeker not found' });
+        }
+
+        const jobSeekerId = jobSeeker._id;
+
+        // Deleting associated Candidature and CandidatureOffre
+        const candidatures = await mongoose.model('Candidature').find({ jobSeeker: jobSeekerId });
+        await mongoose.model('Candidature').deleteMany({ jobSeeker: jobSeekerId });
+
+        const candidatureIds = candidatures.map(candidature => candidature._id);
+        await mongoose.model('CandidatureOffre').deleteMany({ candidature: { $in: candidatureIds } });
+
+        // Deleting the JobSeeker
+        await JobSeeker.findOneAndDelete({ _id: jobSeekerId });
+
+        res.json({ message: 'Job seeker and associated candidatures deleted' });
     } catch (err) {
-      res.status(400).json({ message: err.message });
+        res.status(400).json({ message: err.message });
     }
-  });
+});
 
 
 

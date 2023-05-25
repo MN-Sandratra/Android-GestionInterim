@@ -1,6 +1,7 @@
 package com.example.gestioninterim.utilisateurInterimaire
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,24 +10,23 @@ import android.widget.Button
 import android.widget.TextView
 import com.example.gestioninterim.R
 import com.example.gestioninterim.models.OfferResult
+import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails.Companion.ARG_OFFER
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.gson.Gson
 
 class OffreDetail : Fragment() {
 
     private lateinit var offer: OfferResult
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            offer = it.getSerializable("offer") as OfferResult
-        }
-    }
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_offre_detail, container, false)
+        val view = inflater.inflate(R.layout.fragment_offre_detail_offre, container, false)
+
+        val gson = Gson()
+        val offerJson = arguments?.getString(ARG_OFFER)
+        offer = gson.fromJson(offerJson, OfferResult::class.java)
+
+        Log.d("Affichage details", "===> $offer")
 
         val employeurTextView = view.findViewById<TextView>(R.id.employeurTextView)
         val intituleTextView = view.findViewById<TextView>(R.id.intituleTextView)
@@ -39,7 +39,6 @@ class OffreDetail : Fragment() {
         val tauxHoraireTextView = view.findViewById<TextView>(R.id.tauxHoraireTextView)
         val disponibiliteTextView = view.findViewById<TextView>(R.id.disponibiliteTextView)
         val etatTextView = view.findViewById<TextView>(R.id.etatTextView)
-        val postulerButton = view.findViewById<Button>(R.id.postulerButton)
 
         employeurTextView.text = offer.employeur
         intituleTextView.text = offer.intitule
@@ -55,13 +54,6 @@ class OffreDetail : Fragment() {
 
         val parentActivity = activity as MainInterimaireActivity
         val navigationView = parentActivity.findViewById<BottomNavigationView>(R.id.navigation_interimaire)
-
-
-        // Gestion du clic sur le bouton "Postuler"
-        postulerButton.setOnClickListener {
-            val fragment = CandidatureFormFragment()
-            parentActivity.loadFragment(fragment, R.string.postule_offres)
-            navigationView.selectedItemId = R.id.search_page }
 
         return view
     }

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:id="@+id/linearLayout5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="16dp">
+
+        <TextView
+            android:id="@+id/textMoreFiltres"
+            style="@style/DefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/DefaultMargin"
+            android:text="@string/trouver_job_plus_filtres" />
+
+        <ImageButton
+            android:id="@+id/imageButtonFiltres"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/DefaultMargin"
+            android:background="@drawable/ic_more_filter"
+            android:backgroundTint="@color/orange" />
+
+        <ImageButton
+            android:id="@+id/imageButtonDeleteFilters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="@dimen/DefaultMargin"
+            android:layout_marginRight="@dimen/DefaultMargin"
+            android:background="@drawable/ic_delete"
+            android:backgroundTint="@color/orange" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/validateSearchJob"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/DefaultMargin"
+            android:backgroundTint="@color/orange"
+            android:text="@string/validez"
+            app:cornerRadius="10dp" />
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/vertical_recycler_view_candidatures"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginTop="@dimen/DefaultMargin"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/imageViewEmpty"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5"
+        app:layout_constraintBottom_toTopOf="@+id/addCandidatureText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:src="@drawable/no_result"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/addCandidatureText"
+        style="@style/DefaultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DefaultMargin"
+        android:layout_marginHorizontal="@dimen/DefaultMargin"
+        android:text="@string/add_candidature"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vertical_recycler_view_candidatures"></TextView>
+
+    <TextView
+        android:id="@+id/listCandidatureText"
+        style="@style/DefaultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/DefaultMargin"
+        android:text="@string/list_candidature"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addCandidatureText"></TextView>
+</androidx.constraintlayout.widget.ConstraintLayout>

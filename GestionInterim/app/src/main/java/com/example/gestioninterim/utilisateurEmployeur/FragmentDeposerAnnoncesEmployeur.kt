@@ -42,6 +42,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
     private lateinit var inputDateDebutMission: TextInputEditText
     private lateinit var inputDateFinMission: TextInputEditText
     private lateinit var inputRemunerationMission: TextInputEditText
+    private lateinit var inputDebutMission : TextInputEditText
     private lateinit var dropdownMenu: MaterialAutoCompleteTextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -59,6 +60,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
         inputDateDebutMission = view.findViewById(R.id.inputDateDebutMission)
         inputDateFinMission = view.findViewById(R.id.inputDateFinMission)
         inputRemunerationMission = view.findViewById(R.id.inputTextRemunerationMission)
+        inputDebutMission = view.findViewById(R.id.inputTextHeureDebut)
         val buttonAddOffer = view.findViewById<MaterialButton>(R.id.addOfferButton)
 
         val items = listOf("1", "2", "3+", "Aucune expérience")
@@ -100,6 +102,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
                 || inputDateDebutMission.text?.isBlank() == true
                 || inputDateFinMission.text?.isBlank() == true
                 || inputRemunerationMission.text?.isBlank() == true
+                || inputDebutMission.text?.isBlank() == true
                 || dropdownMenu.text.isNullOrBlank()) {
                 // Afficher un toast si un ou plusieurs champs sont vides
                 Toast.makeText(context, "Veuillez remplir tous les champs", Toast.LENGTH_SHORT).show()
@@ -119,6 +122,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
                     dropdownMenu.text.toString(),
                     inputDescriptionMission.text.toString(),
                     remunerationDouble,
+                    inputDebutMission.text.toString(),
                     true,
                     "en cours",
                     user.ville,
@@ -150,6 +154,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
         EventBus.getDefault().unregister(this)
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onPostOfferResult(event: AddOfferResultEvent) {
 
@@ -165,6 +170,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
             inputDescriptionMission.setText("")
             inputDateDebutMission.setText("")
             inputDateFinMission.setText("")
+            inputDebutMission.setText("")
             inputRemunerationMission.setText("")
             dropdownMenu.setText("Aucune expérience")
         }

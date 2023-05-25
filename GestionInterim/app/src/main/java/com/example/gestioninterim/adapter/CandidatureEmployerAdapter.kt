@@ -12,8 +12,8 @@ import com.example.gestioninterim.models.CandidatureEmployerResult
 import java.text.SimpleDateFormat
 import java.util.*
 
-class CandidatureEmployerResultAdapter(private val onClickListener: (CandidatureEmployerResult) -> Unit) :
-    RecyclerView.Adapter<CandidatureEmployerResultAdapter.CandidatureEmployerResultViewHolder>() {
+class CandidatureEmployerAdapter(private val onClickListener: (CandidatureEmployerResult) -> Unit) :
+    RecyclerView.Adapter<CandidatureEmployerAdapter.CandidatureEmployerResultViewHolder>() {
 
     private var candidatures: List<CandidatureEmployerResult> = listOf()
 
@@ -21,7 +21,6 @@ class CandidatureEmployerResultAdapter(private val onClickListener: (Candidature
         val metierTextView: TextView = view.findViewById(R.id.offreMetier)
         val lieuTextView: TextView = view.findViewById(R.id.offreLieu)
         val dateTextView: TextView = view.findViewById(R.id.offreDate)
-        val heureTextView: TextView = view.findViewById(R.id.offreHeure)
         val voirPlusTextView: TextView = view.findViewById(R.id.voirPlus)
         val readMoreImage: ImageView = view.findViewById(R.id.readMoreImage)
 
@@ -30,8 +29,6 @@ class CandidatureEmployerResultAdapter(private val onClickListener: (Candidature
             lieuTextView.text = candidatureResult.offre.ville
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             dateTextView.text = dateFormat.format(candidatureResult.offre.dateDebut)
-            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-            heureTextView.text = timeFormat.format(candidatureResult.offre.dateDebut)
 
             itemView.setOnClickListener {
                 onClickListener(candidatureResult)

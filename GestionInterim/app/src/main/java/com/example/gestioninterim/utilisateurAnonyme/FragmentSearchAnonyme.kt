@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
-import com.example.gestioninterim.commonFragments.FragmentOffer
+import com.example.gestioninterim.commonFragments.FragmentOfferAnonyme
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -37,7 +37,7 @@ class FragmentSearchAnonyme : Fragment() {
     private class ScreenSlidePageAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapter(fragmentActivity) {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
-                0 -> FragmentOffer()
+                0 -> FragmentOfferAnonyme()
                 1 -> FragmentPourVousAnonyme()
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }

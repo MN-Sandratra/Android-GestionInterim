@@ -1,20 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:orientation="vertical"
+    >
 
     <TextView
-        android:id="@+id/textView2"
-        style="@style/DefaultTextStyle"
+        android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="@string/candidatureInterimaire"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_margin="@dimen/DefaultMargin"
+
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/DefaultTextStyle"
+        android:text="@string/infosEmployer">
+    </TextView>
 
     <ScrollView
         android:id="@+id/scrollViewInterimInscription"
@@ -23,7 +27,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/textTitle">
 
         <LinearLayout
             android:id="@+id/linearLayout3"
@@ -32,6 +36,9 @@
             android:orientation="vertical"
             android:padding="25dp">
 
+
+
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
@@ -39,7 +46,7 @@
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/inscriptionInterimaireNom"
+                android:hint="@string/interimaireNom"
                 app:startIconTint="@color/white"
                 app:startIconDrawable="@drawable/ic_user"
                 android:textColorHint="@color/white"
@@ -64,7 +71,7 @@
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/inscriptionInterimairePrenom"
+                android:hint="@string/interimairePrenom"
                 android:layout_marginTop="10dp"
                 app:startIconTint="@color/white"
                 app:startIconDrawable="@drawable/ic_user"
@@ -81,6 +88,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
+
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
@@ -88,7 +96,55 @@
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/inscriptionInterimaireDateNaissance"
+                android:hint="@string/interimaireMail"
+                app:startIconTint="@color/white"
+                app:startIconDrawable="@drawable/ic_mail"
+                android:layout_marginTop="10dp"
+                android:textColorHint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextMail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/interimaireTelephone"
+                android:layout_marginTop="10dp"
+                app:startIconTint="@color/white"
+                app:startIconDrawable="@drawable/ic_phone"
+                android:textColorHint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextTelephone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="phone" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/interimaireDateNaissance"
                 app:startIconDrawable="@drawable/ic_birthday"
                 app:startIconTint="@color/white"
                 android:layout_marginTop="10dp"
@@ -97,6 +153,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputDateNaissance"
+                    android:focusable="false"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -111,48 +168,39 @@
                 android:theme="@style/ShapeAppearanceOverlay.App.rounded"
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/interimaireVille"
+                android:layout_marginTop="10dp"
+                app:startIconDrawable="@drawable/ic_location"
+                app:startIconTint="@color/white"
+                android:textColorHint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputVille"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="textEmailAddress" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:hint="@string/inscriptionInterimaireNationalite"
+                android:hint="@string/interimaireNationalite"
                 android:layout_marginTop="10dp"
                 app:startIconDrawable="@drawable/ic_flag"
                 app:startIconTint="@color/white"
                 android:textColorHint="@color/white">
 
-                <AutoCompleteTextView
+                <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputNationnalite"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:completionThreshold="1"
-                    android:inputType="text"
-                    android:textSize="16dp"
-                    android:imeOptions="actionDone"
-                    android:singleLine="true"
-                    android:textColor="@color/white"
-                    android:textColorHint="@color/grey"/>
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
-                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
-                app:boxBackgroundColor="@color/darkblue"
-                android:id="@+id/inscriptionInterimaireCv"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/inscriptionInterimaireCv"
-                android:layout_marginTop="10dp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_import"
-                app:endIconTint="@color/white"
-                app:startIconDrawable="@drawable/ic_document"
-                app:startIconTint="@color/white"
-                android:textColorHint="@color/white">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputCv"
-                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
                     android:inputType="text" />
@@ -164,24 +212,20 @@
                 app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
                 android:theme="@style/ShapeAppearanceOverlay.App.rounded"
                 app:boxBackgroundColor="@color/darkblue"
-                android:id="@+id/inscriptionInterimaireLm"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/inscriptionInterimaireLm"
-                android:layout_marginTop="10dp"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_import"
-                app:endIconTint="@color/white"
                 app:startIconDrawable="@drawable/ic_document"
                 app:startIconTint="@color/white"
+                android:hint="@string/interimaireCommentaires"
+                android:layout_marginTop="10dp"
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputLm"
+                    android:id="@+id/inputCommentaires"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:inputType="text" />
+                    android:inputType="textLongMessage" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -189,20 +233,39 @@
         </LinearLayout>
 
     </ScrollView>
-
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/buttonValidationInscription"
+        android:id="@+id/modifyButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/orange"
-        android:paddingHorizontal="50dp"
-        android:text="@string/validez"
-        app:cornerRadius="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="@dimen/DefaultMargin"
+        android:text="@string/modifyButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewInterimInscription"
-        app:layout_constraintVertical_bias="0.3" />
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewInterimInscription">
+
+    </com.google.android.material.button.MaterialButton>
+
+    <TextView
+        android:id="@+id/deconnexionText"
+        style="@style/DefaultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/DefaultMargin"
+        android:layout_marginHorizontal="@dimen/DefaultMargin"
+        android:text="@string/accueil_deconnexion_profil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/modifyButton"></TextView>
+
+    <TextView
+        android:id="@+id/suppressionText"
+        style="@style/DefaultTextStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="@dimen/DefaultMargin"
+        android:text="@string/accueil_suppression_profil"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deconnexionText"></TextView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

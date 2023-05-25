@@ -178,14 +178,4 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/postulerButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Postuler"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:textColor="@android:color/white"
-        android:padding="12dp" />
-
 </LinearLayout>

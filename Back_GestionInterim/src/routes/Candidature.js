@@ -29,6 +29,34 @@ router.get('/', async (req, res) => {
   }
 });
 
+// Obtenir toutes les candidatures
+router.get('/jobseekers', async (req, res) => {
+  try {
+
+    const { email, telephone } = req.query; 
+
+    let jobSeeker = null;
+
+      if(email){
+        jobSeeker = await JobSeeker.findOne({ email: email });
+      }
+
+      if(!jobSeeker && telephone){
+        jobSeeker = await JobSeeker.findOne({ phoneNumber: telephone });
+      }
+
+    if (!jobSeeker) {
+        return res.status(404).json({ message: 'Interimaire non trouvé.' });
+    }
+    
+    const candidatures = await Candidature.find({ jobSeeker: jobSeeker._id });
+    res.json(candidatures);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur est survenue lors de la récupération des candidatures' });
+  }
+});
+
 // Obtenir une candidature spécifique
 router.get('/:id', async (req, res) => {
   try {

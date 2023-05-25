@@ -37,6 +37,11 @@ router.post('/', async (req, res) => {
     const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
     try{
 
+      const existingEmployer = await Employer.findOne({ email1: req.body.email1 });
+      if (existingEmployer) {
+          return res.status(400).json({ message: "Un employer avec cet email existe déjà" });
+      }
+
         const employer = new Employer({
         companyName: req.body.companyName,
         department: req.body.department,
@@ -148,25 +153,39 @@ router.put('/:email1', async (req, res) => {
 
 
   
-
 router.delete('/:email1', async (req, res) => {
-    try {
-        // Trouver l'employeur à supprimer
-        const employerToDelete = await Employer.findOneAndDelete({ email1: req.params.email1 });
+  try {
+      // Trouver l'employeur à supprimer
+      const employerToDelete = await Employer.findOneAndDelete({ email1: req.params.email1 });
 
-        if (employerToDelete) {
-            // Supprimer toutes les offres associées à cet employeur
-            const Offer = require('../models/offer'); // Importer le modèle Offer
-            await Offer.deleteMany({ employeur: employerToDelete._id });
+      if (employerToDelete) {
+          // Importer les modèles nécessaires
+          const Offer = require('../models/offer');
+          const EmployerSubscription = require('../models/employerSubscription');
+          const CandidatureOffre = require('../models/candidatureOffre').CandidatureOffre;
 
-            res.json({ message: 'Employer and associated offers deleted successfully' });
-        } else {
-            res.status(404).json({ message: 'Employer not found' });
-        }
-    } catch (error) {
-        res.status(500).json({ message: error.message });
-    }
+          // Trouver toutes les offres de l'employeur
+          const offers = await Offer.find({ employeur: employerToDelete._id });
+
+          // Supprimer toutes les offres associées à cet employeur
+          await Offer.deleteMany({ employeur: employerToDelete._id });
+
+          // Supprimer tous les abonnements de l'employeur
+          await EmployerSubscription.deleteMany({ employer: employerToDelete._id });
+
+          // Supprimer toutes les CandidaturesOffres associées aux offres de l'employeur
+          const offerIds = offers.map(offer => offer._id);
+          await CandidatureOffre.deleteMany({ offre: { $in: offerIds } });
+
+          res.json({ message: 'Employer, associated offers, subscriptions, and candidatures deleted successfully' });
+      } else {
+          res.status(404).json({ message: 'Employer not found' });
+      }
+  } catch (error) {
+      res.status(500).json({ message: error.message });
+  }
 });
+
 
 
 

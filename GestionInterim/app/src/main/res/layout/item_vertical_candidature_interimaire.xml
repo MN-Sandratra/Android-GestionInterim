@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/border"
+    >
+
+    <TextView
+        android:id="@+id/offreMetier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Electricien"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        style="@style/SubtitleTextStyle"
+        android:textColor="@color/orange"
+        android:layout_margin="@dimen/DefaultMargin"
+        >
+    </TextView>
+
+    <TextView
+        android:id="@+id/offreLieu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Montpellier"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginLeft="@dimen/DefaultMargin"
+        style="@style/DefaultTextStyle"
+        app:layout_constraintTop_toBottomOf="@+id/offreMetier">
+    </TextView>
+
+    <ImageView
+        android:id="@+id/favoriteIcon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/DefaultMargin"
+        android:layout_marginRight="@dimen/DefaultMargin"
+        android:background="@drawable/ic_coeur"
+        android:backgroundTint="@color/orange"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/DefaultMargin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/offreLieu">
+
+        <TextView
+            android:id="@+id/offreTiret"
+            style="@style/DefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/offreDate"
+            android:text="-"></TextView>
+
+        <TextView
+            android:id="@+id/offreHeure"
+            style="@style/DefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/offreTiret"
+            android:text="10:45"></TextView>
+
+        <TextView
+            android:id="@+id/offreDate"
+            style="@style/DefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="26/06/2023"></TextView>
+
+        <TextView
+            android:id="@+id/voirPlus"
+            style="@style/DefaultTextStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_toLeftOf="@+id/readMoreImage"
+            android:text="@string/abonnementMoreDetails">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/readMoreImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="center"
+            android:background="@drawable/ic_read_more"
+            android:backgroundTint="@color/orange" />
+
+    </RelativeLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

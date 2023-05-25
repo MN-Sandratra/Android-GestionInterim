@@ -24,6 +24,24 @@
         <activity
             android:name=".MainActivity"
             android:exported="false" />
+        
+        <service android:name=".services.InscriptionService"/>
+        <service android:name=".services.LoginService"/>
+        <service android:name=".services.InscriptionValidationService"/>
+        <service android:name=".services.OffresService"/>
+        <service android:name=".services.AbonnementsService"/>
+        <service android:name=".services.MissionEmployerService"/>
+        <service android:name=".services.ProfilEmployerService"/>
+        <service android:name=".services.ProfilInterimaireService"/>
+        <service android:name=".services.SuppresionCompteService"/>
+        <service android:name=".services.CandidatureResultService"/>
+        <service android:name=".services.CandidatureService"/>
+        <service android:name=".services.CandidatureJobSeekersResultService"/>
+        <service android:name=".services.SendCandidatureOfferService"/>
+        <service android:name=".services.SendCandidatureOfferBisService"/>
+        <service android:name=".services.CandidatureEmployerTraitementService"/>
+
+
         <activity
             android:name=".message.ConversationListActivity"
             android:exported="false" />

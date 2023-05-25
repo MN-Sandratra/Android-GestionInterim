@@ -36,8 +36,6 @@ class OffresService : Service() {
 
         val isOffer = intent!!.getBooleanExtra("isOffer", false)
 
-        println("JE SUIS LAAAAA")
-        Log.d(TAG, "onStartCommand: LALALAALAL")
         if(isOffer){
             offer = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 intent!!.getSerializableExtra("offerRequest", Offer::class.java) as Offer

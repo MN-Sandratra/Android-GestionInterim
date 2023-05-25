@@ -9,8 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
-import com.example.gestioninterim.commonFragments.FragmentOffer
-import com.example.gestioninterim.utilisateurAnonyme.FragmentPourVousAnonyme
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fond"
+    >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/DefaultMargin"
+        android:orientation="vertical">
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                    android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                    app:boxBackgroundColor="@color/darkblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Nom (obligatoire)"
+                    app:startIconTint="@color/white"
+                    app:startIconDrawable="@drawable/ic_user"
+                    android:textColorHint="@color/white"
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputTextNom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:inputType="textCapCharacters"
+                        />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                    android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                    app:boxBackgroundColor="@color/darkblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Prénom (obligatoire)"
+                    android:layout_marginTop="10dp"
+                    app:startIconTint="@color/white"
+                    app:startIconDrawable="@drawable/ic_user"
+                    android:textColorHint="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputTextPrenom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:textColor="@color/white"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                    android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                    app:boxBackgroundColor="@color/darkblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Date de naissance (obligatoire)"
+                    android:layout_marginTop="10dp"
+                    app:startIconDrawable="@drawable/ic_birthday"
+                    app:startIconTint="@color/white"
+                    android:textColorHint="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputDateNaissance"
+                        android:focusable="false"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:inputType="date" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                    android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                    app:boxBackgroundColor="@color/darkblue"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Nationalité (obligatoire)"
+                    android:layout_marginTop="10dp"
+                    app:startIconDrawable="@drawable/ic_flag"
+                    app:startIconTint="@color/white"
+                    android:textColorHint="@color/white">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/inputNationnalite"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:completionThreshold="1"
+                        android:inputType="text"
+                        android:textSize="16dp"
+                        android:imeOptions="actionDone"
+                        android:singleLine="true"
+                        android:textColor="@color/white"
+                        android:textColorHint="@color/grey"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                    android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                    app:boxBackgroundColor="@color/darkblue"
+                    android:id="@+id/inscriptionInterimaireCv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Curriculum vitae (obligatoire)"
+                    android:layout_marginTop="10dp"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_import"
+                    app:endIconTint="@color/white"
+                    app:startIconDrawable="@drawable/ic_document"
+                    app:startIconTint="@color/white"
+                    android:textColorHint="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputCv"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                    android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                    app:boxBackgroundColor="@color/darkblue"
+                    android:id="@+id/inscriptionInterimaireLm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Lettre de motivation (optionnelle)"
+                    android:layout_marginTop="10dp"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_import"
+                    app:endIconTint="@color/white"
+                    app:startIconDrawable="@drawable/ic_document"
+                    app:startIconTint="@color/white"
+                    android:textColorHint="@color/white">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/inputLm"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:inputType="text" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/validateCandidature"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center_horizontal"
+            android:text="@string/validez">
+        </com.google.android.material.button.MaterialButton>
+
+    </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
