@@ -1,7 +1,7 @@
 const express = require('express');
-
+const mongoose = require('mongoose');
 const Offer = require('../models/offer');
-const CandidatureOffre = require('../models/candidatureOffre'); 
+const { CandidatureOffre, etatsCandidaturesEnum } = require('../models/candidatureOffre');
 const Employer = require('../models/employer'); 
 const JobSeeker = require('../models/jobSeeker'); 
 const Candidature = require('../models/candidature'); 
@@ -43,6 +43,34 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Une erreur est survenue lors de la création de l\'association candidature-offre' });
   }
 });
+
+
+router.post('/employersCandidature', async(req,res) => {
+  try {
+    const { candidatureId, offreId, status } = req.body;
+
+    // Vérifie si le status est dans l'enum
+    if (!etatsCandidaturesEnum.includes(status)) {
+      return res.status(400).json({ message: "Status non valide" });
+    }
+
+    // Trouve l'instance de CandidatureOffre et la met à jour
+    const updatedCandidatureOffre = await mongoose.model('CandidatureOffre').findOneAndUpdate(
+      { candidature: candidatureId, offre: offreId }, // critères de recherche
+      { status: status }, // mise à jour du champ status
+    );
+
+    if (!updatedCandidatureOffre) {
+      return res.status(404).json({ message: 'Association candidature-offre non trouvée' });
+    }
+
+    res.json({ message: 'Candidature traitée !'});
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur est survenue lors de la création de l\'association candidature-offre',error: error.message});
+  }
+});
+
 
 
 // Créer une association entre une candidature et une offre
@@ -112,7 +140,7 @@ router.get('/', async (req, res) => {
 // Candidature - Offre pour un employeur spécifique
 router.get('/employers', async (req, res) => {
   try {
-    const { email } = req.query; 
+    const { email, status} = req.query; 
 
     const employer = await Employer.findOne({ email1: email });
 
@@ -124,7 +152,8 @@ router.get('/employers', async (req, res) => {
     const offerIds = offers.map(offer => offer._id);
 
     const candidatureOffres = await CandidatureOffre.find({ 
-      offre: { $in: offerIds } 
+      offre: { $in: offerIds },
+      status: status || 'en attente'
     }).populate('candidature').populate('offre');
 
     const enrichedCandidatureOffres = await Promise.all(candidatureOffres.map(async (candidatureOffre) => {
@@ -149,7 +178,7 @@ router.get('/employers', async (req, res) => {
 // Candidature - Offre pour un interimaire spécifique
 router.get('/jobseekers', async (req, res) => {
   try {
-    const { email, telephone } = req.query; 
+    const { email, telephone, status } = req.query; 
 
     let jobSeeker = null;
 
@@ -172,7 +201,8 @@ router.get('/jobseekers', async (req, res) => {
     const candidatureIds = candidatures.map(candidature => candidature._id);
 
     const candidatureOffres = await CandidatureOffre.find({ 
-      candidature: { $in: candidatureIds }
+      candidature: { $in: candidatureIds },
+      status: status || 'en attente'
     })
     .populate('candidature')
     .populate('offre');

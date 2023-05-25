@@ -23,6 +23,8 @@ import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
 import com.example.gestioninterim.resultEvent.CandidaturesResultEvent
 import com.example.gestioninterim.services.AbonnementsService
 import com.example.gestioninterim.services.CandidatureResultService
+import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails
+import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
@@ -53,8 +55,17 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
         // Initialise le RecyclerView et l'adaptateur.
         recyclerView = view.findViewById(R.id.vertical_recycler_view_offres)
         candidaturesAdapter = CandidatureEmployerAdapter { candidature ->
-            // Gestion des clics sur les éléments de la liste.
-            // Remplacez ceci par le code souhaité pour gérer les clics.
+            val activity = activity
+            if (activity is MainEmployeurActivity) {
+                val gson = Gson()
+                val candidatureJson = gson.toJson(candidature)
+                val fragment = FragmentCandidaturesDetailsEmployer()
+                val args = Bundle()
+                args.putString("candidatureATraiter", candidatureJson)
+                fragment.arguments = args
+
+                activity.loadFragment(fragment, R.string.sub_title_consult_missions)
+            }
         }
 
         recyclerView.apply {
@@ -75,8 +86,15 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
         val intent = Intent(requireContext(), CandidatureResultService::class.java)
         intent.putExtra("contact", user.email1)
         intent.putExtra("type", "employers")
+        intent.putExtra("status", "en attente")
         requireContext().startService(intent)
     }
+
+    override fun onResume() {
+        super.onResume()
+        launchServiceCandidatures()
+    }
+
     override fun onStart() {
         super.onStart()
         EventBus.getDefault().register(this)

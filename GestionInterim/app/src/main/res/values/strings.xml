@@ -118,7 +118,7 @@
     <string name="add_candidature">Ajouter une candidature !</string>
     <string name="list_candidature">Voir mes candidatures crées !</string>
     <string name="candidatures_envoyees">Candidatures envoyées</string>
-    <string name="candidatures_a_valider">Candidatures à valider</string>
+    <string name="candidatures_valider">Candidatures validées</string>
     <string name="candidatures_refusees">Candidatures refusées</string>
     <string name="candidature_spontanée">Candidature spontanée</string>
     <string name="offre_details">Détails de l\'offre</string>

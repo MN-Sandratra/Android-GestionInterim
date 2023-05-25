@@ -150,6 +150,7 @@ class FragmentDeposerAnnoncesEmployeur : Fragment() {
         EventBus.getDefault().unregister(this)
     }
 
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onPostOfferResult(event: AddOfferResultEvent) {
 

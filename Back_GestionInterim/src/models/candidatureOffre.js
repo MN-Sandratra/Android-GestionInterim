@@ -20,4 +20,7 @@ const candidatureOffreSchema = new mongoose.Schema({
 }
 });
 
-module.exports = mongoose.model('CandidatureOffre', candidatureOffreSchema);
+module.exports = {
+  CandidatureOffre: mongoose.model('CandidatureOffre', candidatureOffreSchema),
+  etatsCandidaturesEnum
+};

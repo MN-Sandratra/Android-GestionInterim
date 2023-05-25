@@ -26,6 +26,8 @@
         <service android:name=".services.CandidatureJobSeekersResultService"/>
         <service android:name=".services.SendCandidatureOfferService"/>
         <service android:name=".services.SendCandidatureOfferBisService"/>
+        <service android:name=".services.CandidatureEmployerTraitementService"/>
+
 
         <activity
             android:name=".message.ConversationListActivity"

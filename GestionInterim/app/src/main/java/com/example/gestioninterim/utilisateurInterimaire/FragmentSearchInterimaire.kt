@@ -9,7 +9,6 @@ import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
-import com.example.gestioninterim.commonFragments.FragmentOfferAnonyme
 import com.example.gestioninterim.commonFragments.FragmentOfferInterimaire
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -44,7 +43,7 @@ class FragmentSearchInterimaire : Fragment() {
         override fun createFragment(position: Int): Fragment {
             return when (position) {
                 0 -> FragmentOfferInterimaire()
-                1 -> FragmentCandidaturesAValider()
+                1 -> FragmentCandidaturesValidees()
                 2 -> FragmentCandidaturesRefusees()
                 else -> throw IllegalArgumentException("Invalid position: $position")
             }

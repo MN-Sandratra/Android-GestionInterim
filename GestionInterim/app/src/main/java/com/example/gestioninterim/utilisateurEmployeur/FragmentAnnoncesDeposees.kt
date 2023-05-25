@@ -108,6 +108,11 @@ class FragmentAnnoncesDeposees : Fragment(), FilterDialogCallbackEmployer{
         EventBus.getDefault().unregister(this)
     }
 
+    override fun onResume() {
+        super.onResume()
+        launchServiceOffers()
+    }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetOffersResult(event: OffersResultEmployerEvent) {
         println(event.offres)

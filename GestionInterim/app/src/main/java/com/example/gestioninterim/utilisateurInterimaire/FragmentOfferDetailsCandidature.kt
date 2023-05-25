@@ -37,6 +37,7 @@ import com.example.gestioninterim.services.CandidatureJobSeekersResultService
 import com.example.gestioninterim.services.CandidatureService
 import com.example.gestioninterim.services.SendCandidatureOfferBisService
 import com.example.gestioninterim.services.SendCandidatureOfferService
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -318,6 +319,8 @@ class FragmentOfferDetailsCandidature : Fragment() {
                 var fragment = FragmentCandidaturesInterimaire()
                 if (activity is MainInterimaireActivity) {
                     activity.loadFragment(fragment, R.string.sub_title_consult_missions)
+                    val navigationView = requireActivity().findViewById<BottomNavigationView>(R.id.navigation_interimaire)
+                    navigationView.selectedItemId = R.id.candidatures_page
                 }
             }
 

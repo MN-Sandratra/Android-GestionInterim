@@ -34,9 +34,10 @@ class CandidatureResultService : Service() {
 
         val contact = intent!!.getStringExtra("contact")
         val type = intent!!.getStringExtra("type")
+        val status = intent!!.getStringExtra("status")
 
 
-        sendGetRequestOffers(contact, type) { candidatures ->
+        sendGetRequestOffers(contact, type, status) { candidatures ->
             val event = CandidaturesResultEvent(candidatures)
             EventBus.getDefault().post(event)
             Log.d("CANDIDATURES", "affichage => $candidatures")
@@ -47,7 +48,7 @@ class CandidatureResultService : Service() {
         return START_STICKY
     }
 
-    fun sendGetRequestOffers(contact : String?, type : String?,  callback: (candidatures: List<CandidatureEmployerResult>) -> Unit) {
+    fun sendGetRequestOffers(contact : String?, type : String?,  status : String?, callback: (candidatures: List<CandidatureEmployerResult>) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
 
@@ -58,6 +59,10 @@ class CandidatureResultService : Service() {
             }
             else{
                 reqParamBuilder.append("telephone=" + URLEncoder.encode(contact, "UTF-8"))
+            }
+
+            if(!status.isNullOrEmpty()){
+                reqParamBuilder.append("&status=" + URLEncoder.encode(status, "UTF-8"))
             }
 
             val reqParam = reqParamBuilder.toString()
