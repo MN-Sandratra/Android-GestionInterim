@@ -92,8 +92,17 @@ class FragmentAddCandidature : Fragment() {
 
         inputNom.setText(user.lastName)
         inputPrenom.setText(user.firstName)
-        inputDateNaissance.setText(user.dateOfBirth)
+        val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+        val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
+        if (user.dateOfBirth != null) {
+            val date = inputFormat.parse(user.dateOfBirth)
+            inputDateNaissance.setText(outputFormat.format(date))
+        }
+
+        if(user.nationality != null){
+            autoCompleteTextView.setText(user.nationality)
+        }
 
         // Explorateur de fichier
         val myCvLauncher = registerForActivityResult(

@@ -46,7 +46,7 @@ class MainInterimaireActivity : AppCompatActivity() {
                     return@setOnItemSelectedListener true
                 }
                 R.id.profil_page -> {
-                    val fragment = FragmentAccueilInterimaire()
+                    val fragment = FragmentProfilInterimaire()
                     loadFragment(fragment, R.string.profilUtilisateurTitle)
                     return@setOnItemSelectedListener true
                 }

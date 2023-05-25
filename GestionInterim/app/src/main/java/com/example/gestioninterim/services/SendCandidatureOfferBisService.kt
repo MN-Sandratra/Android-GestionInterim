@@ -83,6 +83,8 @@ class SendCandidatureOfferBisService : Service() {
 
         val requestBody = requestBodyBuilder.build()
 
+        Log.d("Affichage", "=====> Request body : $requestBody")
+
         val request = Request.Builder()
             .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatureOffres/jobseekerOffre")
             .post(requestBody)

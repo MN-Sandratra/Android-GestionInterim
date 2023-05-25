@@ -196,8 +196,17 @@ class FragmentInterimaireInscription : Fragment() {
 
                 val inputDate : String? = inputDateNaissance?.text?.toString()
 
-                val date = inputDateFormat.parse(inputDate)
-                val formattedDate = outputDateFormat.format(date)
+                val date: Date? = if (!inputDate.isNullOrEmpty()) {
+                    inputDateFormat.parse(inputDate)
+                } else {
+                    null
+                }
+
+                val formattedDate = if (date != null) {
+                    outputDateFormat.format(date)
+                } else {
+                    null
+                }
 
                 var cvByteArray: ByteArray? = null
                 selectedFileUri?.let {

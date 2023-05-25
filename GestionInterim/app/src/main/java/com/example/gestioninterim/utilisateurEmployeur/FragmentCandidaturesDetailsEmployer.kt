@@ -65,8 +65,14 @@ class FragmentCandidaturesDetailsEmployer : Fragment() {
         view.findViewById<TextInputEditText>(R.id.inputTextNationality).setText(candidatureEmployerResult.candidature.nationality)
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
         val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        val date = inputFormat.parse(candidatureEmployerResult.candidature.dateOfBirth)
-        view.findViewById<TextInputEditText>(R.id.inputTextDateNaissance).setText(outputFormat.format(date))
+
+        if (candidatureEmployerResult.candidature.dateOfBirth != null) {
+            val date = inputFormat.parse(candidatureEmployerResult.candidature.dateOfBirth)
+            view.findViewById<TextInputEditText>(R.id.inputTextDateNaissance).setText(outputFormat.format(date))
+        } else {
+            // Gérez le cas où la date est nulle. Par exemple, vous pouvez effacer le champ de texte ou afficher un message d'erreur.
+            view.findViewById<TextInputEditText>(R.id.inputTextDateNaissance).setText("")
+        }
         view.findViewById<TextInputEditText>(R.id.inputTextCv).setText(candidatureEmployerResult.candidature.cv)
         view.findViewById<TextInputEditText>(R.id.inputTextLm).setText(candidatureEmployerResult.candidature.lm ?: "N/A")
 

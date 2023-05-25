@@ -159,6 +159,7 @@ router.post('/', async (req, res) => {
         experienceRequise: req.body.experienceRequise,
         description: req.body.description,
         tauxHoraire: req.body.tauxHoraire,
+        heureDebut: req.body.heureDebut,
         disponibilite: req.body.disponibilite,
         etat: req.body.etat,
         ville: req.body.ville, // Ajout de la ville

@@ -178,8 +178,9 @@ class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
                 longitude = "2.34"
             }
         }.addOnCompleteListener {
-            Log.d("Debug","JE SUIS LA3")
-            launchServiceOffers(latitude, longitude)
+            if (it.isSuccessful && isAdded) {
+                launchServiceOffers(latitude, longitude)
+            }
         }
         launchServiceOffers(latitude, longitude)
     }

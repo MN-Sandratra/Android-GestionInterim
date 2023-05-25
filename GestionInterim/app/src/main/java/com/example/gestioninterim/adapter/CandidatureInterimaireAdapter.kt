@@ -31,7 +31,7 @@ class CandidatureInterimaireAdapter(private val onClickListener: (CandidatureEmp
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             dateTextView.text = dateFormat.format(candidatureResult.offre.dateDebut)
             val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-            heureTextView.text = timeFormat.format(candidatureResult.offre.dateDebut)
+            heureTextView.text = candidatureResult.offre.heureDebut
 
             itemView.setOnClickListener {
                 onClickListener(candidatureResult)

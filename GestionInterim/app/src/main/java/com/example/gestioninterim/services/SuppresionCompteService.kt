@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.UtilisateurEmployeur
 import com.example.gestioninterim.resultEvent.OffersResultEmployerEvent
@@ -15,6 +16,7 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
+import java.net.URLEncoder
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
@@ -22,7 +24,7 @@ class SuppresionCompteService : Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
-        val email = intent?.getStringExtra("email")
+        val contact = intent?.getStringExtra("contact")
         val type = intent?.getStringExtra("type")
 
         val client = OkHttpClient.Builder()
@@ -31,15 +33,18 @@ class SuppresionCompteService : Service() {
             .readTimeout(30, TimeUnit.SECONDS)
             .build()
 
+        Log.d("Affichage", "JE SUIS DANS LE DELETE")
+
         val request = Request.Builder()
-            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/${type}/${email}")
+            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/${type}/${contact}")
             .delete()
             .build()
 
         Executors.newSingleThreadExecutor().execute {
             client.newCall(request).execute().use { response ->
                 if (!response.isSuccessful) {
-                    // Handle the error
+                    Log.d("Affichage", "JE SUIS DANS l'erreur !")
+
                 }
             }
         }

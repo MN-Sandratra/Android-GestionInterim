@@ -22,14 +22,14 @@ class FragmentAbonnementChoix(
 
         val prixAbonnementTextView : TextView = view.findViewById(R.id.PrixAbonnementText)
         val typeAbonnementTextView : TextView = view.findViewById(R.id.typeAbonnementText)
-        val conditionsDesabonnementTextView : TextView = view.findViewById(R.id.conditionDesabonnement)
+//        val conditionsDesabonnementTextView : TextView = view.findViewById(R.id.conditionDesabonnement)
         val descriptionTextView : TextView = view.findViewById(R.id.descriptionAbonnement)
         val validationAbonnementBouton : MaterialButton = view.findViewById(R.id.boutonValidationAbonnement)
 
         prixAbonnementTextView.text = prixAbonnement.toString() + "€"
         typeAbonnementTextView.text = typeAbonnement
         descriptionTextView.text = description
-        conditionsDesabonnementTextView.text = "- $conditionsDesabonnement"
+//        conditionsDesabonnementTextView.text = "- $conditionsDesabonnement"
 
         validationAbonnementBouton.setOnClickListener {
             val fragmentAbonnementPaiement = FragmentAbonnementPaiement(prixAbonnement, typeAbonnement)

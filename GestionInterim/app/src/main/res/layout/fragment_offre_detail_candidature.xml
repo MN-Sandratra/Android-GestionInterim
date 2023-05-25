@@ -38,7 +38,7 @@
                     app:boxBackgroundColor="@color/darkblue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inscriptionInterimaireNom"
+                    android:hint="Nom (obligatoire)"
                     app:startIconTint="@color/white"
                     app:startIconDrawable="@drawable/ic_user"
                     android:textColorHint="@color/white"
@@ -63,7 +63,7 @@
                     app:boxBackgroundColor="@color/darkblue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inscriptionInterimairePrenom"
+                    android:hint="Prénom (obligatoire)"
                     android:layout_marginTop="10dp"
                     app:startIconTint="@color/white"
                     app:startIconDrawable="@drawable/ic_user"
@@ -87,7 +87,7 @@
                     app:boxBackgroundColor="@color/darkblue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inscriptionInterimaireDateNaissance"
+                    android:hint="Date de naissance (obligatoire)"
                     android:layout_marginTop="10dp"
                     app:startIconDrawable="@drawable/ic_birthday"
                     app:startIconTint="@color/white"
@@ -111,23 +111,18 @@
                     app:boxBackgroundColor="@color/darkblue"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="@string/inscriptionInterimaireNationalite"
+                    android:hint="Nationalité (obligatoire)"
                     android:layout_marginTop="10dp"
                     app:startIconDrawable="@drawable/ic_flag"
                     app:startIconTint="@color/white"
                     android:textColorHint="@color/white">
 
-                    <AutoCompleteTextView
+                    <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputNationnalite"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:completionThreshold="1"
-                        android:inputType="text"
-                        android:textSize="16dp"
-                        android:imeOptions="actionDone"
-                        android:singleLine="true"
+                        android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textColorHint="@color/grey"/>
+                        android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -140,7 +135,7 @@
                     android:id="@+id/inscriptionInterimaireCv"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inscriptionInterimaireCv"
+                    android:hint="CV (obligatoire)"
                     android:layout_marginTop="10dp"
                     app:endIconMode="custom"
                     app:endIconDrawable="@drawable/ic_import"
@@ -166,7 +161,7 @@
                     android:id="@+id/inscriptionInterimaireLm"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/inscriptionInterimaireLm"
+                    android:hint="Lettre de motivation (optionnel)"
                     android:layout_marginTop="10dp"
                     app:endIconMode="custom"
                     app:endIconDrawable="@drawable/ic_import"

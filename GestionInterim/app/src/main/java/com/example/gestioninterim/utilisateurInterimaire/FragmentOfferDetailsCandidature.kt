@@ -46,25 +46,32 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.io.Serializable
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
+import java.util.TimeZone
 
 class FragmentOfferDetailsCandidature : Fragment() {
 
     private var lmFilePath: String? = null
     private var cvFilePath: String? = null
+
+    private var cvByteArray: ByteArray? = null
+    private var lmByteArray: ByteArray? = null
+
+
     private lateinit var user : UtilisateurInterimaire
     private lateinit var offer : OfferResult
     private lateinit var inputNom : TextInputEditText
     private lateinit var inputPrenom : TextInputEditText
     private lateinit var inputDateNaissance : TextInputEditText
+    private lateinit var inputNationalite : TextInputEditText
+
     private lateinit var nomCv : TextInputEditText
     private lateinit var nomLm : TextInputEditText
 
     private lateinit var buttonValidate : MaterialButton
-
-    private lateinit var autoCompleteTextView : AutoCompleteTextView
 
     // Explorateur de fichier
     private lateinit var myLauncher: ActivityResultLauncher<Intent>
@@ -94,9 +101,10 @@ class FragmentOfferDetailsCandidature : Fragment() {
         buttonValidate = view.findViewById<MaterialButton>(R.id.validateCandidature)
 
         // Définition des inputs obligatoires
-        inputNom = view.findViewById<TextInputEditText>(R.id.inputTextNom)
-        inputPrenom = view.findViewById<TextInputEditText>(R.id.inputTextPrenom)
-        inputDateNaissance = view.findViewById<TextInputEditText>(R.id.inputDateNaissance)
+        inputNom = view.findViewById(R.id.inputTextNom)
+        inputPrenom = view.findViewById(R.id.inputTextPrenom)
+        inputDateNaissance = view.findViewById(R.id.inputDateNaissance)
+        inputNationalite = view.findViewById(R.id.inputNationnalite)
         val textCandidatureExistante = view.findViewById<TextView>(R.id.text)
 
 
@@ -110,26 +118,38 @@ class FragmentOfferDetailsCandidature : Fragment() {
         var selectedFileUri: Uri? = null
         var selectedFileUriLm: Uri? = null
 
-        // Adapter pour la sélection des pays
-        val nationalities = resources.getStringArray(R.array.nationalities)
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, nationalities)
-        autoCompleteTextView = view.findViewById(R.id.inputNationnalite)
-        autoCompleteTextView.setAdapter(adapter)
-
         inputNom.setText(user.lastName)
         inputPrenom.setText(user.firstName)
-        inputDateNaissance.setText(user.dateOfBirth)
-        nomCv.setText(user.cv)
+        if(user.dateOfBirth != null) {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            inputFormat.timeZone = TimeZone.getTimeZone("UTC") // as the input date seems to be in UTC
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+            try {
+                val date = inputFormat.parse(user.dateOfBirth)
+                val outputDateStr = outputFormat.format(date)
+                inputDateNaissance.setText(outputDateStr)
+            } catch (e: ParseException) {
+                e.printStackTrace()
+            }
+        }
+        if(user.nationality != null){
+            inputNationalite.setText(user.nationality)
+        }
+//        nomCv.setText(user.cv)
 
-        // Explorateur de fichier
+
+        if (!nomCv.text.isNullOrEmpty()) {
+            getCv.setEndIconDrawable(R.drawable.ic_delete)
+        }
+
         val myCvLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // Récupération du Uri du fichier sélectionné pour le CV
-                val uri: Uri? = result.data?.data
+                selectedFileUri = result.data?.data
                 // Utilisation du Uri (ex: affichage du nom du fichier dans un TextView)
-                uri?.let {
+                selectedFileUri?.let {
                     val cursor: Cursor? = activity?.contentResolver?.query(it, null, null, null, null, null)
                     cursor?.use { c ->
                         val nameIndex: Int = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
@@ -138,21 +158,22 @@ class FragmentOfferDetailsCandidature : Fragment() {
                             cvFilePath = name.replace(" ", "_")
                             nomCv.setText(name)
                             getCv.setEndIconDrawable(R.drawable.ic_delete)
+                            val inputStream = requireContext().contentResolver.openInputStream(it)
+                            cvByteArray = inputStream?.readBytes() // Read the file content into a ByteArray
                         }
                     }
                 }
             }
         }
 
-// Explorateur de fichier pour la lettre de motivation (lm)
         val myLmLauncher = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 // Récupération du Uri du fichier sélectionné pour la lettre de motivation (lm)
-                val uri: Uri? = result.data?.data
+                selectedFileUriLm = result.data?.data
                 // Utilisation du Uri (ex: affichage du nom du fichier dans un TextView)
-                uri?.let {
+                selectedFileUriLm?.let {
                     val cursor: Cursor? = activity?.contentResolver?.query(it, null, null, null, null, null)
                     cursor?.use { c ->
                         val nameIndex: Int = c.getColumnIndex(OpenableColumns.DISPLAY_NAME)
@@ -161,11 +182,14 @@ class FragmentOfferDetailsCandidature : Fragment() {
                             lmFilePath = name.replace(" ", "_")
                             nomLm.setText(name)
                             getLm.setEndIconDrawable(R.drawable.ic_delete)
+                            val inputStream = requireContext().contentResolver.openInputStream(it)
+                            lmByteArray = inputStream?.readBytes() // Read the file content into a ByteArray
                         }
                     }
                 }
             }
         }
+
 
         // Je vais demander la permission
         requestPermissionLauncher = registerForActivityResult(ActivityResultContracts.RequestPermission()) {
@@ -215,13 +239,11 @@ class FragmentOfferDetailsCandidature : Fragment() {
         // Listener du bouton de validation
         buttonValidate.setOnClickListener{
             // Vérification que chaque input soit remplis
-            val allInputsFilled = listOf(inputNom, inputPrenom,inputDateNaissance).all {
+            val allInputsFilled = listOf(inputNom, inputPrenom,inputDateNaissance, nomCv).all {
                 it.text?.isNotEmpty() == true
             }
 
             if (allInputsFilled) {
-
-                val inputNationalite : String? = autoCompleteTextView?.text?.toString()
 
                 var cvByteArray: ByteArray? = null
                 selectedFileUri?.let {
@@ -247,7 +269,7 @@ class FragmentOfferDetailsCandidature : Fragment() {
                     user.email,
                     inputPrenom.text.toString(),
                     inputNom.text.toString(),
-                    inputNationalite.toString(),
+                    inputNationalite.text.toString(),
                     formattedDate,
                     cvByteArray,
                     cvFilePath,
@@ -286,12 +308,15 @@ class FragmentOfferDetailsCandidature : Fragment() {
 
     fun launchServiceCandidater(candidat : CandidatureToSend){
         val intent = Intent(requireContext(), SendCandidatureOfferBisService::class.java)
+        Log.d("Affichage", "=====> Request body : $candidat")
+        Log.d("Affichage", "==> SERVICE 1")
         intent.putExtra("candidature", candidat as Serializable)
         intent.putExtra("identifiantOffre",  offer.identifiant)
         requireActivity().startService(intent)
     }
 
     fun launchServiceGetCandidatures(contact : String){
+        Log.d("Affichage", "==> SERVICE 2")
         val intent = Intent(requireContext(), CandidatureJobSeekersResultService::class.java)
         intent.putExtra("contact", contact)
         requireActivity().startService(intent)
@@ -349,7 +374,7 @@ class FragmentOfferDetailsCandidature : Fragment() {
                     inputPrenom.setText(selectedCandidature.firstName)
                     val date = inputFormat.parse(selectedCandidature.dateOfBirth)
                     inputDateNaissance.setText(outputFormat.format(date))
-                    autoCompleteTextView.setText(selectedCandidature.nationality)
+                    inputNationalite.setText(selectedCandidature.nationality)
                     nomCv.setText(selectedCandidature.cv)
                     nomLm.setText(selectedCandidature.lm)
                     buttonValidate.setOnClickListener{

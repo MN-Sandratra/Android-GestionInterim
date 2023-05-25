@@ -36,6 +36,10 @@ const offerSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    heureDebut:{
+        type:String,
+        required: true
+    },
     disponibilite:{
         type: Boolean,
         default:true

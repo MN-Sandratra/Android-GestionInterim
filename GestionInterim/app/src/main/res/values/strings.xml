@@ -123,6 +123,16 @@
     <string name="candidature_spontanée">Candidature spontanée</string>
     <string name="offre_details">Détails de l\'offre</string>
     <string name="offre_candidature">Candidater</string>
+    <string name="interimaireNom">Nom</string>
+    <string name="interimairePrenom">Prénom</string>
+    <string name="interimaireNationalite">Nationalité</string>
+    <string name="interimaireMail">Mail</string>
+    <string name="interimaireTelephone">Téléphone</string>
+    <string name="interimaireDateNaissance">Date de naissance</string>
+    <string name="interimaireVille">Ville</string>
+    <string name="interimaireCv">CV</string>
+    <string name="interimaireCommentaires">Commentaires</string>
+
 
 
     <!-- UTILISATEUR EMPLOYEUR -->

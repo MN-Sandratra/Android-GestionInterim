@@ -38,7 +38,7 @@ class OfferEmployerAdapter(private val onClickListener: (OfferResult) -> Unit) :
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             dateTextView.text = dateFormat.format(offer.dateDebut)
             val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-            heureTextView.text = timeFormat.format(offer.dateDebut)
+            heureTextView.text = offer.heureDebut
 
             itemView.setOnClickListener {
                 onClickListener(offer)

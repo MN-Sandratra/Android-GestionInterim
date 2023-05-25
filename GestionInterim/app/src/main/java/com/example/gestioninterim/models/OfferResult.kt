@@ -14,6 +14,7 @@ data class OfferResult (
     val experienceRequise: String,
     val description: String,
     val tauxHoraire: Double,
+    val heureDebut: String,
     val disponibilite: Boolean,
     val etat: String,
     val ville: String,

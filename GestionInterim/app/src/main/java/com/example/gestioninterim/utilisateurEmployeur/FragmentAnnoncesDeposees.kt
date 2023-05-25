@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -36,6 +37,7 @@ class FragmentAnnoncesDeposees : Fragment(), FilterDialogCallbackEmployer{
     private lateinit var recyclerView: RecyclerView
     private lateinit var offerAdapter: OfferEmployerAdapter
     private lateinit var listOffers: List<OfferResult>
+    private lateinit var imageViewEmpty: ImageView
     private lateinit var inputMetier : TextInputEditText
     private var filterMetier: String = ""
     private var filterDateDebut: String = ""
@@ -46,6 +48,7 @@ class FragmentAnnoncesDeposees : Fragment(), FilterDialogCallbackEmployer{
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
         var view =  inflater.inflate(R.layout.fragment_menu_top_annonces_deposees, container, false)
+        imageViewEmpty = view.findViewById(R.id.imageViewEmpty)
 
         val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
         val gson = Gson()
@@ -118,6 +121,15 @@ class FragmentAnnoncesDeposees : Fragment(), FilterDialogCallbackEmployer{
         println(event.offres)
         offerAdapter.updateOffers(event.offres)
         listOffers = event.offres
+        updateEmptyView()
+    }
+
+    private fun updateEmptyView() {
+        if (offerAdapter.itemCount == 0) {
+            imageViewEmpty.visibility = View.VISIBLE
+        } else {
+            imageViewEmpty.visibility = View.GONE
+        }
     }
 
     override fun onFiltersApplied(metier: String, dateDebut: String, dateFin: String) {
