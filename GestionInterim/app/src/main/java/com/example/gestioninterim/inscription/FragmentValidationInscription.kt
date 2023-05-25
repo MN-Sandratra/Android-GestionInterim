@@ -10,6 +10,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import com.example.gestioninterim.resultEvent.OffersResultEvent
@@ -32,6 +33,12 @@ class FragmentValidationInscription : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_inscription_validation, container, false)
+
+        val activity = activity as InscriptionActivity
+        val skipButton = activity.findViewById<ImageButton>(R.id.imageButton)
+        val inscriptionLaterTV = activity.findViewById<TextView>(R.id.inscriptionLater)
+        inscriptionLaterTV.visibility = View.GONE
+        skipButton.visibility = View.GONE
 
         // Définition des boutons
         val clickHere = view.findViewById<TextView>(R.id.clickHere)

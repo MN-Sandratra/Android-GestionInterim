@@ -35,11 +35,6 @@ class MainInterimaireActivity : AppCompatActivity() {
                     loadFragment(fragment, R.string.sub_title_search)
                     return@setOnItemSelectedListener true
                 }
-                R.id.missions_page -> {
-                    val fragment = FragmentOfferAnonyme()
-                    loadFragment(fragment, R.string.sub_title_search)
-                    return@setOnItemSelectedListener true
-                }
                 R.id.candidatures_page -> {
                     val fragment = FragmentCandidaturesInterimaire()
                     loadFragment(fragment, R.string.sub_title_consult_missions)

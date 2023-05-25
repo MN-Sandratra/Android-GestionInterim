@@ -37,6 +37,11 @@ router.post('/', async (req, res) => {
     const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
     try{
 
+      const existingEmployer = await Employer.findOne({ email1: req.body.email1 });
+      if (existingEmployer) {
+          return res.status(400).json({ message: "Un employer avec cet email existe déjà" });
+      }
+
         const employer = new Employer({
         companyName: req.body.companyName,
         department: req.body.department,

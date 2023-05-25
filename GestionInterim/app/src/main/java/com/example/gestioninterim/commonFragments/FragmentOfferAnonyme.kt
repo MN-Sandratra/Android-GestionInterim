@@ -19,9 +19,12 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
+import android.app.AlertDialog
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.ProgressBar
 import com.example.gestioninterim.adapter.*
+import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.utilisateurInterimaire.OffreDetail
@@ -52,7 +55,7 @@ class FragmentOfferAnonyme : Fragment(), FilterDialogCallback {
     private var filterDateDebut: String = ""
     private var filterDateFin: String = ""
     private var filterRayon: Int = 30
-
+    private lateinit var imageViewEmpty: ImageView
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -63,10 +66,22 @@ class FragmentOfferAnonyme : Fragment(), FilterDialogCallback {
         inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
         val moreFilter = view.findViewById<ImageButton>(R.id.imageButtonFiltres)
+        imageViewEmpty = view.findViewById(R.id.imageViewEmpty)
 
         // Initialise le RecyclerView et l'adaptateur.
         recyclerView = view.findViewById(R.id.vertical_recycler_view_offres)
         offerAdapter = OfferAdapter { offer ->
+
+            AlertDialog.Builder(requireContext()).apply {
+                setTitle("Non connecté")
+                setMessage("Vous devez être connecté pour candidater. Voulez-vous vous connecter maintenant ?")
+                setPositiveButton("Oui") { _, _ ->
+                    // Si l'utilisateur clique sur "Oui", démarrer l'activité de connexion
+                    startActivity(Intent(requireContext(), LoginActivity::class.java))
+                }
+                setNegativeButton("Non", null) // Ne fait rien si l'utilisateur clique sur "Non"
+            }.show()
+
         }
 
         recyclerView.apply {
@@ -158,8 +173,11 @@ class FragmentOfferAnonyme : Fragment(), FilterDialogCallback {
                 longitude = "2.34"
             }
         }.addOnCompleteListener {
-            launchServiceOffers(latitude, longitude)
+            if (it.isSuccessful && isAdded) {
+                launchServiceOffers(latitude, longitude)
+            }
         }
+        launchServiceOffers(latitude, longitude)
     }
 
     fun launchServiceOffers(latitude: String, longitude: String) {
@@ -182,6 +200,15 @@ class FragmentOfferAnonyme : Fragment(), FilterDialogCallback {
     fun onGetOffersResult(event: OffersResultEvent) {
         offerAdapter.updateOffers(event.offres)
         listOffers = event.offres
+        updateEmptyView()
+    }
+
+    private fun updateEmptyView() {
+        if (offerAdapter.itemCount == 0) {
+            imageViewEmpty.visibility = View.VISIBLE
+        } else {
+            imageViewEmpty.visibility = View.GONE
+        }
     }
 
     override fun onFiltersApplied(ville: String, dateDebut: String, dateFin: String, rayon: Int) {

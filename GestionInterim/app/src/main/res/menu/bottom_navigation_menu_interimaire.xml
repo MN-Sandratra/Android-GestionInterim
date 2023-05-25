@@ -13,11 +13,6 @@
         android:icon="@drawable/ic_search"/>
 
     <item
-        android:id="@+id/missions_page"
-        android:title="@string/bottom_missions_item"
-        android:icon="@drawable/ic_missions"/>
-
-    <item
         android:id="@+id/candidatures_page"
         android:title="@string/bottom_candidatures_item"
         android:icon="@drawable/ic_candidatures"/>

@@ -1,5 +1,6 @@
 package com.example.gestioninterim.utilisateurEmployeur
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,14 +28,24 @@ class FragmentAccueilPage2Employeur : Fragment() {
         cardViewDeconnexion.setOnClickListener {
             // Effacer les données sauvegardées
             val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
-            sharedPreferences?.edit()?.clear()?.apply()
+            val builder = AlertDialog.Builder(activity)
+            builder.setTitle("Déconnexion")
+            builder.setMessage("Êtes-vous sûr de vouloir vous déconnecter ?")
+            builder.setPositiveButton("Oui") { dialog, _ ->
 
-            // Démarrer LoginActivity
-            val intent = Intent(activity, LoginActivity::class.java)
-            startActivity(intent)
-
-            // Terminer l'activité actuelle
-            activity?.finish()
+                sharedPreferences?.edit()?.clear()?.apply()
+                // Démarrer LoginActivity
+                val intent = Intent(activity, LoginActivity::class.java)
+                startActivity(intent)
+                // Terminer l'activité actuelle
+                activity?.finish()
+                dialog.dismiss()
+            }
+            builder.setNegativeButton("Non") { dialog, _ ->
+                dialog.dismiss()
+            }
+            val dialog = builder.create()
+            dialog.show()
         }
 
 

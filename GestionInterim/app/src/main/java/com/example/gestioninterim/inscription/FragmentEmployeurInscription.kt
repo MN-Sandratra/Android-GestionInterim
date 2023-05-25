@@ -2,6 +2,7 @@ package com.example.gestioninterim.inscription
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,14 +13,23 @@ import com.example.gestioninterim.R
 import com.example.gestioninterim.services.InscriptionService
 import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.models.UtilisateurEmployeur
+import com.example.gestioninterim.resultEvent.ValidationBooleanEvent
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
+import org.w3c.dom.Text
 import java.io.Serializable
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
 class FragmentEmployeurInscription : Fragment() {
+
+
+    private lateinit var inputNomEntreprise : TextInputEditText
+    private lateinit var inputMailContact1 : TextInputEditText
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
@@ -36,7 +46,7 @@ class FragmentEmployeurInscription : Fragment() {
         val buttonValidate = view.findViewById<MaterialButton>(R.id.buttonValidationInscription)
 
         // Input employeurs
-        val inputNomEntreprise = view.findViewById<TextInputEditText>(R.id.inputTextNomEntreprise)
+        inputNomEntreprise = view.findViewById(R.id.inputTextNomEntreprise)
         val inputNomService = view.findViewById<TextInputEditText>(R.id.inputTextNomService)
         val inputNomSousService = view.findViewById<TextInputEditText>(R.id.inputTextNomSousService)
         val inputMdp = view.findViewById<TextInputEditText>(R.id.inputTextPassword)
@@ -47,7 +57,7 @@ class FragmentEmployeurInscription : Fragment() {
 
         val inputNomContact1 = view.findViewById<TextInputEditText>(R.id.inputTextNomContact1)
         val inputTelephoneContact1 = view.findViewById<TextInputEditText>(R.id.inputTextTelephoneContact1)
-        val inputMailContact1 = view.findViewById<TextInputEditText>(R.id.inputTextMailContact1)
+        inputMailContact1 = view.findViewById(R.id.inputTextMailContact1)
         val inputNomContact2 = view.findViewById<TextInputEditText>(R.id.inputTextNomContact2)
         val inputTelephoneContact2 = view.findViewById<TextInputEditText>(R.id.inputTextTelephoneContact2)
         val inputMailContact2 = view.findViewById<TextInputEditText>(R.id.inputTextMailContact2)
@@ -97,14 +107,6 @@ class FragmentEmployeurInscription : Fragment() {
                 // Lancement du service d'inscription
                 launchServiceInscription(user)
 
-                // Lancement du fragment de validation
-                val fragment = FragmentValidationInscription()
-                val args = Bundle()
-                args.putString("username", inputNomEntreprise.text.toString())
-                args.putString("email", inputMailContact1.text.toString())
-                fragment.arguments = args
-                val fragmentManager = requireActivity().supportFragmentManager
-                fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
 
 
             } else if (!isMdpMatching) {
@@ -119,10 +121,22 @@ class FragmentEmployeurInscription : Fragment() {
         return view
     }
 
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
     // Lancement du service d'inscription
     fun launchServiceInscription(user : UtilisateurEmployeur){
         val intent = Intent(requireContext(), InscriptionService::class.java)
         intent.putExtra("utilisateur", user as Serializable)
+        Log.d("Affichage", "===> LAA")
+
         intent.putExtra("type", "employers")
         requireActivity().startService(intent)
     }
@@ -140,6 +154,24 @@ class FragmentEmployeurInscription : Fragment() {
             return hexString.toString()
         } catch (e: NoSuchAlgorithmException) {
             throw RuntimeException("Error hashing password", e)
+        }
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPostInscriptionResult(event: ValidationBooleanEvent) {
+        Log.d("Affichage", "===> ${event.validateRequest}")
+        if(event.validateRequest){
+            // Lancement du fragment de validation
+            val fragment = FragmentValidationInscription()
+            val args = Bundle()
+            args.putString("username", inputNomEntreprise.text.toString())
+            args.putString("email", inputMailContact1.text.toString())
+            fragment.arguments = args
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
+        }
+        else{
+            Toast.makeText(requireContext(), "L'émail est déjà utilisé !", Toast.LENGTH_SHORT).show()
         }
     }
 

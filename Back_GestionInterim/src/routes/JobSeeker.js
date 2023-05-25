@@ -35,6 +35,12 @@ const upload = multer({
 router.post('/', upload.single('contenuCv'), async (req, res) => {
     const confirmationCode = Math.floor(Math.random() * 9000) + 1000;
     try {
+
+        const existingJobSeeker = await JobSeeker.findOne({ email: req.body.email });
+        if (existingJobSeeker) {
+            return res.status(400).json({ message: "Un chercheur d'emploi avec cet email existe déjà" });
+        }
+
         const jobSeeker = new JobSeeker({
             firstName: req.body.firstName,
             lastName: req.body.lastName,

@@ -21,7 +21,6 @@ class CandidatureEmployerAdapter(private val onClickListener: (CandidatureEmploy
         val metierTextView: TextView = view.findViewById(R.id.offreMetier)
         val lieuTextView: TextView = view.findViewById(R.id.offreLieu)
         val dateTextView: TextView = view.findViewById(R.id.offreDate)
-        val heureTextView: TextView = view.findViewById(R.id.offreHeure)
         val voirPlusTextView: TextView = view.findViewById(R.id.voirPlus)
         val readMoreImage: ImageView = view.findViewById(R.id.readMoreImage)
 
@@ -30,8 +29,6 @@ class CandidatureEmployerAdapter(private val onClickListener: (CandidatureEmploy
             lieuTextView.text = candidatureResult.offre.ville
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             dateTextView.text = dateFormat.format(candidatureResult.offre.dateDebut)
-            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-            heureTextView.text = candidatureResult.offre.heureDebut
 
             itemView.setOnClickListener {
                 onClickListener(candidatureResult)

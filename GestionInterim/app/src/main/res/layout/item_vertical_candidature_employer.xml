@@ -74,24 +74,6 @@
         app:layout_constraintTop_toBottomOf="@+id/offreLieu">
 
         <TextView
-            android:id="@+id/offreTiret"
-            style="@style/DefaultTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/offreDate"
-            android:text="-"></TextView>
-
-        <TextView
-            android:id="@+id/offreHeure"
-            style="@style/DefaultTextStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@+id/offreTiret"
-            android:text="10:45"></TextView>
-
-        <TextView
             android:id="@+id/offreDate"
             style="@style/DefaultTextStyle"
             android:layout_width="wrap_content"

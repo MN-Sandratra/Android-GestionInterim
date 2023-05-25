@@ -3,6 +3,7 @@ package com.example.gestioninterim.inscription
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -10,6 +11,7 @@ import android.database.Cursor
 import android.net.Uri
 import android.os.Bundle
 import android.provider.OpenableColumns
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +27,15 @@ import com.example.gestioninterim.R
 import com.example.gestioninterim.services.InscriptionService
 import com.example.gestioninterim.login.LoginActivity
 import com.example.gestioninterim.models.UtilisateurInterimaire
+import com.example.gestioninterim.resultEvent.ValidationBooleanEvent
+import com.example.gestioninterim.utilisateurInterimaire.FragmentCandidaturesInterimaire
+import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import java.io.Serializable
 import java.nio.charset.StandardCharsets
 import java.security.MessageDigest
@@ -40,6 +48,7 @@ class FragmentInterimaireInscription : Fragment() {
     // Définition de l'URI du CV
     private var selectedFileUri: Uri? = null
     private var nomFichier: String? = null
+    private lateinit var inputMail: TextInputEditText
 
     // Explorateur de fichier
     private lateinit var myLauncher: ActivityResultLauncher<Intent>
@@ -66,7 +75,7 @@ class FragmentInterimaireInscription : Fragment() {
         val inputPrenom = view.findViewById<TextInputEditText>(R.id.inputTextPrenom)
         val inputMdp = view.findViewById<TextInputEditText>(R.id.inputTextPassword)
         val inputConfirmMdp = view.findViewById<TextInputEditText>(R.id.inputTextConfirmPassword)
-        val inputMail = view.findViewById<TextInputEditText>(R.id.inputTextMail)
+        inputMail = view.findViewById<TextInputEditText>(R.id.inputTextMail)
         val inputTelephone = view.findViewById<TextInputEditText>(R.id.inputTextTelephone)
         val inputDateNaissance = view.findViewById<TextInputEditText>(R.id.inputDateNaissance)
         val inputVille = view.findViewById<TextInputEditText>(R.id.inputVille)
@@ -231,16 +240,6 @@ class FragmentInterimaireInscription : Fragment() {
 
                 launchServiceInscription(user)
 
-                val fragment = FragmentValidationInscription()
-
-                val args = Bundle()
-                args.putString("email", inputMailText)
-
-                fragment.arguments = args
-
-                val fragmentManager = requireActivity().supportFragmentManager
-                fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
-
             } else if (!isMdpMatching) {
                 Toast.makeText(requireContext(), "Les mots de passe ne correspondent pas", Toast.LENGTH_SHORT).show()
             }
@@ -291,4 +290,34 @@ class FragmentInterimaireInscription : Fragment() {
         // Affichez le DatePickerDialog
         datePickerDialog.show()
     }
+
+    override fun onStart() {
+        super.onStart()
+        EventBus.getDefault().register(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onPostInscriptionResult(event: ValidationBooleanEvent) {
+        Log.d("Affichage", "===> ${event.validateRequest}")
+        if(event.validateRequest){
+            val fragment = FragmentValidationInscription()
+
+            val args = Bundle()
+            args.putString("email", inputMail.text.toString())
+
+            fragment.arguments = args
+
+            val fragmentManager = requireActivity().supportFragmentManager
+            fragmentManager.beginTransaction().replace(R.id.containerInscription, fragment).commit()
+        }
+        else{
+            Toast.makeText(requireContext(), "L'émail est déjà utilisé !", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }
