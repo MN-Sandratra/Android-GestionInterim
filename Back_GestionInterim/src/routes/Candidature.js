@@ -164,4 +164,43 @@ router.delete('/:id', async (req, res) => {
   }
 });
 
+router.get('/download/cv/:id', async (req, res) => {
+  try {
+    const candidature = await Candidature.findById(req.params.id);
+    if (!candidature) {
+      return res.status(404).json({ message: 'Candidature non trouvée' });
+    }
+
+    const cvPath = candidature.cv;
+    if (!cvPath) {
+      return res.status(404).json({ message: 'CV non trouvé pour cette candidature' });
+    }
+
+    res.download(cvPath);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur est survenue lors du téléchargement du CV' });
+  }
+});
+
+// Télécharger la lettre de motivation d'une candidature
+router.get('/download/lm/:id', async (req, res) => {
+  try {
+    const candidature = await Candidature.findById(req.params.id);
+    if (!candidature) {
+      return res.status(404).json({ message: 'Candidature non trouvée' });
+    }
+
+    const lmPath = candidature.lm;
+    if (!lmPath) {
+      return res.status(404).json({ message: 'Lettre de motivation non trouvée pour cette candidature' });
+    }
+
+    res.download(lmPath);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Une erreur est survenue lors du téléchargement de la lettre de motivation' });
+  }
+});
+
 module.exports = router;

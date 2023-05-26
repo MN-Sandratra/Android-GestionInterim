@@ -67,7 +67,7 @@ class ConversationListFragment : Fragment() {
         requireContext().startService(intent)
     }
 
-    override fun onConversationClicked(participantId: String) {
+    fun onConversationClicked(participantId: String) {
         val intent = Intent(requireContext(), MessageActivity::class.java)
         intent.putExtra("participantId", participantId)
         startActivity(intent)

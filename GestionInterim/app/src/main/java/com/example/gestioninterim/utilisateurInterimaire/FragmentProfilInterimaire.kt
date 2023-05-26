@@ -131,6 +131,7 @@ class FragmentProfilInterimaire : Fragment() {
                 ).show()
             } else {
                 val updatedUser = UtilisateurInterimaire(
+                    _id=user._id,
                     lastName = lastName,
                     firstName = firstName,
                     email = email,
