@@ -73,7 +73,6 @@ class FragmentCandidaturesValidees : Fragment() {
         intent.putExtra("status", "acceptée")
         requireContext().startService(intent)
     }
-
     override fun onResume() {
         super.onResume()
         launchServiceCandidatures()

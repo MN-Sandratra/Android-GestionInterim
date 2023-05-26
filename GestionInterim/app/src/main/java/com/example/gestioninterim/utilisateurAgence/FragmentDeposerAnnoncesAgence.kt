@@ -98,6 +98,19 @@ class FragmentDeposerAnnoncesAgence : Fragment() {
         val buttonAddOffer = view.findViewById<MaterialButton>(R.id.addOfferButton)
 
         buttonAddOffer.setOnClickListener {
+
+            if(editTextList.size == 0){
+                Toast.makeText(context, "Veuillez choisir au moins une offre", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            for (editText in editTextList) {
+                if (editText.text.toString().isEmpty()) {
+                    Toast.makeText(context, "Veuillez remplir toutes les offres avant de soumettre", Toast.LENGTH_LONG).show()
+                    return@setOnClickListener
+                }
+            }
+
             val offers = editTextList.mapNotNull { editText ->
                 val json = editTextToContent[editText]
                 try {

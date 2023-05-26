@@ -110,7 +110,6 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
     fun onGetCandidaturesResult(event: CandidaturesResultEvent) {
         candidaturesAdapter.updateCandidatures(event.candidatures)
         listCandidatures = event.candidatures
-        Log.d("CANDIDATURES", "list => ${listCandidatures[0].candidature.email}")
         Log.d("Affichage", "=> A TRAITER 2")
         updateEmptyView()
 

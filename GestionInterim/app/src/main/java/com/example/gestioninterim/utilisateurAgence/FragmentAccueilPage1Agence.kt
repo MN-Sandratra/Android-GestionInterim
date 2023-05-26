@@ -22,7 +22,7 @@ class FragmentAccueilPage1Agence : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
-        var view =  inflater.inflate(R.layout.fragment_employer_accueil_page_1, container, false)
+        var view =  inflater.inflate(R.layout.fragment_agence_accueil_page_1, container, false)
 
         val cardViewDeposerAnnonces = view.findViewById<MaterialCardView>(R.id.cardViewDeposerAnnonces)
         val cardViewConsult = view.findViewById<MaterialCardView>(R.id.cardViewConsult)

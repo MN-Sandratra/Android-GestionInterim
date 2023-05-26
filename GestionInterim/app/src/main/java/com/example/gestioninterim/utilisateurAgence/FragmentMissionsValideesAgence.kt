@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +30,7 @@ class FragmentMissionsValideesAgence : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var candidaturesAdapter: CandidatureEmployerAdapter
     private lateinit var listCandidatures : List<CandidatureEmployerResult>
+    private lateinit var imageViewEmpty: ImageView
 
     private lateinit var user : UtilisateurEmployeur
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
@@ -39,6 +41,7 @@ class FragmentMissionsValideesAgence : Fragment() {
         val gson = Gson()
         val jsonUser = sharedPreferences!!.getString("user", "")
         user = gson.fromJson(jsonUser, UtilisateurEmployeur::class.java)
+        imageViewEmpty = view.findViewById(R.id.imageViewEmpty)
 
         val searchButton = view.findViewById<MaterialButton>(R.id.validateSearchJob)
         val moreFilter = view.findViewById<ImageButton>(R.id.imageButtonFiltres)
@@ -96,13 +99,19 @@ class FragmentMissionsValideesAgence : Fragment() {
         super.onStop()
         EventBus.getDefault().unregister(this)
     }
-
+    private fun updateEmptyView() {
+        if (candidaturesAdapter.itemCount == 0) {
+            imageViewEmpty.visibility = View.VISIBLE
+        } else {
+            imageViewEmpty.visibility = View.GONE
+        }
+    }
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetCandidaturesResult(event: CandidaturesResultEvent) {
 
         candidaturesAdapter.updateCandidatures(event.candidatures)
         listCandidatures = event.candidatures
-        Log.d("CANDIDATURES", "list => ${listCandidatures[0].candidature.email}")
+        updateEmptyView()
     }
 
 }

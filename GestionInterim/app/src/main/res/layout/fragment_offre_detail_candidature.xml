@@ -211,7 +211,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/DefaultMargin"
-        android:text="Ou utiliser une candidature déjà existante"
+        android:text="Utiliser une candidature déjà existante"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/view"></TextView>
