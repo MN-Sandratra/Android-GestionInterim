@@ -20,6 +20,7 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
 import android.app.AlertDialog
+import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
@@ -181,6 +182,7 @@ class FragmentOfferAnonyme : Fragment(), FilterDialogCallback {
     }
 
     fun launchServiceOffers(latitude: String, longitude: String) {
+        Log.d("Affichage", "===> LAUCUN")
         val offerRequest = OfferDAO(latitude = latitude, longitude = longitude)
         val intent = Intent(requireContext(), OffresService::class.java)
         intent.putExtra("offerRequest", offerRequest as Serializable)
@@ -218,6 +220,7 @@ class FragmentOfferAnonyme : Fragment(), FilterDialogCallback {
         filterDateFin = dateFin
         filterRayon = rayon
 
+        Log.d("Affichage", "===> LAUCUN2")
 
         val offerRequest = OfferDAO(metier = inputMetier.text.toString(), ville = ville, latitude = latitude, longitude = longitude, rayon = rayon, dateDebut = dateDebut, dateFin = dateFin)
         val intent = Intent(requireContext(), OffresService::class.java)

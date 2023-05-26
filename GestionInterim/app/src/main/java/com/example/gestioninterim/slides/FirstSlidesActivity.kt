@@ -3,11 +3,9 @@ package com.example.gestioninterim.slides
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.view.View
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
@@ -16,9 +14,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
 import com.example.gestioninterim.login.LoginActivity
-import com.example.gestioninterim.utilisateurEmployeur.FragmentSlides
-import com.example.gestioninterim.utilisateurEmployeur.MainEmployeurActivity
-import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
 
 class FirstSlidesActivity : AppCompatActivity() {
 

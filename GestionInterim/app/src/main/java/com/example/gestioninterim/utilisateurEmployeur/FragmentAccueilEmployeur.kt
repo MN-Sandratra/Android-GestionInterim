@@ -1,6 +1,5 @@
 package com.example.gestioninterim.utilisateurEmployeur
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.gestioninterim.R
-import com.google.android.material.card.MaterialCardView
+import com.example.gestioninterim.utilisateurAgence.FragmentAccueilPage2Agence
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlin.math.roundToInt
 
 class FragmentAccueilEmployeur : Fragment() {
 

@@ -18,13 +18,25 @@ import okhttp3.Request
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import org.greenrobot.eventbus.EventBus
+import java.io.IOException
 import java.net.URLEncoder
+import java.nio.Buffer
 import java.util.concurrent.Executors
 import java.util.concurrent.TimeUnit
 
 class ProfilInterimaireService : Service() {
 
     lateinit var utilisateur: UtilisateurInterimaire
+
+    fun getRequestBodyContent(requestBody: RequestBody): String {
+        return try {
+            val buffer = okio.Buffer()
+            requestBody.writeTo(buffer)
+            buffer.readUtf8()
+        } catch (e: IOException) {
+            "Erreur lors de la lecture du contenu du RequestBody"
+        }
+    }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
@@ -51,10 +63,15 @@ class ProfilInterimaireService : Service() {
             utilisateur.phoneNumber ?: ""
         }
 
+        val url = "http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/jobseekers/"
+
         val request = Request.Builder()
-            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/jobseekers/")
+            .url(url)
             .put(requestBody)
             .build()
+
+        Log.d("Affichage", "url => $url")
+        Log.d("Affichage", "body => ${getRequestBodyContent(requestBody)}")
 
         Executors.newSingleThreadExecutor().execute {
             client.newCall(request).execute().use { response ->

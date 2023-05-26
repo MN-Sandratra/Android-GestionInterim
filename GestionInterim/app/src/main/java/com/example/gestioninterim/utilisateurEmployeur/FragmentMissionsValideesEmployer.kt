@@ -19,7 +19,6 @@ import com.example.gestioninterim.models.UtilisateurEmployeur
 import com.example.gestioninterim.resultEvent.CandidaturesResultEvent
 import com.example.gestioninterim.services.CandidatureResultService
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe

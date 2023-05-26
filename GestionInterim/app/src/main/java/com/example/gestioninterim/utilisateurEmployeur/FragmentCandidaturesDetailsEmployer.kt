@@ -8,29 +8,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.gestioninterim.R
-import com.example.gestioninterim.adapter.CandidatureEmployerAdapter
-import com.example.gestioninterim.adapter.OfferDecorationItem
-import com.example.gestioninterim.adapter.OfferEmployerAdapter
-import com.example.gestioninterim.models.Candidature
 import com.example.gestioninterim.models.CandidatureEmployerResult
-import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.models.UtilisateurEmployeur
-import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
-import com.example.gestioninterim.resultEvent.CandidaturesResultEvent
 import com.example.gestioninterim.resultEvent.ValidationBooleanEvent
-import com.example.gestioninterim.services.AbonnementsService
 import com.example.gestioninterim.services.CandidatureEmployerTraitementService
-import com.example.gestioninterim.services.CandidatureResultService
-import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails
-import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.gson.Gson
@@ -39,7 +23,6 @@ import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import java.text.SimpleDateFormat
 import java.util.Locale
-import java.util.TimeZone
 
 class FragmentCandidaturesDetailsEmployer : Fragment() {
 

@@ -1,5 +1,6 @@
 package com.example.gestioninterim.adapter
 
+import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
@@ -26,6 +27,7 @@ class CandidatureInterimaireAdapter(private val onClickListener: (CandidatureEmp
         val readMoreImage: ImageView = view.findViewById(R.id.readMoreImage)
 
         fun bind(candidatureResult: CandidatureEmployerResult) {
+            Log.d("Affichage", "=> $candidatureResult")
             metierTextView.text = candidatureResult.offre.intitule
             lieuTextView.text = candidatureResult.offre.ville
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())

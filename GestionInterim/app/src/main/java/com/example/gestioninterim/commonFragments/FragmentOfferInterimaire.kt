@@ -19,6 +19,7 @@ import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
 import org.greenrobot.eventbus.ThreadMode
 import android.Manifest;
+import android.content.Context
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ImageView
@@ -26,6 +27,7 @@ import android.widget.ProgressBar
 import com.example.gestioninterim.adapter.*
 import com.example.gestioninterim.models.OfferDAO
 import com.example.gestioninterim.models.OfferResult
+import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.example.gestioninterim.utilisateurInterimaire.FragmentAddCandidature
 import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
@@ -53,16 +55,25 @@ class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
         longitude = "2.34"
     }
 
+    private var useUserCity: Boolean = false
+
+
     private lateinit var inputMetier : TextInputEditText
     private var filterVille: String = ""
     private var filterDateDebut: String = ""
     private var filterDateFin: String = ""
     private var filterRayon: Int = 30
+    private lateinit var user : UtilisateurInterimaire
     private lateinit var imageViewEmpty: ImageView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_menu_top_search, container, false)
+
+        val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
+        val gson = Gson()
+        val jsonUser = sharedPreferences!!.getString("user", "")
+        user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
 
         // Initialisation des variables layout
         inputMetier = view.findViewById<TextInputEditText>(R.id.editMetier)
@@ -94,10 +105,14 @@ class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
         // Ajout de l'écart entre chaque offre
         recyclerView.addItemDecoration(OfferDecorationItem())
 
-        // Permission de localisation
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
-        requestLocationPermission()
 
+//        if (user.city != null) {
+//            useUserCity = true
+//            onFiltersApplied(user.city!!, "", "", 30)
+//        } else {
+//            useUserCity = false
+//            requestLocationPermission()
+//        }
 
         // Listener du bouton de validation
         searchButton.setOnClickListener {
@@ -199,8 +214,12 @@ class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
 
     override fun onResume() {
         super.onResume()
-        Log.d("Debug", "onResume called")
-        getLastKnownLocation()
+        if (user.city != null) {
+            useUserCity = true
+            onFiltersApplied(user.city!!, "", "", 30)
+        } else {
+            getLastKnownLocation()
+        }
     }
 
     override fun onStop() {
@@ -230,8 +249,16 @@ class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
         filterDateFin = dateFin
         filterRayon = rayon
 
+        Log.d("Affichage","=> ville $ville")
 
-        val offerRequest = OfferDAO(metier = inputMetier.text.toString(), ville = ville, latitude = latitude, longitude = longitude, rayon = rayon, dateDebut = dateDebut, dateFin = dateFin)
+        Log.d("Affichage", "==> $useUserCity")
+
+        val offerRequest = if (useUserCity) {
+            OfferDAO(metier = inputMetier.text.toString(), ville = ville, rayon = rayon, dateDebut = dateDebut, dateFin = dateFin)
+        } else {
+            OfferDAO(metier = inputMetier.text.toString(), latitude = latitude, longitude = longitude, rayon = rayon, dateDebut = dateDebut, dateFin = dateFin)
+        }
+
         val intent = Intent(requireContext(), OffresService::class.java)
         intent.putExtra("offerRequest", offerRequest as Serializable)
         requireContext().startService(intent)

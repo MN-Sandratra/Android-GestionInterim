@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const JobSeeker = require('../models/jobSeeker');
 const Employer = require('../models/employer');
+const Agence = require('../models/agence');
 const crypto = require('crypto');
 
 router.post('/validate', async (req, res) => {
@@ -12,8 +13,9 @@ router.post('/validate', async (req, res) => {
   try {
     const jobSeeker = await JobSeeker.findOne({ email: email });
     const employer = await Employer.findOne({ email1: email });
+    const agence = await Agence.findOne({ email1: email });
 
-    if (!jobSeeker && !employer) {
+    if (!jobSeeker && !employer && !agence) {
       return res.status(404).json({ message: 'Utilisateur non trouvé' });
     }
 
@@ -22,6 +24,10 @@ router.post('/validate', async (req, res) => {
     }
 
     if (employer && employer.validationCode !== validationCode) {
+      return res.status(400).json({ message: "Code de validation incorrect" });
+    }
+
+    if (agence && agence.validationCode !== validationCode) {
       return res.status(400).json({ message: "Code de validation incorrect" });
     }
 
@@ -36,6 +42,12 @@ router.post('/validate', async (req, res) => {
       await employer.save();
       userType = "employers";
       user = employer;
+    }
+    else if (agence) {
+      agence.isValidated = true;
+      await agence.save();
+      userType = "agence";
+      user = agence;
     }
     
 
@@ -55,8 +67,9 @@ router.post('/code', async (req, res) => {
   try {
       const jobSeeker = await JobSeeker.findOne({ email: email });
       const employer = await Employer.findOne({ email1: email });
+      const agence = await Agence.findOne({ email1: email });
 
-      if (!jobSeeker && !employer) {
+      if (!jobSeeker && !employer && !agence) {
           return res.status(404).json({ message: "Utilisateur non trouvé" });
       }
 
@@ -68,6 +81,11 @@ router.post('/code', async (req, res) => {
       if(employer){
         employer.validationCode = confirmationCode;
         await employer.save();  
+      }
+
+      if(agence){
+        agence.validationCode = confirmationCode;
+        await agence.save();  
       }
 
       mailService.sendConfirmationCodeByEmail(email, confirmationCode)

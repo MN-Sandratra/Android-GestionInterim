@@ -15,19 +15,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gestioninterim.R
 import com.example.gestioninterim.adapter.CandidatureEmployerAdapter
 import com.example.gestioninterim.adapter.OfferDecorationItem
-import com.example.gestioninterim.adapter.OfferEmployerAdapter
-import com.example.gestioninterim.models.Candidature
 import com.example.gestioninterim.models.CandidatureEmployerResult
-import com.example.gestioninterim.models.OfferResult
 import com.example.gestioninterim.models.UtilisateurEmployeur
-import com.example.gestioninterim.resultEvent.AbonnementsResultEvent
 import com.example.gestioninterim.resultEvent.CandidaturesResultEvent
-import com.example.gestioninterim.services.AbonnementsService
 import com.example.gestioninterim.services.CandidatureResultService
-import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails
-import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
+
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.card.MaterialCardView
 import com.google.gson.Gson
 import org.greenrobot.eventbus.EventBus
 import org.greenrobot.eventbus.Subscribe
@@ -78,9 +71,6 @@ class FragmentCandidaturesTraiterEmployer : Fragment() {
         }
 
         recyclerView.addItemDecoration(OfferDecorationItem())
-
-
-        launchServiceCandidatures()
 
         return view
     }

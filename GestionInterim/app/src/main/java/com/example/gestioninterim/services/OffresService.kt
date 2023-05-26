@@ -87,37 +87,50 @@ class OffresService : Service() {
 
             val reqParam = reqParamBuilder.toString()
 
-
             val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/offers/?$reqParam")
+            val mURLbis = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/offersAgence/?$reqParam")
+
             println("La requête est : $reqParam")
+            Log.d("Affichage", "=> requete $reqParam")
 
-            with(mURL.openConnection() as HttpURLConnection) {
-                // optional default is GET
-                requestMethod = "GET"
+            var totalRequests = 2
+            val offers1 = mutableListOf<OfferResult>()
+            val offers2 = mutableListOf<OfferResult>()
 
-                println("URL : $url")
-                println("Response Code : $responseCode")
-                if (responseCode == HttpURLConnection.HTTP_OK) {
-                    BufferedReader(InputStreamReader(inputStream)).use {
-                        val response = StringBuffer()
+            val processResponse: (HttpURLConnection, MutableList<OfferResult>) -> Unit = { conn, offers ->
+                with(conn) {
+                    requestMethod = "GET"
 
-                        var inputLine = it.readLine()
-                        while (inputLine != null) {
-                            response.append(inputLine)
-                            inputLine = it.readLine()
+                    println("URL : $url")
+                    println("Response Code : $responseCode")
+
+                    if (responseCode == HttpURLConnection.HTTP_OK) {
+                        BufferedReader(InputStreamReader(inputStream)).use {
+                            val response = StringBuffer()
+
+                            var inputLine = it.readLine()
+                            while (inputLine != null) {
+                                response.append(inputLine)
+                                inputLine = it.readLine()
+                            }
+
+                            val gson = Gson()
+                            val offersType = object : TypeToken<List<OfferResult>>() {}.type
+                            offers.addAll(gson.fromJson(response.toString(), offersType))
                         }
-                        // Convert JSON response to a list of Offer objects
-                        val gson = Gson()
-                        val offersType = object : TypeToken<List<OfferResult>>() {}.type
-                        val offers: List<OfferResult> = gson.fromJson(response.toString(), offersType)
-                        callback(offers)
                     }
-                } else {
-                    callback(emptyList())
+
+                    if (--totalRequests == 0) {
+                        callback(offers1 + offers2)
+                    }
                 }
             }
+
+            processResponse(mURL.openConnection() as HttpURLConnection, offers1)
+            processResponse(mURLbis.openConnection() as HttpURLConnection, offers2)
         }
     }
+
 
     fun sendPostRequestOffer(newOffer : Offer, callback: (success: Boolean) -> Unit) {
         Executors.newSingleThreadExecutor().execute {

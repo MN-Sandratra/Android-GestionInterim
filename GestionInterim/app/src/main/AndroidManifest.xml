@@ -19,7 +19,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".MessageActivity"
+            android:name=".message.MessageActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -40,7 +40,7 @@
         <service android:name=".services.SendCandidatureOfferService"/>
         <service android:name=".services.SendCandidatureOfferBisService"/>
         <service android:name=".services.CandidatureEmployerTraitementService"/>
-
+        <service android:name=".services.AbonnementsServiceAgence"/>
 
         <activity
             android:name=".message.ConversationListActivity"
@@ -76,12 +76,27 @@
             android:name=".utilisateurEmployeur.MainEmployeurActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".utilisateurEmployeur.ActivityAbonnement"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+
+        <activity
+            android:name=".utilisateurAgence.MainAgenceActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".utilisateurEmployeur.SlidesActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
+
         <activity
-            android:name=".utilisateurEmployeur.ActivityAbonnement"
+            android:name=".utilisateurAgence.SlidesActivityAgence"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".utilisateurAgence.ActivityAbonnementAgence"
             android:exported="false"
             android:windowSoftInputMode="adjustPan" />
 
@@ -99,9 +114,11 @@
         <service android:name=".services.InscriptionService" />
         <service android:name=".services.LoginService" />
         <service android:name=".services.InscriptionValidationService" />
-        <service android:name=".services.OffresService" />
+        <service android:name=".services.OffresAgenceService" />
         <service android:name=".services.AbonnementsService" />
         <service android:name=".services.MissionEmployerService" />
+        <service android:name=".services.MissionAgenceService" />
+        <service android:name=".services.ProfilAgenceService" />
     </application>
 
 </manifest>

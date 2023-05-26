@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,9 @@ class FragmentAbonnementPaiement(private val prixAbonnement: Int, private val ty
         val abonnementChoisiTextView: TextView = view.findViewById(R.id.chooseAbonnementText)
         val prixAbonnementTextView: TextView = view.findViewById(R.id.prixAbonnementChoisi)
         val abonnementBoutonValidation: MaterialButton = view.findViewById(R.id.validationPaiementButton)
+
+
+        Log.d("Affichage", "==> JE PAYE")
 
         val inputTextDateExpiration = view.findViewById<TextInputEditText>(R.id.inputTextDateExpiration)
         inputTextDateExpiration.setOnClickListener {

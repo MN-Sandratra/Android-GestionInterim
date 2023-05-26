@@ -50,37 +50,14 @@ class FragmentProfilInterimaire : Fragment() {
     private val gson = Gson()
     private lateinit var user : UtilisateurInterimaire
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_profil_interimaire, container, false)
+    override fun onResume() {
+        super.onResume()
 
+        // Récupère les données utilisateur à partir de SharedPreferences
         val jsonUser = sharedPreferences!!.getString("user", "")
         user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
 
-        val deconnexionText = view.findViewById<TextView>(R.id.deconnexionText)
-        val suppressionText = view.findViewById<TextView>(R.id.suppressionText)
-
-
-        inputTextNom = view.findViewById(R.id.inputTextNom)
-        inputTextPrenom = view.findViewById(R.id.inputTextPrenom)
-        inputTextMail = view.findViewById(R.id.inputTextMail)
-        inputTextTelephone = view.findViewById(R.id.inputTextTelephone)
-        inputTextDateNaissance = view.findViewById(R.id.inputDateNaissance)
-        inputTextVille = view.findViewById(R.id.inputVille)
-        inputTextNationalite = view.findViewById(R.id.inputNationnalite)
-        inputTextCommentaires = view.findViewById(R.id.inputCommentaires)
-        buttonModify = view.findViewById(R.id.modifyButton)
-
-
-        setupTextField(inputTextNom)
-        setupTextField(inputTextPrenom)
-        setupTextField(inputTextMail)
-        setupTextField(inputTextTelephone)
-        setupTextField(inputTextDateNaissance)
-        setupTextField(inputTextVille)
-        setupTextField(inputTextNationalite)
-        setupTextField(inputTextCommentaires)
-
-        // Assurez-vous que l'objet `user` n'est pas null avant d'affecter les valeurs
+        // Met à jour les champs TextView avec les données utilisateur récupérées
         if (user != null) {
             inputTextNom.setText(user.lastName)
             inputTextPrenom.setText(user.firstName)
@@ -108,7 +85,70 @@ class FragmentProfilInterimaire : Fragment() {
             inputTextVille.setTextColor(if (user.city == null) Color.GRAY else Color.WHITE)
             inputTextCommentaires.setTextColor(if (user.comments == null) Color.GRAY else Color.WHITE)
             inputTextNationalite.setTextColor(if (user.nationality == null) Color.GRAY else Color.WHITE)
+        }
+    }
 
+
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        val view = inflater.inflate(R.layout.fragment_profil_interimaire, container, false)
+
+        val deconnexionText = view.findViewById<TextView>(R.id.deconnexionText)
+        val suppressionText = view.findViewById<TextView>(R.id.suppressionText)
+
+
+        inputTextNom = view.findViewById(R.id.inputTextNom)
+        inputTextPrenom = view.findViewById(R.id.inputTextPrenom)
+        inputTextMail = view.findViewById(R.id.inputTextMail)
+        inputTextTelephone = view.findViewById(R.id.inputTextTelephone)
+        inputTextDateNaissance = view.findViewById(R.id.inputDateNaissance)
+        inputTextVille = view.findViewById(R.id.inputVille)
+        inputTextNationalite = view.findViewById(R.id.inputNationnalite)
+        inputTextCommentaires = view.findViewById(R.id.inputCommentaires)
+        buttonModify = view.findViewById(R.id.modifyButton)
+
+        val jsonUser = sharedPreferences!!.getString("user", "")
+        user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
+
+        // Met à jour les champs TextView avec les données utilisateur récupérées
+        Log.d("Affichage", "JE SUIS LA !!")
+        Log.d("Affichage", "$user")
+
+        setupTextField(inputTextNom)
+        setupTextField(inputTextPrenom)
+        setupTextField(inputTextMail)
+        setupTextField(inputTextTelephone)
+        setupTextField(inputTextDateNaissance)
+        setupTextField(inputTextVille)
+        setupTextField(inputTextNationalite)
+        setupTextField(inputTextCommentaires)
+
+        if (user != null) {
+            inputTextNom.setText(user.lastName)
+            inputTextPrenom.setText(user.firstName)
+            inputTextMail.setText(user.email ?: "non défini")
+            inputTextTelephone.setText(user.phoneNumber ?: "non défini")
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+
+            if (user.dateOfBirth != null) {
+                val date = inputFormat.parse(user.dateOfBirth)
+                inputTextDateNaissance.setText(outputFormat.format(date))
+            }
+            else{
+                inputTextDateNaissance.setText("non défini")
+            }
+            inputTextVille.setText(user.city ?: "non défini")
+            inputTextNationalite.setText(user.nationality ?: "non défini")
+            inputTextCommentaires.setText(user.comments ?: "non défini")
+
+            inputTextNom.setTextColor(if (user.lastName == null) Color.GRAY else Color.WHITE)
+            inputTextPrenom.setTextColor(if (user.firstName == null) Color.GRAY else Color.WHITE)
+            inputTextMail.setTextColor(if (user.email == null) Color.GRAY else Color.WHITE)
+            inputTextTelephone.setTextColor(if (user.phoneNumber == null) Color.GRAY else Color.WHITE)
+            inputTextDateNaissance.setTextColor(if (user.dateOfBirth == null) Color.GRAY else Color.WHITE)
+            inputTextVille.setTextColor(if (user.city == null) Color.GRAY else Color.WHITE)
+            inputTextCommentaires.setTextColor(if (user.comments == null) Color.GRAY else Color.WHITE)
+            inputTextNationalite.setTextColor(if (user.nationality == null) Color.GRAY else Color.WHITE)
         }
 
 
@@ -220,6 +260,7 @@ class FragmentProfilInterimaire : Fragment() {
         Log.d("Affichage", "===> JE SUIS LAA")
         val editor = sharedPreferences!!.edit()
         val updatedUserJson = gson.toJson(event.employer)
+        Log.d("Affichage", "${event.employer}")
         editor.putString("user", updatedUserJson)
         editor.apply()
         Toast.makeText(requireContext(), "Profil mis à jour avec succès", Toast.LENGTH_SHORT).show()

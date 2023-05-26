@@ -4,6 +4,7 @@ import android.app.Service
 import android.content.Intent
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import com.example.gestioninterim.BuildConfig
 import com.example.gestioninterim.models.Abonnement
 import com.example.gestioninterim.models.Offer
@@ -33,8 +34,11 @@ class AbonnementsService : Service() {
 
         if(email != null){
             sendPostRequestAbonnement(type!!, email) { validation ->
+                Log.d("Affichage", ")))==> $validation")
                 val event = AbonnementsResultEvent(validation = validation)
                 EventBus.getDefault().post(event)
+                Log.d("Affichage","==> SERVICE2")
+
             }
         }
         else {
