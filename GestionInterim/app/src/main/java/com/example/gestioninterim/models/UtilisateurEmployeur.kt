@@ -4,6 +4,7 @@ import com.google.gson.annotations.Expose
 import java.io.Serializable
 
 data class UtilisateurEmployeur (
+    @Expose val _id:String,
     @Expose val companyName : String,
     @Expose val department : String?,
     @Expose val subDepartment : String?,

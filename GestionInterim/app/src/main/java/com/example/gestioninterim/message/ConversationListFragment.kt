@@ -27,7 +27,7 @@ class ConversationListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var conversationAdapter: ConversationAdapter
     private val conversationList = mutableListOf<ListConversationDao>()
-    private lateinit var user : UtilisateurInterimaire
+    private lateinit var user : String;
 
 
     override fun onStart() {
@@ -55,11 +55,7 @@ class ConversationListFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-
-        val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
-        val gson = Gson()
-        val jsonUser = sharedPreferences!!.getString("user", "")
-        user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
+        user= getArguments()?.getString("myUser").toString();
 
         launchServiceDiscussion();
 
@@ -68,8 +64,7 @@ class ConversationListFragment : Fragment() {
 
     fun launchServiceDiscussion() {
         val intent = Intent(requireContext(), DiscussionsService::class.java)
-        intent.putExtra("userId", user._id)
-        intent.putExtra("p", ""+user.firstName+""+user.lastName)
+        intent.putExtra("userId", user)
         requireContext().startService(intent)
     }
 
@@ -118,7 +113,7 @@ class ConversationListFragment : Fragment() {
             val listConversation = ListConversationDao(participant.id,participant.name, limitedMessage, formattedTimestamp)
             conversationList.add(listConversation)
         }
-        conversationAdapter = ConversationAdapter(conversationList)
+        conversationAdapter = ConversationAdapter(conversationList,user)
         recyclerView.adapter = conversationAdapter
     }
 }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.gestioninterim.R
 import com.example.gestioninterim.models.ListConversationDao
 
-class ConversationAdapter(private val conversations: List<ListConversationDao>) : RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>() {
+class ConversationAdapter(private val conversations: List<ListConversationDao> ,private val currentUser:String) : RecyclerView.Adapter<ConversationAdapter.ConversationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ConversationViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_conversation, parent, false)
@@ -24,6 +24,7 @@ class ConversationAdapter(private val conversations: List<ListConversationDao>) 
             val context = holder.itemView.context
             val intent = Intent(context, MessageActivity::class.java)
             intent.putExtra("participantId", conversation.participantId)
+            intent.putExtra("userId", currentUser)
             intent.putExtra("participantName",conversation.userName)
             context.startActivity(intent)
         }

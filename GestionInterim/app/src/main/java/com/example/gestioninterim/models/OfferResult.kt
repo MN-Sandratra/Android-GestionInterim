@@ -7,6 +7,7 @@ import java.util.*
 data class OfferResult (
     @SerializedName("_id")
     val identifiant: String,
+    val id_posteur:String,
     val employeur: String,
     val intitule: String,
     val dateDebut: Date,

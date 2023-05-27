@@ -31,6 +31,7 @@ class MessageActivity : AppCompatActivity() {
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var user : UtilisateurInterimaire
     private lateinit var recyclerView: RecyclerView
+    private  lateinit var userId:String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,18 +40,20 @@ class MessageActivity : AppCompatActivity() {
         val sharedPreferences = this?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
         val gson = Gson()
         val jsonUser = sharedPreferences!!.getString("user", "")
-        user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
+        //user = gson.fromJson(jsonUser, UtilisateurInterimaire::class.java)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        val name=intent.getStringExtra("participantName")
+        userId= intent.getStringExtra("userId").toString()
+        toolbar.setTitle(name)
+        toolbar.setTitleTextColor(Color.WHITE)
 
         // Initialize RecyclerView and adapter
         recyclerView= findViewById(R.id.recyclerView)
-        messageAdapter = MessageAdapter(messageList,user._id)
+        messageAdapter = MessageAdapter(messageList,userId)
         recyclerView.adapter = messageAdapter
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-            val toolbar: Toolbar = findViewById(R.id.toolbar)
-            val name=intent.getStringExtra("participantName")
-            toolbar.setTitle(name)
-            toolbar.setTitleTextColor(Color.WHITE)
+
 
         val messageEditText:EditText=findViewById(R.id.editTextMessage)
         val sendButton: Button = findViewById(R.id.buttonSend)
@@ -88,7 +91,7 @@ class MessageActivity : AppCompatActivity() {
     }
 
     private fun getAllMessages() {
-        val senderId = user._id
+        val senderId = userId
         val receiverId = intent.getStringExtra("participantId")
         // Appelez le service de messages pour récupérer tous les messages correspondants
         val intent = Intent(applicationContext, MessageService::class.java)
@@ -100,7 +103,7 @@ class MessageActivity : AppCompatActivity() {
 
     private fun sendMessage(messageText: String) {
        if(messageText.trim().isNotEmpty()) {
-            val senderId = user._id
+            val senderId = userId
             val receiverId = intent.getStringExtra("participantId")
             val message = receiverId?.let {
                 Message(

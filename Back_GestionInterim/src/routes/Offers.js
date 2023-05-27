@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
     }
 
     // Récupération du nom de l'employeur (il faut ajouter de l'agence) à partir de l'identifiant 
-    const offers = await Offer.find().populate('employeur', 'companyName -_id');
+    const offers = await Offer.find().populate('employeur', 'companyName  _id');
     const filteredOffers = [];
 
     console.log(offers)
@@ -69,6 +69,7 @@ router.get('/', async (req, res) => {
 
     const modifiedOffers = filteredOffers.map(offer => {
       const modifiedOffer = offer.toObject();
+      modifiedOffer.id_posteur=offer.employeur._id;
       modifiedOffer.employeur = offer.employeur.companyName;
       return modifiedOffer;
     });

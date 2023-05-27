@@ -218,6 +218,7 @@ class FragmentOfferInterimaire : Fragment(), FilterDialogCallback {
             useUserCity = true
             onFiltersApplied(user.city!!, "", "", 30)
         } else {
+            fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
             getLastKnownLocation()
         }
     }

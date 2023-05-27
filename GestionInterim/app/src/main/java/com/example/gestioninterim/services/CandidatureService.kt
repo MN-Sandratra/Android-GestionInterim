@@ -45,7 +45,6 @@ class CandidatureService : Service() {
     }
 
     private fun sendPostRequestCandidature(candidature: CandidatureToSend, callback: (validation: Boolean) -> Unit) {
-        println("candidatures service")
 
         val client = OkHttpClient()
 
@@ -75,7 +74,7 @@ class CandidatureService : Service() {
             .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatures")
             .post(requestBody)
             .build()
-
+        
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()

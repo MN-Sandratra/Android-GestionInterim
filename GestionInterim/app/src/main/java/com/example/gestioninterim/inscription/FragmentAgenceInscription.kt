@@ -85,6 +85,7 @@ class FragmentAgenceInscription : Fragment() {
                 val inputPasswordEncrypt : String = hashPassword(inputMdp.text.toString())
 
                 val user = UtilisateurEmployeur(
+                    "",
                     inputNomEntreprise.text.toString(),
                     inputNomServiceText,
                     inputNomSousServiceText,

@@ -1,36 +1,40 @@
 package com.example.gestioninterim.utilisateurInterimaire
 
 import android.content.Context
-import org.osmdroid.config.Configuration
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import com.example.gestioninterim.BuildConfig
-import org.osmdroid.util.GeoPoint
-import org.osmdroid.views.MapController
-import org.osmdroid.views.MapView
-import org.osmdroid.views.overlay.Marker
 import com.example.gestioninterim.R
+import com.example.gestioninterim.message.MessageActivity
 import com.example.gestioninterim.models.OfferResult
+import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.example.gestioninterim.utilisateurInterimaire.FragmentOfferDetails.Companion.ARG_OFFER
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.gson.Gson
+import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
+import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.CustomZoomButtonsController
+import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.Marker
 import java.text.SimpleDateFormat
-import java.util.Date
+import java.util.*
 import javax.net.ssl.HostnameVerifier
 import javax.net.ssl.HttpsURLConnection
+
 
 class OffreDetail : Fragment() {
 
     private lateinit var offer: OfferResult
     private lateinit var map: MapView
+    private lateinit var user : UtilisateurInterimaire
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.fragment_offre_detail_offre, container, false)
@@ -39,6 +43,10 @@ class OffreDetail : Fragment() {
         val offerJson = arguments?.getString(ARG_OFFER)
         offer = gson.fromJson(offerJson, OfferResult::class.java)
 
+        val sharedPreferences = activity?.getSharedPreferences("user_infos", Context.MODE_PRIVATE)
+        val gsons = Gson()
+        val jsonUser = sharedPreferences!!.getString("user", "")
+        user = gsons.fromJson(jsonUser, UtilisateurInterimaire::class.java)
 
         val hostnameVerifier = HostnameVerifier { _, _ -> true }
         HttpsURLConnection.setDefaultHostnameVerifier(hostnameVerifier)
@@ -92,6 +100,14 @@ class OffreDetail : Fragment() {
         val parentActivity = activity as MainInterimaireActivity
         val navigationView = parentActivity.findViewById<BottomNavigationView>(R.id.navigation_interimaire)
 
+        val messageButton:Button=view.findViewById(R.id.messageButton)
+        messageButton.setOnClickListener(View.OnClickListener {
+            val intent = Intent(context, MessageActivity::class.java)
+            intent.putExtra("participantId", offer.id_posteur)
+            intent.putExtra("participantName",offer.employeur)
+            intent.putExtra("userId",user._id)
+            context?.startActivity(intent)
+        })
         return view
     }
     override fun onResume() {

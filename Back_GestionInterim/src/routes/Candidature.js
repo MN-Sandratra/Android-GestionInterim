@@ -105,6 +105,8 @@ router.put('/:id', upload.fields([{ name: 'cv' }, { name: 'lm' }]), async (req, 
 });
 
 router.post('/', upload.fields([{ name: 'contenuCv' }, { name: 'contenuLm' }]), async (req, res) => {
+    console.log("Eto zah zao")
+  
     try {
       const { firstName, lastName, nationality, dateOfBirth, email, telephone, cv, lm } = req.body;
   

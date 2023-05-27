@@ -128,6 +128,7 @@ class FragmentProfilEmployeur : Fragment() {
                 ).show()
             } else {
                 val updatedUser = UtilisateurEmployeur(
+                    _id=user._id,
                     companyName = inputTextNomEmployeur.text.toString(),
                     department = getValueOrSetNull(inputTextNomService.text.toString()),
                     subDepartment = getValueOrSetNull(inputTextNomSousService.text.toString()),
