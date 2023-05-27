@@ -10,12 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.gestioninterim.inscription.InscriptionActivity
 import com.example.gestioninterim.R
-import com.example.gestioninterim.models.Utilisateur
-import com.example.gestioninterim.models.UtilisateurEmployeur
-import com.example.gestioninterim.models.UtilisateurInterimaire
 import com.example.gestioninterim.resultEvent.LoginResultEvent
 import com.example.gestioninterim.services.LoginService
 import com.example.gestioninterim.utilisateurAnonyme.MainAnonymeActivity
+import com.example.gestioninterim.utilisateurAgence.MainAgenceActivity
+import com.example.gestioninterim.utilisateurAgence.SlidesActivityAgence
 import com.example.gestioninterim.utilisateurEmployeur.MainEmployeurActivity
 import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
@@ -119,7 +118,16 @@ class LoginActivity : AppCompatActivity() {
                     val intent = Intent(this, SlidesActivity::class.java)
                     startActivity(intent)
                 }
-
+            }
+            else if(event.type == "agence"){
+                if(event.hasSubscription == true){
+                    val intent = Intent(this, MainAgenceActivity::class.java)
+                    startActivity(intent)
+                }
+                else{
+                    val intent = Intent(this, SlidesActivityAgence::class.java)
+                    startActivity(intent)
+                }
             }
         }
         else{

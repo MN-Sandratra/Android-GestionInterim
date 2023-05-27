@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
-import android.provider.Settings.Global.getString
 import android.text.Html
 import android.view.View
 import android.widget.ImageButton

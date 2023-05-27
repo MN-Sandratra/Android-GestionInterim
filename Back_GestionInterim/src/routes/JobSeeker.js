@@ -94,6 +94,8 @@ router.get('/:id', getJobSeeker, (req, res) => {
 // Route pour mettre à jour un chercheur d'emploi spécifique
 router.put('/', upload.single('contenuCv'), async (req, res) => {    
 
+    console.log(req.body.dateOfBirth)
+
     let jobSeeker;
     // Determine if contact is an email or a phone number
     if (req.body.phoneNumber) {
@@ -118,7 +120,12 @@ router.put('/', upload.single('contenuCv'), async (req, res) => {
         jobSeeker.nationality = req.body.nationality;
     }
     if (req.body.dateOfBirth != null) {
-        jobSeeker.dateOfBirth = req.body.dateOfBirth;
+        const dateOfBirthParts = req.body.dateOfBirth.split('/');
+        const day = parseInt(dateOfBirthParts[0]);
+        const month = parseInt(dateOfBirthParts[1]) - 1;
+        const year = parseInt(dateOfBirthParts[2]);
+
+        jobSeeker.dateOfBirth = new Date(year, month, day);
     }
     if (req.body.phoneNumber != null) {
         jobSeeker.phoneNumber = req.body.phoneNumber;

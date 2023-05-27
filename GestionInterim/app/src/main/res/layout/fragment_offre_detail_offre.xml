@@ -36,6 +36,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Adresse"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="16dp" />
@@ -50,7 +51,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_marginTop="8dp"
                     android:textColor="@android:color/white" />
 
@@ -59,7 +60,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     android:layout_marginTop="8dp"
                     android:textColor="@android:color/white" />
 
@@ -71,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="Date"
                 android:textStyle="bold"
+                android:textSize="22sp"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="16dp" />
 
@@ -78,7 +80,7 @@
                 android:id="@+id/dateDebutTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white" />
 
@@ -86,7 +88,7 @@
                 android:id="@+id/dateFinTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white" />
 
@@ -96,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:text="Experience"
                 android:textStyle="bold"
+                android:textSize="22sp"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="16dp" />
 
@@ -103,7 +106,7 @@
                 android:id="@+id/experienceTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white" />
 
@@ -112,6 +115,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Description"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="16dp" />
@@ -120,7 +124,7 @@
                 android:id="@+id/descriptionTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white" />
 
@@ -129,6 +133,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Taux Horaire"
+                android:textSize="22sp"
                 android:textStyle="bold"
                 android:textColor="@android:color/white"
                 android:layout_marginTop="16dp" />
@@ -137,43 +142,18 @@
                 android:id="@+id/tauxHoraireTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginTop="8dp"
                 android:textColor="@android:color/white" />
 
-            <TextView
-                android:id="@+id/disponibiliteLabelTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Disponibilité"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="16dp" />
 
-            <TextView
-                android:id="@+id/disponibiliteTextView"
+            <org.osmdroid.views.MapView
+                android:id="@+id/map"
+                android:layout_marginTop="@dimen/DefaultMargin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/white" />
+                android:layout_height="300dp"
+                tilesource="Mapnik" />
 
-            <TextView
-                android:id="@+id/etatLabelTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="État"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:layout_marginTop="16dp" />
-
-            <TextView
-                android:id="@+id/etatTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"
-                android:textColor="@android:color/white" />
 
         </LinearLayout>
     </ScrollView>

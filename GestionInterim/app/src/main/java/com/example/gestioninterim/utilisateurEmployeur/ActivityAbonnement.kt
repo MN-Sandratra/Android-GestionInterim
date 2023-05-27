@@ -8,6 +8,8 @@ import androidx.fragment.app.FragmentManager
 import com.example.gestioninterim.R
 import com.example.gestioninterim.adapter.OnAbonnementClickListener
 import com.example.gestioninterim.models.Abonnement
+import com.example.gestioninterim.utilisateurAgence.FragmentAbonnementChoixAgence
+import com.example.gestioninterim.utilisateurAgence.FragmentAbonnementConsultationAgence
 
 class ActivityAbonnement : AppCompatActivity(), OnAbonnementClickListener {
 
@@ -16,7 +18,6 @@ class ActivityAbonnement : AppCompatActivity(), OnAbonnementClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_abonnement)
-
         val fragment = FragmentAbonnementConsultation()
         loadFragment(fragment, R.string.abonnementConsult)
 

@@ -13,9 +13,9 @@ import android.text.TextWatcher
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
-import com.example.gestioninterim.resultEvent.OffersResultEvent
 import com.example.gestioninterim.resultEvent.ValidationInscriptionResultEvent
 import com.example.gestioninterim.services.InscriptionValidationService
+import com.example.gestioninterim.utilisateurAgence.SlidesActivityAgence
 import com.example.gestioninterim.utilisateurEmployeur.SlidesActivity
 import com.example.gestioninterim.utilisateurInterimaire.MainInterimaireActivity
 import com.google.android.material.button.MaterialButton
@@ -126,6 +126,11 @@ class FragmentValidationInscription : Fragment() {
         }
         if(event.type == "employers"){
             val intent = Intent(requireContext(), SlidesActivity::class.java)
+            intent.putExtra("nom", username)
+            startActivity(intent)
+        }
+        if(event.type == "agence"){
+            val intent = Intent(requireContext(), SlidesActivityAgence::class.java)
             intent.putExtra("nom", username)
             startActivity(intent)
         }

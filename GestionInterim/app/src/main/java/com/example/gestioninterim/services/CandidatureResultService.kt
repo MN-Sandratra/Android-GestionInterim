@@ -69,6 +69,8 @@ class CandidatureResultService : Service() {
 
             val mURL = URL("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatureOffres/$type/?$reqParam")
 
+            Log.d("Affichage", "=>> requete $mURL")
+
             with(mURL.openConnection() as HttpURLConnection) {
                 // optional default is GET
                 requestMethod = "GET"

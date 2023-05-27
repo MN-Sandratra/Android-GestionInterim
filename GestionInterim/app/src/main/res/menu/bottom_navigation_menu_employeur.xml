@@ -7,6 +7,13 @@
         android:icon="@drawable/ic_home"
         />
 
+
+    <item
+        android:id="@+id/voir_message_page"
+        android:title="Mes messages"
+        android:icon="@drawable/ic_message"/>
+
+
     <item
         android:id="@+id/voir_annonces_page"
         android:title="@string/bottom_voir_annonces_item"

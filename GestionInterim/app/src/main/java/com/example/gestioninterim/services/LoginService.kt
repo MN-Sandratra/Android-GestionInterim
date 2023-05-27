@@ -98,6 +98,10 @@ class LoginService : Service(){
                                 UtilisateurInterimaire::class.java
                             )
                         }
+                        else if(type == "agence"){
+                            user =
+                                gson.fromJson(userJson.toString(), UtilisateurEmployeur::class.java)
+                        }
 
                         callback(message, type, user, hasSubscription)
                     } ?: run {

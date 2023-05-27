@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:text="@string/inscriptionAgence"
+        android:text="Vous êtes une agence !"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <ScrollView
-        android:id="@+id/scrollViewAgenceInscription"
+        android:id="@+id/scrollViewEmployeurInscription"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_marginTop="20dp"
@@ -57,11 +57,11 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/inputTextNom"
+                    android:id="@+id/inputTextNomEntreprise"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
-                    android:inputType="textCapCharacters" />
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +80,7 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -102,6 +103,7 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomSousService"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -186,6 +188,28 @@
                 app:boxBackgroundColor="@color/darkblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/inscriptionEmployeurVille"
+                android:layout_marginTop="10dp"
+                app:startIconTint="@color/white"
+                app:startIconDrawable="@drawable/ic_location"
+                android:textColorHint="@color/white">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextVille"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.rounded"
+                android:theme="@style/ShapeAppearanceOverlay.App.rounded"
+                app:boxBackgroundColor="@color/darkblue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:hint="@string/inscriptionEmployeurNumeroNational"
                 android:layout_marginTop="10dp"
                 app:startIconTint="@color/white"
@@ -215,10 +239,11 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomContact1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:textColor="@color/white" />
+                    android:textColor="@color/white"
+                    android:inputType="text" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -237,6 +262,7 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextTelephoneContact1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -282,6 +308,7 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextNomContact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -303,6 +330,7 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextTelephoneContact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -325,6 +353,7 @@
                 android:textColorHint="@color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputTextMailContact2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColor="@color/white"
@@ -349,7 +378,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollViewAgenceInscription"
+        app:layout_constraintTop_toBottomOf="@+id/scrollViewEmployeurInscription"
         app:layout_constraintVertical_bias="0.3"
         />
 

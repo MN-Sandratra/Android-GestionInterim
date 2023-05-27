@@ -2,6 +2,7 @@ package com.example.gestioninterim.utilisateurEmployeur
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,8 @@ class FragmentAbonnementConsultation : Fragment(){
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
+        Log.d("Affichage", "==> JE SUIS CONSultation")
+
         var view = inflater.inflate(R.layout.fragment_consult_abonnement, container, false)
 
         // Initialise le RecyclerView et l'adaptateur.
@@ -55,6 +58,7 @@ class FragmentAbonnementConsultation : Fragment(){
     }
 
     fun launchServiceAbonnements() {
+        Log.d("Affichage","==> SERVICE")
         val intent = Intent(requireContext(), AbonnementsService::class.java)
         requireContext().startService(intent)
     }
@@ -70,6 +74,8 @@ class FragmentAbonnementConsultation : Fragment(){
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onGetAbonnementsResult(event: AbonnementsResultEvent) {
+
+        Log.d("Affichage", "${event.abonnements}")
 
         abonnementAdapter.updateAbonnements(event.abonnements!!)
         listAbonnements = event.abonnements

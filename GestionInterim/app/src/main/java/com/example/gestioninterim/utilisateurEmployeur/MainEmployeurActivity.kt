@@ -1,18 +1,11 @@
 package com.example.gestioninterim.utilisateurEmployeur;
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.gestioninterim.R
-import com.example.gestioninterim.login.LoginActivity
-import com.example.gestioninterim.utilisateurAnonyme.FragmentAccueilAnonyme
-import com.example.gestioninterim.utilisateurAnonyme.FragmentSearchAnonyme
-import com.google.android.material.bottomnavigation.BottomNavigationItemView
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainEmployeurActivity : AppCompatActivity() {
@@ -37,9 +30,14 @@ class MainEmployeurActivity : AppCompatActivity() {
                     loadFragment(fragment, R.string.sub_title_accueil)
                     return@setOnItemSelectedListener true
                 }
+                R.id.voir_message_page -> {
+                    val fragment = FragmentMessageEmployer()
+                    loadFragment(fragment, R.string.voirMessageSubTitle)
+                    return@setOnItemSelectedListener true
+                }
                 R.id.voir_annonces_page -> {
                     val fragment = FragmentConsultEmployer()
-                    loadFragment(fragment, R.string.sub_title_search)
+                    loadFragment(fragment, R.string.voirAnnoncesSubTitle)
                     return@setOnItemSelectedListener true
                 }
                 R.id.deposer_annonces_page -> {

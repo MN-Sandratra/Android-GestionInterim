@@ -57,11 +57,15 @@ class CandidatureEmployerTraitementService : Service() {
 
         val requestBody = body.toString().toRequestBody(json)
 
+        val url = "http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatureOffres/employersCandidature"
+
         val request = Request.Builder()
-            .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/candidatureOffres/employersCandidature")
+            .url(url)
             .post(requestBody)
             .build()
 
+        Log.d("Affichage", "requête => $body")
+        Log.d("Affichage", "URL => $url")
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 e.printStackTrace()

@@ -95,11 +95,13 @@ class InscriptionService : Service() {
             return  // Or handle this case as appropriate for your application.
         }
 
+
+
         val request = Request.Builder()
             .url("http://${BuildConfig.ADRESSE_IP}:${BuildConfig.PORT}/api/$type")
             .post(requestBody)
             .build()
-        Log.d("Affichage", "===> LAA4")
+        Log.d("Affichage", "===> LAA4 $type")
         Log.d("Affichage", "===> $requestBody")
         client.newCall(request).enqueue(object : Callback {
             override fun onFailure(call: Call, e: IOException) {

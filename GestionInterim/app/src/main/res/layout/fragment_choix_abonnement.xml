@@ -93,13 +93,14 @@
                         style="@style/texteAbonnementConditionsUtilisation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/DefaultMargin"
+                        android:textAlignment="textStart"                        android:layout_marginTop="@dimen/DefaultMargin"
                         android:text="@string/conditionsUtilisation1"></TextView>
 
                     <TextView
                         style="@style/texteAbonnementConditionsUtilisation"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:textAlignment="textStart"
                         android:layout_marginTop="@dimen/DefaultMargin"
                         android:text="@string/conditionsUtilisation2"></TextView>
 

@@ -8,7 +8,9 @@ router.get('/', async (req, res) => {
   try {
     const { metier, ville, latitude, longitude, rayon, dateDebut, dateFin } = req.query;
 
-    if (!latitude || !longitude) {
+    console.log(ville)
+
+    if ((!latitude || !longitude) && !ville) {
       return res.status(400).json({ message: 'Missing latitude and/or longitude' });
     }
 
@@ -16,10 +18,16 @@ router.get('/', async (req, res) => {
     const offers = await Offer.find().populate('employeur', 'companyName -_id');
     const filteredOffers = [];
 
+    console.log(offers)
+
     // Pour chaque offre
     for (const offer of offers) {
       // Comparaison de la distance entre l'utilisateur et les offres
       
+      if (!offer.disponibilite) {
+        continue;
+      }
+
       let distance;
       let cityLat, cityLng;
       if (ville) {
@@ -64,6 +72,8 @@ router.get('/', async (req, res) => {
       modifiedOffer.employeur = offer.employeur.companyName;
       return modifiedOffer;
     });
+
+    console.log(modifiedOffers)
 
     res.json(modifiedOffers);
   } catch (error) {

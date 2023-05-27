@@ -126,6 +126,9 @@ class InscriptionValidationService : Service() {
                         } else if (userType == "jobseekers") {
                             user = gson.fromJson(userJson.toString(), UtilisateurInterimaire::class.java)
                         }
+                        else{
+                            user = gson.fromJson(userJson.toString(), UtilisateurEmployeur::class.java)
+                        }
                         callback(validate, userType, user)
                     }
                 } else {
