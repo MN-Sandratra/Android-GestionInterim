@@ -88,6 +88,14 @@ router.post('/employersCandidature', async(req,res) => {
       return res.status(404).json({ message: 'Association candidature-offre non trouvée' });
     }
 
+    if (status === 'acceptée') {
+      await mongoose.model(offerModel).findByIdAndUpdate(
+        offreIdObj,
+        { disponibilite: false },
+        { new: true }
+      );
+    }
+
     res.json({ message: 'Candidature traitée !'});
   } catch (error) {
     console.error(error);

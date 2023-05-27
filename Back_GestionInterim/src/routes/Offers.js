@@ -24,6 +24,10 @@ router.get('/', async (req, res) => {
     for (const offer of offers) {
       // Comparaison de la distance entre l'utilisateur et les offres
       
+      if (!offer.disponibilite) {
+        continue;
+      }
+
       let distance;
       let cityLat, cityLng;
       if (ville) {
