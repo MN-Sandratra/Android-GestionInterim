@@ -30,6 +30,11 @@ class MainEmployeurActivity : AppCompatActivity() {
                     loadFragment(fragment, R.string.sub_title_accueil)
                     return@setOnItemSelectedListener true
                 }
+                R.id.voir_message_page -> {
+                    val fragment = FragmentMessageEmployer()
+                    loadFragment(fragment, R.string.voirMessageSubTitle)
+                    return@setOnItemSelectedListener true
+                }
                 R.id.voir_annonces_page -> {
                     val fragment = FragmentConsultEmployer()
                     loadFragment(fragment, R.string.voirAnnoncesSubTitle)

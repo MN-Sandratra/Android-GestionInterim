@@ -10,6 +10,7 @@ import com.example.gestioninterim.utilisateurAgence.FragmentAccueilAgence
 import com.example.gestioninterim.utilisateurAgence.FragmentConsultAgence
 import com.example.gestioninterim.utilisateurAgence.FragmentDeposerAnnoncesAgence
 import com.example.gestioninterim.utilisateurAgence.FragmentProfilAgence
+import com.example.gestioninterim.utilisateurEmployeur.FragmentMessageEmployer
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainAgenceActivity : AppCompatActivity() {
@@ -32,6 +33,11 @@ class MainAgenceActivity : AppCompatActivity() {
                 R.id.home_page -> {
                     val fragment = FragmentAccueilAgence()
                     loadFragment(fragment, R.string.sub_title_accueil)
+                    return@setOnItemSelectedListener true
+                }
+                R.id.voir_message_page -> {
+                    val fragment = FragmentMessageEmployer()
+                    loadFragment(fragment, R.string.voirMessageSubTitle)
                     return@setOnItemSelectedListener true
                 }
                 R.id.voir_annonces_page -> {
