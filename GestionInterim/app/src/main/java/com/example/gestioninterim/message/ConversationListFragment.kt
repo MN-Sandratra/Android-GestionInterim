@@ -40,6 +40,11 @@ class ConversationListFragment : Fragment() {
         super.onStop()
     }
 
+    override fun onResume() {
+        super.onResume()
+        launchServiceDiscussion()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -64,6 +69,7 @@ class ConversationListFragment : Fragment() {
     fun launchServiceDiscussion() {
         val intent = Intent(requireContext(), DiscussionsService::class.java)
         intent.putExtra("userId", user._id)
+        intent.putExtra("p", ""+user.firstName+""+user.lastName)
         requireContext().startService(intent)
     }
 
@@ -72,16 +78,6 @@ class ConversationListFragment : Fragment() {
         intent.putExtra("participantId", participantId)
         startActivity(intent)
     }
-
-    private fun getDummyConversationList(): List<ListConversationDao> {
-        // Simulated dummy data for conversation list
-        val conversationList = mutableListOf<ListConversationDao>()
-        conversationList.add(ListConversationDao("John Doe", "Hello, are you still hiring?", "May 20, 2023"))
-        conversationList.add(ListConversationDao("Jane Smith", "Thank you for the opportunity!", "May 19, 2023"))
-        // Add more conversations as needed
-        return conversationList
-    }
-
     private fun formatTimestamp(timestamp: String): String {
         // Parse the timestamp string to a Date object
         val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
@@ -105,7 +101,6 @@ class ConversationListFragment : Fragment() {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     fun onConversationsResultEvent(event: ConversationsResultEvent) {
-        println("miditra ato ah")
         conversationList.clear()
 
         val conversations = event.conversations
@@ -120,7 +115,7 @@ class ConversationListFragment : Fragment() {
             val limitedMessage = limitMessageLength(lastMessage, 30)
 
             // Create a new ListConversationDao object and add it to the list
-            val listConversation = ListConversationDao(participant.name, limitedMessage, formattedTimestamp)
+            val listConversation = ListConversationDao(participant.id,participant.name, limitedMessage, formattedTimestamp)
             conversationList.add(listConversation)
         }
         conversationAdapter = ConversationAdapter(conversationList)

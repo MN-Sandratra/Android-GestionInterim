@@ -3,6 +3,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fond"
     android:orientation="vertical">
 
   <!-- Toolbar -->
@@ -15,6 +16,8 @@
       android:theme="@style/ThemeOverlay.AppCompat.ActionBar" />
 
   <!-- RecyclerView for displaying messages -->
+
+  <!-- Message input layout -->
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/recyclerView"
       android:layout_width="match_parent"
@@ -22,11 +25,10 @@
       android:layout_weight="1"
       android:padding="8dp" />
 
-  <!-- Message input layout -->
   <LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:background="?android:attr/colorBackground"
+      android:background="@color/darkblue"
       android:padding="8dp">
 
     <EditText
@@ -36,12 +38,13 @@
         android:layout_weight="1"
         android:padding="10dp"
         android:hint="Aa"
-        android:layout_marginRight="4dp"
+        android:layout_marginEnd="4dp"
         android:layout_gravity="bottom"
         android:singleLine="true"
         android:background="@drawable/edittext_background"
         android:imeOptions="actionDone"
-        />
+        android:textColor="#ffffff"
+        android:textColorHint="#FFFFFF"/>
 
     <Button
         android:id="@+id/buttonSend"

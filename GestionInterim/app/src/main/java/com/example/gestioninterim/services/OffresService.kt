@@ -69,7 +69,6 @@ class OffresService : Service() {
     fun sendGetRequestOffers(offersRequest : OfferDAO, callback: (offers: List<OfferResult>) -> Unit) {
 
         Executors.newSingleThreadExecutor().execute {
-
             // Je définis les paramètres de la requête
             val reqParamBuilder = StringBuilder()
             offersRequest.metier?.let { reqParamBuilder.append("metier=" + URLEncoder.encode(it, "UTF-8") + "&") }

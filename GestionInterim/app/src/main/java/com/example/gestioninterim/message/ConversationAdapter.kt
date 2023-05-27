@@ -1,5 +1,6 @@
 package com.example.gestioninterim.message
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,8 +19,15 @@ class ConversationAdapter(private val conversations: List<ListConversationDao>) 
     override fun onBindViewHolder(holder: ConversationViewHolder, position: Int) {
         val conversation = conversations[position]
         holder.bind(conversation)
-    }
 
+        holder.itemView.setOnClickListener {
+            val context = holder.itemView.context
+            val intent = Intent(context, MessageActivity::class.java)
+            intent.putExtra("participantId", conversation.participantId)
+            intent.putExtra("participantName",conversation.userName)
+            context.startActivity(intent)
+        }
+    }
     override fun getItemCount(): Int {
         return conversations.size
     }
@@ -34,7 +42,6 @@ class ConversationAdapter(private val conversations: List<ListConversationDao>) 
             userNameTextView.text = conversation.userName
             lastMessageTextView.text = conversation.lastMessage
             dateTextView.text = conversation.date
-
             }
     }
 }

@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="#1f1a30"
     android:padding="8dp">
 
     <LinearLayout
@@ -28,14 +29,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="John Doe"
+                android:textColor="#fff"
                 android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/textMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="14sp"
-                android:text="Hello, are you still hiring?" />
+                android:text="Hello, are you still hiring?"
+                android:textColor="#979191"
+                android:textSize="14sp" />
 
         </LinearLayout>
 
@@ -43,11 +46,12 @@
             android:id="@+id/textDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:layout_weight="1"
-            android:textSize="12sp"
-            android:text="May 20, 2023"
             android:gravity="end"
-            android:layout_marginStart="8dp" />
+            android:text="May 20, 2023"
+            android:textColor="#8F889D"
+            android:textSize="12sp" />
 
     </LinearLayout>
 

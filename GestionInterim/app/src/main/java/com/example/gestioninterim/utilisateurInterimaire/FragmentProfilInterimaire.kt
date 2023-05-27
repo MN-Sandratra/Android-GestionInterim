@@ -43,7 +43,6 @@ class FragmentProfilInterimaire : Fragment() {
     private lateinit var inputTextNationalite: TextInputEditText
     private lateinit var inputTextCommentaires: TextInputEditText
     private lateinit var buttonModify: MaterialButton
-
     private val sharedPreferences: SharedPreferences
         get() = requireActivity().getSharedPreferences("user_infos", Context.MODE_PRIVATE)
 
@@ -191,9 +190,6 @@ class FragmentProfilInterimaire : Fragment() {
             val dialog = builder.create()
             dialog.show()
         }
-
-
-
         return view
     }
 
@@ -265,6 +261,4 @@ class FragmentProfilInterimaire : Fragment() {
             }
         }
     }
-
-
 }
